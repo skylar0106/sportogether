@@ -4,9 +4,11 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import model.*;
 import model.service.dto.*;
 
 public class MatchRivalDAO {
+    
 private JDBCUtil jdbcUtil = null;
     
     public MatchRivalDAO() {
@@ -18,6 +20,37 @@ private JDBCUtil jdbcUtil = null;
      * 같은 레벨인 모든 팀 검색
      * 승률이 가장 비슷한 팀 이름 반환
      * */
+    public Team findByTeamName(String name) {
+        StringBuilder query = new StringBuilder();
+        query.append("SELECT * ");
+        query.append("FROM team ");
+        query.append("WHERE name = ? ");
+        
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{name}); // JDBCUtil에 질의문과 파라미터 설정   
+        
+        try {
+            ResultSet rs = jdbcUtil.executeQuery();
+            
+            if (rs.next()) {        // 검색 결과 존재
+                Team tm = new Team();          
+                 tm.setTeamId(rs.getString("teamid"));
+                 tm.setTname(name);
+                 tm.setSpoLeader(rs.getString("spoleader"));
+                 tm.setLevel(rs.getInt("tlevel"));
+                 tm.setSport(rs.getString("sport"));
+                 tm.setLocation(rs.getString("location"));
+                 tm.setMembership(rs.getInt("membership"));
+                 tm.setRival(rs.getString("rival"));
+                return tm;
+            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.close();       // ResultSet, PreparedStatement, Connection 등 해제
+        }
+        return null;
+    }
+    
     public String getMatchList(Team tm) {
         float gap = 0;
         String rival = null;
@@ -42,7 +75,7 @@ private JDBCUtil jdbcUtil = null;
             StringBuilder sql2 = new StringBuilder();
             sql2.append("SELECT name, teamId, rate ");
             sql2.append("FROM teamScore JOIN team USING (teamId) ");
-            sql2.append("Where level = ? ");
+            sql2.append("Where tlevel = ? ");
             
             jdbcUtil.setSqlAndParameters(sql2.toString(), new Object[] {tm.getLevel()});
             
@@ -50,18 +83,20 @@ private JDBCUtil jdbcUtil = null;
             rs =  jdbcUtil.executeQuery();
             
             while(rs.next()) {
-                Rival r = new Rival(rs.getString("teamName"), 
-                            rs.getInt("teamId"), 
+                Rival r = new Rival(rs.getString("name"), 
+                            rs.getString("teamId"), 
                             rs.getFloat("rate"));
-                teamList.add(r);
+                if(!r.getTeamId().equals(tm.getTeamId()))
+                    teamList.add(r);
             }
             /*라이벌 찾기*/
-            gap = Math.abs(myRate - teamList.get(0).getRate());
+            gap = 1000;
             rival = teamList.get(0).getTeamName();
-            for(int i=1; i < teamList.size(); i++) {
-                if(Math.abs(myRate -teamList.get(i).getRate()) < gap)
+            for(int i=0; i < teamList.size(); i++) {
+                if(Math.abs(myRate -teamList.get(i).getRate()) < gap) {
                     gap = Math.abs(myRate - teamList.get(i).getRate());
-                rival = teamList.get(i).getTeamName();
+                    rival = teamList.get(i).getTeamName();
+                }
             }
             /*db 라이벌 업데이트*/
             String sql3 = "UPDATE team "
@@ -82,7 +117,6 @@ private JDBCUtil jdbcUtil = null;
             jdbcUtil.commit();
             jdbcUtil.close();   // resource 반환
         }
-
         return rival;
     }
 }
