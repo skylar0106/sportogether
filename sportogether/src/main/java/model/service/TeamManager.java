@@ -41,14 +41,14 @@ public class TeamManager {
     }
     
     /*사용자 팀 정보 찾기*/
-    public String findRivalTeam(String name)
+    public Rival findRivalTeam(String name)
             throws SQLException, UserNotFoundException {
             Team tm = rivalDAO.findByTeamName(name);
             if (tm == null) {
                 throw new UserNotFoundException(name + "는 존재하지 않는 아이디입니다.");
             }   
             
-            String rival = rivalDAO.getMatchList(tm);
+            Rival rival = rivalDAO.getMatchList(tm);
             if (rival == null) {
                 throw new UserNotFoundException("라이벌이 존재하지 않습니다.");
             }          

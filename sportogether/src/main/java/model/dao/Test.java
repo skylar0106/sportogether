@@ -26,8 +26,9 @@ public class Test {
          System.out.println("라이벌: " + tm.getRival());
          System.out.println();
          
-         String rival = compDao.getMatchList(tm);
-         System.out.println("라이벌: " + rival);
+         Rival rival = compDao.getMatchList(tm);
+         System.out.println("라이벌: " + rival.getTeamName());
+         System.out.println("라이벌승률: " + rival.getRate());
         
          
         

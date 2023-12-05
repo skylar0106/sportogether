@@ -51,9 +51,10 @@ private JDBCUtil jdbcUtil = null;
         return null;
     }
     
-    public String getMatchList(Team tm) {
+    public Rival getMatchList(Team tm) {
         float gap = 0;
-        String rival = null;
+        Rival rival = new Rival();
+        float rivalRate = 0;
         
         float myRate = 0;
         List<Rival> teamList = null;
@@ -91,18 +92,21 @@ private JDBCUtil jdbcUtil = null;
             }
             /*라이벌 찾기*/
             gap = 1000;
-            rival = teamList.get(0).getTeamName();
+//            rival = teamList.get(0).getTeamName();
+            rival = teamList.get(0);
             for(int i=0; i < teamList.size(); i++) {
                 if(Math.abs(myRate -teamList.get(i).getRate()) < gap) {
                     gap = Math.abs(myRate - teamList.get(i).getRate());
-                    rival = teamList.get(i).getTeamName();
+//                    rival = teamList.get(i).getTeamName();
+//                    rivalRate = teamList.get(i).getRate();
+                    rival = teamList.get(i);
                 }
             }
             /*db 라이벌 업데이트*/
             String sql3 = "UPDATE team "
                     + "SET rival= ? "
                     + "WHERE teamId=?";
-            Object[] param = new Object[] {rival, tm.getTeamId()};                
+            Object[] param = new Object[] {rival.getTeamName(), tm.getTeamId()};                
             jdbcUtil.setSqlAndParameters(sql3, param);   // JDBCUtil에 update문과 매개 변수 설정
         
             int result = jdbcUtil.executeUpdate();  // update 문 실행

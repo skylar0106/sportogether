@@ -7,7 +7,7 @@ import controller.Controller;
 import model.User;
 import model.service.TeamManager;
 import model.service.UserManager;
-import model.service.dto.Team;
+import model.service.dto.*;
 
 public class SearchTeamController implements Controller {
 	// private static final int countPerPage = 100;	// 한 화면에 출력할 사용자 수
@@ -27,7 +27,7 @@ public class SearchTeamController implements Controller {
     	*/
     	
 		TeamManager manager = TeamManager.getInstance();
-		String rival  = manager.findRivalTeam(teamName);
+		Rival rival  = manager.findRivalTeam(teamName);
 		// List<User> userList = manager.findUserList(currentPage, countPerPage);
 
 		// userList 객체와 현재 로그인한 사용자 ID를 request에 저장하여 전달

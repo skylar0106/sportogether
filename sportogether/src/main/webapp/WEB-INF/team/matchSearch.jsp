@@ -100,7 +100,7 @@
   <div class='rivalSearchArea'>
 	  <div class='rivalArea'>
 	  <p class='text1'>라이벌 팀을 추천해드려요</p>
-	  <p class='rivalTeam'>&nbsp;${rival}&nbsp;<span class = 'winning'>[승률58.3%]</span>&nbsp;</p>
+	  <p class='rivalTeam'>&nbsp;${rival.getTeamName()}&nbsp;<span class = 'winning'>[승률${rival.getRate()}%]</span>&nbsp;</p>
 	  </div>
 	  <div class='searchArea'>
 	  	<input type="text" name="teamName"  />&nbsp;&nbsp;
