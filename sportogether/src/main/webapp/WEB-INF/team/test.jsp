@@ -15,6 +15,11 @@ function rivalMatching() {
 	} 	
 	form.submit();
 }
+function totalLanking(targetUri) {
+	form.action = targetUri;
+	form.method="GET";		
+	form.submit();
+}
 </script>
 </head>
 <body>
@@ -50,6 +55,8 @@ function rivalMatching() {
 		  <tr>
 			<td align=left>
 			<input type="button" value="라이벌 찾기" onClick="rivalMatching()"> &nbsp;
+			<input type="button" value="전체랭킹" onClick="totalLanking(
+								'<c:url value='/team/lankingList'/>')"> &nbsp;
 			</td>						
 		  </tr>
 	    </table>

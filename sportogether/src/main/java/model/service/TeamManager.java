@@ -6,6 +6,7 @@ import java.util.List;
 import model.Community;
 import model.User;
 import model.dao.CommunityDAO;
+import model.dao.LankingDAO;
 import model.dao.MatchRivalDAO;
 import model.dao.UserDAO;
 import model.service.dto.*;
@@ -20,6 +21,7 @@ import model.service.dto.*;
 public class TeamManager {
     private static TeamManager teamMan = new TeamManager();
     private UserDAO userDAO;
+    private LankingDAO lankingDAO;
     private CommunityDAO commDAO;
     private UserAnalysis userAanlysis;
     
@@ -31,6 +33,7 @@ public class TeamManager {
             commDAO = new CommunityDAO();
             userAanlysis = new UserAnalysis(userDAO);
             rivalDAO = new MatchRivalDAO();
+            lankingDAO = new LankingDAO();
         } catch (Exception e) {
             e.printStackTrace();
         }           
@@ -40,7 +43,7 @@ public class TeamManager {
         return teamMan;
     }
     
-    /*사용자 팀 정보 찾기*/
+    /*라이벌 찾기*/
     public Rival findRivalTeam(String name)
             throws SQLException, UserNotFoundException {
             Team tm = rivalDAO.findByTeamName(name);
@@ -55,6 +58,15 @@ public class TeamManager {
             return rival;
         }
     
+    /*랭킹리스트 가져오기*/
+    public List<Lanking> findLankingList()
+            throws SQLException, UserNotFoundException { 
+            List<Lanking> lankingList = lankingDAO.findTeamLankingList();
+            if (lankingList == null) {
+                throw new UserNotFoundException("랭킹이 존재하지 않습니다.");
+            }          
+            return lankingList;
+        }
     
     public int create(User user) throws SQLException, ExistingUserException {
         if (userDAO.existingUser(user.getUserId()) == true) {

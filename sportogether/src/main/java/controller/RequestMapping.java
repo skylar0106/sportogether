@@ -47,6 +47,9 @@ public class RequestMapping {
         mappings.put("/team/test", new ForwardController("/team/test.jsp"));
         mappings.put("/team/search", new SearchTeamController());
         
+        // 랭킹 관련 controller
+        mappings.put("/team/lankingList", new LankingListController());
+        
         logger.info("Initialized Request Mapping!");
     }
 
