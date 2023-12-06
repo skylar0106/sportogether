@@ -26,6 +26,7 @@ public class CreateBattleRequestController implements Controller{
        battleRequestDAO.insetBattleRequest(b);
        List<BattleRequest> battleRequestList = battleRequestDAO.getBattleRequestList(teamId);
        request.setAttribute("battleRequestList",battleRequestList );
+       
        return "/team/matchSearch.jsp";
     }
 }

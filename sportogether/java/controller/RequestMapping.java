@@ -46,9 +46,9 @@ public class RequestMapping {
         // 검색, 라이벌 관련 controller
         mappings.put("/team/test", new ForwardController("/team/test.jsp"));
         mappings.put("/team/search", new SearchTeamController());
-        mappings.put("/team/search/battleRequest", new BattleController());
-        mappings.put("/team/battleRequest/approve", new BattleRequestController());
-        mappings.put("/team/battleRequest/reject", new BattleRequestController());
+        mappings.put("/team/search/battleRequest", new CreateBattleRequestController());
+        mappings.put("/team/search/battleRequest/approve", new BattleRequestController());
+        mappings.put("/team/search/battleRequest/reject", new BattleRequestController());
         
         // 랭킹 관련 controller
         mappings.put("/team/lankingList", new LankingListController());
