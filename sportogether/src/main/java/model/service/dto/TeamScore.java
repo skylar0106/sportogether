@@ -8,12 +8,10 @@ public class TeamScore {
     private int ranking;
     private int draw;
     private double rate;
-    private String comment;
     
     public TeamScore() {}
     
-    public TeamScore(String teamID, int matches, int win, int lose, int ranking, int draw, double rate, String comment) {
-		super();
+    public TeamScore(String teamID, int matches, int win, int lose, int ranking, int draw, double rate) {
 		this.teamID = teamID;
 		this.matches = matches;
 		this.win = win;
@@ -21,7 +19,6 @@ public class TeamScore {
 		this.ranking = ranking;
 		this.draw = draw;
 		this.rate = rate;
-		this.comment = comment;
 	}
 
     public String getTeamID() {
@@ -66,12 +63,6 @@ public class TeamScore {
 	public void setRate(double rate) {
 		this.rate = rate;
 	}
-	public String getComment() {
-		return comment;
-	}
-	public void setComment(String comment) {
-		this.comment = comment;
-	}
 	// toString method
     @Override
     public String toString() {
@@ -83,7 +74,6 @@ public class TeamScore {
                 ", ranking=" + ranking +
                 ", draw=" + draw +
                 ", rate=" + rate +
-                ", comment=" + comment +
                 '}';
     }
 }

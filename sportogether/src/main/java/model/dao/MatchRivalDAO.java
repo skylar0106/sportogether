@@ -34,7 +34,7 @@ private JDBCUtil jdbcUtil = null;
             if (rs.next()) {        // 검색 결과 존재
                 Team tm = new Team();          
                  tm.setTeamId(rs.getString("teamid"));
-                 tm.setTname(name);
+                 tm.setName(name);
                  tm.setSpoLeader(rs.getString("spoleader"));
                  tm.setLevel(rs.getInt("tlevel"));
                  tm.setSport(rs.getString("sport"));

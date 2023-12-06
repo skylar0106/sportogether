@@ -2,7 +2,7 @@ package model.service.dto;
 
 public class Team {
     private String teamId;
-    private String tname;
+    private String name;
     private String spoLeader;
     private int level;
     private String sport;
@@ -16,11 +16,11 @@ public class Team {
     public void setTeamId(String teamId) {
         this.teamId = teamId;
     }
-    public String getTname() {
-        return tname;
+    public String getName() {
+        return name;
     }
-    public void setTname(String tname) {
-        this.tname = tname;
+    public void setName(String tname) {
+        this.name = tname;
     }
     public String getSpoLeader() {
         return spoLeader;
@@ -62,11 +62,11 @@ public class Team {
     public Team() {
 
     }
-    public Team(String teamId, String tname, String spoLeader, int level, String sport, String location, int membership,
+    public Team(String teamId, String name, String spoLeader, int level, String sport, String location, int membership,
             String rival) {
         super();
         this.teamId = teamId;
-        this.tname = tname;
+        this.name = name;
         this.spoLeader = spoLeader;
         this.level = level;
         this.sport = sport;

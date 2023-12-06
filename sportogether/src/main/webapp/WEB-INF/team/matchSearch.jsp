@@ -2,99 +2,15 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <html lang="ko">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<link rel=stylesheet href="<c:url value='/css/bannerSubTitle.css' />" type="text/css">
+<link rel=stylesheet href="<c:url value='/css/searchTeam.css' />" type="text/css">
 <head>
-	<style>
-		p.subTitle {
-      		margin: 5px; 
-     		padding-left: 5px;
-      		color: #7D7C7C;
-    	}	
-	    p.text1 {
-	    	margin: 5px; 
-	      	padding-left: 15px;
-	      	color: #A8A8A8;
-	    }
-	    p.rivalTeam {
-	    	margin: 0px; 
-	      	margin-left: 15px;
-	      	padding: 5px;
-	      	display:inline-block;
-	      	color: #000000;
-	      	background-color: #DDDDDD;
-	      	font-size: 20px;
-	      	font-weight: bold ;
-			font-family: inherit;
-			border-radius : 10px;
-	    }
-	    span.winning {
-	    	font-size: 15px;
-	    	color: #AFAFAF;
-	    	font-weight: bold;
-	    	font-family: inherit;
-	    }
-	    div.rivalSearchArea {
-			display: flex;
-			justify-content: space-between;
-	    }
-	    div.rivalArea {
-	    	display:inline-block;
-	    	align-items: flex-end;
-	    }
-	    div.searchArea {
-	    	display: flex;
-	    	align-items: flex-end;
-	    	padding-right: 10px;
-	    }
-	    div.teamList {
-	    	display:flex;
-	    	overflow-y: scroll;
-	    	/*background-color: green;*/
-	    	margin: 0 auto;
-	    }
-	    div.appliBtnArea {
-	    	display:inline-block;
-	    	justify-content: flex-end;
-	    	float: right;
-	    	margin-right: 50px;
-	    	/*background-color: green;*/
-	    }
-	    input[name="searchBtn"] {
-	    	background-color: #B3B3B3;
-	    	color: #FFFFFF;
-	    	border: none;
-	    	border-radius : 5px;
-	    }
-	    input[name="fightBtn"] {
-	    	background-color: #8AD6D9;
-	    	color: #7D7C7C;
-	    	border: none;
-	    	border-radius : 5px;
-	    }
-	    input[name="joinBtn"] {
-	    	background-color: #8AC6FE;
-	    	color: #7D7C7C;
-	    	border: none;
-	    	border-radius : 5px;
-	    }
-	    .teamList ul {
-      		list-style-type: none;
-      		/*background-color: blue;*/
-      		width: 100%
-      		
-    	}
-    	.teamList li {
-    		padding: 5px;
-    		display: inline-block;
-      		/*background-color: red;*/
-    	}
-	    hr {
-	    	background-color: black; /*색 안바뀜*/
-	    }
-	</style>
+
   <title>search_team</title>
 </head>
 <body>
-  <img src="<c:url value='/images/banner.png' />" width="100%" height="150px" alt="banner"/>
+  <img class="banner" src="<c:url value='/images/banner.png' />" alt="banner"/>
   <p class ='subTitle'>팀 찾기</p>
   <hr>
   <div class='rivalSearchArea'>

@@ -33,7 +33,16 @@ public class MatchDAO {
             
             rs =  jdbcUtil.executeQuery();
             while(rs.next()) {
-                Match m = new Match(rs.getString("winner"), rs.getString("loser"), rs.getString("sport"), rs.getDate("date").toLocalDate(), rs.getInt("winpoint"), rs.getInt("losepoint"));
+                Match m = new Match(
+                		rs.getString("teamID"),
+                        rs.getString("sport"),
+                        rs.getDate("date").toLocalDate(),
+                        rs.getString("winner"),
+                        rs.getString("loser"),
+                        rs.getString("matchID"),
+                        rs.getInt("winpoint"),
+                        rs.getInt("losepoint")
+                 );
                 /*생성자 매개변수
                  * String winner, String loser, String sport, LocalDate date, int winpoint, int losepoint
                  */

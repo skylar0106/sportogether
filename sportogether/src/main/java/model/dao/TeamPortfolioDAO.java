@@ -48,15 +48,12 @@ public class TeamPortfolioDAO {
 		    return team;
 		}
 	 
-    // 팀 전적 업데이트
+    // 팀 전적
     public TeamScore updateMatchResult(String teamID, String result) {
     	TeamScore teamscore = null;
     	ResultSet rs = null;
     	StringBuilder sql = new StringBuilder();
-    	sql.append("UPDATE TeamScore SET matches = matches + 1");
-    	sql.append((result.equals("win") ? "win" : result.equals("lose") ? "lose" : "draw") + " = ");
-    	sql.append((result.equals("win") ? "win + 1" : result.equals("lose") ? "lose + 1" : "draw + 1"));
-    	sql.append(" WHERE teamID = ?");
+    	sql.append("SELECT * FROM \"MATCH\" WHERE teamID = ?");
     	jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {teamID});
     	
     	try {
@@ -69,8 +66,7 @@ public class TeamPortfolioDAO {
                         rs.getInt("lose"),
                         rs.getInt("ranking"),
                         rs.getInt("draw"),
-                        rs.getDouble("rate"),
-                        rs.getString("comment")
+                        rs.getDouble("rate")
                 );
             }
     	}
@@ -83,51 +79,33 @@ public class TeamPortfolioDAO {
     	return teamscore;
     }
 
-    // 승률 계산
-    public double calculateWinRatio(String teamID) { 
-    	ResultSet rs = null;
-    	StringBuilder sql = new StringBuilder();
-    	sql.append("SELECT win, lose, draw FROM TeamScore WHERE teamID = ?");
-    	jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {teamID});
-    	
-    	try {
-    		rs = jdbcUtil.executeQuery();
-    		if(rs != null && rs.next()) {
-    			int win = rs.getInt("win");
-                int lose = rs.getInt("lose");
-                int draw = rs.getInt("draw");
-
-                int totalMatches = win + lose + draw;
-
-                if (totalMatches > 0) {
-                    return (double) win / totalMatches * 100.0;
-                }
-    		}
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    	}finally {
-    		jdbcUtil.close();
-    	}
-
-        return 0.0;
-    }
-
     // 최근 매치 일자 가져오기
-    public LocalDate getRecentMatchDate(String teamID) {
-    	Match match = null;
-    	LocalDate date = null;
+    public String getRecentMatchDate(String teamID) {
+    	String date = null;
+    	String recentDate = null;
     	ResultSet rs = null;
     	StringBuilder sql = new StringBuilder();
-    	sql.append("SELECT date FROM Match WHERE teamID = ?");
-    	sql.append("ORDER BY date DESC FETCH FIRST 1 ROWS ONLY");
+    	sql.append("SELECT \"DATE\" FROM \"MATCH\" WHERE TEAMID = ?");
+    	sql.append("ORDER BY \"DATE\" DESC FETCH FIRST 1 ROWS ONLY");
     	jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {teamID});
     	
     	try {
     		rs = jdbcUtil.executeQuery();
-    		if(rs != null && rs.next()) {
-    			match = new Match();
-    			date = match.getDate();
+    		if(rs.next()) {
+    			date = rs.getString("DATE");
+
+    	        // 띄어쓰기로 문자열 분할
+    	        String[] tmpDate = date.split(" ");
+
+    	        // 첫 번째 부분 가져오기
+    	        if (tmpDate.length > 0) {
+    	            recentDate = tmpDate[0];
+    	            System.out.println(recentDate); // 결과 출력
+    	        } else {
+    	            System.out.println("분할된 부분이 없습니다.");
+    	        }
+    	        
+    			return recentDate;
     		}
     	}
     	catch(SQLException e){
@@ -136,7 +114,7 @@ public class TeamPortfolioDAO {
     		jdbcUtil.close();
     	}
     	
-    	return date;
+    	return recentDate;
     }
 
     // 팀 멤버 수 가져오기
@@ -166,7 +144,7 @@ public class TeamPortfolioDAO {
     	String comment = "";
     	ResultSet rs = null;
     	StringBuilder sql = new StringBuilder();
-    	sql.append("SELECT comment FROM Team WHERE teamID = ?");
+    	sql.append("SELECT \"COMMENT\" FROM Team WHERE teamID = ?");
     	jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {teamID});
     	
     	try {
@@ -253,7 +231,7 @@ public class TeamPortfolioDAO {
 		TeamScore teamScore = null;
 	    ResultSet rs = null;
 	    StringBuilder sql = new StringBuilder();
-	    sql.append("SELECT matches, win, lose, draw, rate, comment FROM TeamScore WHERE teamID = ?");
+	    sql.append("SELECT * FROM TeamScore WHERE teamID = ?");
 	    jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] { teamID });
 
 	    try {
@@ -264,10 +242,9 @@ public class TeamPortfolioDAO {
 	                rs.getInt("matches"),
 	                rs.getInt("win"),
 	                rs.getInt("lose"),
-	                rs.getInt("draw"),
 	                rs.getInt("ranking"),
-	                rs.getDouble("rate"),
-	                rs.getString("comment")
+	                rs.getInt("draw"),
+	                rs.getDouble("rate")
 	            );
 	        }
 	    } catch (SQLException e) {

@@ -1,0 +1,88 @@
+/*라이벌 팀을 추천해드려요*/
+ p.text1 {
+ 	margin: 5px; 
+   	padding-left: 15px;
+   	color: #A8A8A8;
+}
+/*라이벌 팀*/
+p.rivalTeam {
+	margin: 0px; 
+    margin-left: 15px;
+   	padding: 5px;
+   	display:inline-block;
+   	color: #000000;
+   	background-color: #DDDDDD;
+   	font-size: 20px;
+   	font-weight: bold ;
+	font-family: inherit;
+	border-radius : 10px;
+}
+/*승률*/
+span.winning {
+ 	font-size: 15px;
+ 	color: #AFAFAF;
+ 	font-weight: bold;
+ 	font-family: inherit;
+}
+/*라이벌 팀&승률&검색창*/
+div.rivalSearchArea {
+	display: flex;
+	justify-content: space-between;
+}
+/*라이벌 팀&승률*/
+div.rivalArea {
+ 	display:inline-block;
+ 	align-items: flex-end;
+}
+/*검색창*/
+div.searchArea {
+ 	display: flex;
+ 	align-items: flex-end;
+ 	padding-right: 10px;
+}
+/*팀 검색 목록*/
+div.teamList {
+ 	display:flex;
+ 	overflow-y: scroll;
+ 	/*background-color: green;*/
+ 	margin: 0 auto;
+}
+/*대결신청&가입신청 버튼*/
+div.appliBtnArea {
+ 	display:inline-block;
+ 	justify-content: flex-end;
+ 	float: right;
+ 	margin-right: 50px;
+ 	/*background-color: green;*/
+}
+/*검색버튼*/
+input[name="searchBtn"] {
+ 	background-color: #B3B3B3;
+ 	color: #FFFFFF;
+ 	border: none;
+ 	border-radius : 5px;
+}
+/*대결신청 버튼*/
+input[name="fightBtn"] {
+ 	background-color: #8AD6D9;
+ 	color: #7D7C7C;
+ 	border: none;
+ 	border-radius : 5px;
+}
+/*가입신청 버튼*/
+input[name="joinBtn"] {
+ 	background-color: #8AC6FE;
+ 	color: #7D7C7C;
+ 	border: none;
+ 	border-radius : 5px;
+}
+.teamList ul {
+  	list-style-type: none;
+  	/*background-color: blue;*/
+  	width: 100%	
+}
+.teamList li {
+	padding: 5px;
+	display: inline-block;
+  	/*background-color: red;*/
+}
