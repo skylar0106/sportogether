@@ -15,6 +15,11 @@ function teamPortfolioShow() {
 	} 	
 	form.submit();
 }
+function totalLanking(targetUri) {
+	form.action = targetUri;
+	form.method="GET";		
+	form.submit();
+}
 </script>
 </head>
 <body>
@@ -38,15 +43,11 @@ function teamPortfolioShow() {
 				<input type="text" style="width:240" name="teamID">
 			</td>
 		  </tr>
-	    </table>
-	    <br>	  
-	    <table style="width:100%">
 		  <tr>
-			<td align=left>
-				<input type="button" value="팀 포트폴리오 보기" onclick="teamPortfolioShow()">
-			</td>						
+		  	<td colspan = '2'><input type = "button" value="팀 포트폴리오 보기" onClick = "teamPortfolioShow()"></td>
 		  </tr>
 	    </table>
+	    <br>	 
 	  </td>	  
 	</tr>
   </table>  
