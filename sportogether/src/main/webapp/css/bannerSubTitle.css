@@ -1,0 +1,15 @@
+/*배너 이미지*/
+img.banner {
+      width: 100%;
+      height: 150px;
+}
+/*메뉴 제목(subtitle)*/
+p.subTitle {
+	margin: 5px; 
+	padding-left: 5px;
+	color: #7D7C7C;
+}	
+/*수직선*/
+hr {
+    background-color: black; /*색 안바뀜*/
+}
