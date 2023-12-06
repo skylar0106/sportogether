@@ -1,12 +1,14 @@
 package model.service;
 
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.List;
 
 import model.Community;
 import model.User;
 import model.dao.CommunityDAO;
 import model.dao.MatchRivalDAO;
+import model.dao.TeamPortfolioDAO;
 import model.dao.UserDAO;
 import model.service.dto.*;
 
@@ -150,4 +152,30 @@ public class TeamManager {
     public UserDAO getUserDAO() {
         return this.userDAO;
     }
+
+	public TeamScore getTeamScore(String teamID) {
+		TeamPortfolioDAO teamPortfolioDAO = new TeamPortfolioDAO();
+	    return teamPortfolioDAO.getTeamScore(teamID);
+	}
+	
+	public LocalDate getRecentMatchDate(String teamId) throws SQLException {
+	    TeamPortfolioDAO teamPortfolioDAO = new TeamPortfolioDAO();
+	    return teamPortfolioDAO.getRecentMatchDate(teamId);
+	}
+
+	public Team getTeamInfo(String teamID) throws SQLException {
+	    TeamPortfolioDAO teamPortfolioDAO = new TeamPortfolioDAO();
+	    return teamPortfolioDAO.getTeamInfo(teamID);
+	}
+	
+	public int getTeamMemberCount(String teamID) throws SQLException {
+	    TeamPortfolioDAO teamPortfolioDAO = new TeamPortfolioDAO();
+	    return teamPortfolioDAO.getTeamMemberCount(teamID);
+	}
+	
+	public String getTeamIntroduction(String teamID) throws SQLException {
+	    TeamPortfolioDAO teamPortfolioDAO = new TeamPortfolioDAO();
+	    return teamPortfolioDAO.getTeamIntroduction(teamID);
+	}
+
 }
