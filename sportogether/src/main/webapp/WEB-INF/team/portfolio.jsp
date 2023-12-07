@@ -17,29 +17,27 @@
 	      	padding-left: 15px;
 	      	color: #A8A8A8;
 	    }
-	    h1 {
-	    	font-style : italic;
-	    }
 	    th span:nth-child(1){
     		color:black;
+    		font-style : italic;
+    		font-style : bold;
 		}
 		
 		th span:nth-child(2){
 		    color:#7D7C7C;
-		}
-		
-		table{
-			border : 1px;
-			border-color : black;
+		    font-style : italic;
+    		font-style : bold;
 		}
 	</style>
   <title>팀 포트폴리오</title>
 </head>
 <body>
   <div class='portfolio'>
-  	<table border=1>
+  	<table cellpadding = "10px">
   		<tr>
-  			<th colspan = '4'><span>TEAM</span><span>${team.getName()}</span></th>
+  			<th colspan = '4' align = 'left'>
+  				<font size='5px'><span>TEAM  </span><span>${team.getName()}</span></font>
+  			</th>
   		</tr>
   		<tr>
   			<td>전적</td>
@@ -48,61 +46,71 @@
   		</tr>
   		<tr>
   			<td rowspan = '2'>
-  				<table>
+  				<table bgcolor = "#D9D9D9" style="border-radius : 10px;" cellpadding = "5px">
   					<tr>
-  						<th>match</th>
+  						<th align = 'left'>match</th>
   						<td>${teamScore.getMatches()}</td>
   					</tr>
   					<tr>
-  						<th>win</th>
+  						<th align = 'left'>win</th>
   						<td>${teamScore.getWin()}</td>
   					</tr>
   					<tr>
-  						<th>lose</th>
+  						<th align = 'left'>lose</th>
   						<td>${teamScore.getLose()}</td>
   					</tr>
   					<tr>
-  						<th>draw</th>
+  						<th align = 'left'>draw</th>
   						<td>${teamScore.getDraw()}</td>
   					</tr>
   				</table>
   			</td>
   			<td colspan = '2' rowspan = '2'>
-  				<table>
+  				<table cellpadding = "5px">
   					<tr>
-  						<td colspan = '2'>${teamScore.getRate()}%</td>
+  						<td colspan = '2'>
+  							<table width = "250px" cellspacing="0" style="border-radius : 10px;">
+  								<tr>
+  									<td width = '${teamScore.getRate()}%' height='35px' bgcolor='#8AC6FE'>   ${teamScore.getRate()}% </td>
+  									<td width = '{100 - ${teamScore.getRate()}}%' bgcolor='#D9D9D9'></td>
+  								</tr>
+  							</table>
+  						</td>
   					</tr>
   					<tr>
   						<td>최근 매치 일자</td>
   						<td>팀 멤버 수</td>
   					</tr>
   					<tr>
-  						<th>${recentMatchDate}</th>
-  						<th>${teamMemberCount}</th>
+  						<th align = 'left'>${recentMatchDate}</th>
+  						<th align = 'left'>${teamMemberCount}</th>
   					</tr>
   				</table>
   			</td>
   			<td rowspan = '2'>
-  				<table>
+  				<table bgcolor = "#D9D9D9" style="border-radius : 10px;" cellpadding = "10px">
   					<tr>
-  						<th>LV. ${team.getLevel()}</th>
+  						<th align = 'left'>LV. ${team.getLevel()}</th>
   						<td rowspan = '3'>상패 이미지</td>
   					</tr>
   					<tr>
   						<td>다음 레벨까지</td>
   					</tr>
   					<tr>
-  						<th>남은 이길 수</th>
+  						<th align = 'left'>남은 이길 수</th>
   					</tr>
   				</table>
   			</td>
   		</tr>
   		<tr></tr>
   		<tr>
+  			<td> </td>
+  		</tr>
+  		<tr>
   			<td colspan = '4'>팀 소개</td>
   		</tr>
   		<tr>
-  			<th colspan = '4'>${teamIntroduction}</th>
+  			<th colspan = '4' align = 'left'><font size='4px'>${teamIntroduction}</font></th>
   		</tr>
   	</table>
   </div>

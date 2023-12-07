@@ -1,16 +1,19 @@
 CREATE TABLE team
 (
-   teamID                INTEGER  NOT NULL ,
-   name                 VARCHAR2(30)  NOT NULL ,
-   spoleader            VARCHAR2(18)  NOT NULL ,
-   "LEVEL"                INTEGER  NULL ,
-   sport                VARCHAR2(18)  NOT NULL ,
-   location             VARCHAR2(100)  NULL ,
-   membership           INTEGER  NULL ,
-   rival                VARCHAR2(18)  NULL,
-   comment				NVARCHAR(255) NULL
-   FOREIGN KEY (spoleader) REFERENCES spoleader (userID) on DELETE CASCADE
+   teamID       INTEGER  NOT NULL ,
+   name         VARCHAR2(30)  NOT NULL ,
+   spoleader        VARCHAR2(18)  NOT NULL ,
+   "LEVEL"      INTEGER  NULL ,
+   sport        VARCHAR2(18)  NOT NULL ,
+   location     VARCHAR2(100)  NULL ,
+   membership       INTEGER  NULL ,
+   rival        VARCHAR2(18)  NULL,
+   "COMMENT"      VARCHAR2(255) NULL
 );
+
+ALTER TABLE team
+   ADD (
+CONSTRAINT R_1 FOREIGN KEY (spoleader) REFERENCES spoleader (USERID));
 
 CREATE UNIQUE INDEX XPKteam ON team
 (teamID   ASC);
@@ -55,7 +58,9 @@ ALTER TABLE match
     
 CREATE TABLE spoleader
 (
-   userID               VARCHAR2(18)  NOT NULL );
+   userID               VARCHAR2(18)  NOT NULL,
+    message      VARCHAR2(255) NULL   
+);
 
 CREATE TABLE spouser
 (
@@ -90,7 +95,7 @@ CREATE TABLE spomember
    userID               VARCHAR2(18)  NOT NULL ,
    message            NVARCHAR2(255)  NULL, 
    teamID              INTEGER NOT NULL,
-   FOREIGN KEY (teamID) REFERENCES teamID (teamID) on DELETE CASCADE
+   FOREIGN KEY (teamID) REFERENCES team (teamID) on DELETE CASCADE
 );
 
 CREATE UNIQUE INDEX XPKmember ON spomember
