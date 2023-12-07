@@ -29,7 +29,7 @@ public class TeamPortfolioDAO {
 		        rs = jdbcUtil.executeQuery();
 		        if (rs != null && rs.next()) {
 		            team = new Team(
-		                rs.getString("teamID"),
+		                rs.getInt("teamID"),
 		                rs.getString("name"),
 		                rs.getString("spoleader"),
 		                rs.getInt("level"),
@@ -177,7 +177,7 @@ public class TeamPortfolioDAO {
     		rs = jdbcUtil.executeQuery();
     		if(rs != null && rs.next()) {
     			team = new Team(
-    				rs.getString("teamID"),
+    				rs.getInt("teamID"),
     				rs.getString("name"),
     				rs.getString("spoleader"),
     				rs.getInt("level"),
@@ -209,7 +209,7 @@ public class TeamPortfolioDAO {
     		rs = jdbcUtil.executeQuery();
     		if(rs != null && rs.next()) {
     			team = new Team(
-        				rs.getString("teamID"),
+        				rs.getInt("teamID"),
         				rs.getString("name"),
         				rs.getString("spoleader"),
         				rs.getInt("level"),

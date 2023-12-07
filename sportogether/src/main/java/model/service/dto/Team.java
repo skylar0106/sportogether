@@ -1,7 +1,7 @@
 package model.service.dto;
 
 public class Team {
-    private String teamId;
+    private int teamId;
     private String name;
     private String spoLeader;
     private int level;
@@ -10,10 +10,10 @@ public class Team {
     private int membership;
     private String rival;
     
-    public String getTeamId() {
+    public int getTeamId() {
         return teamId;
     }
-    public void setTeamId(String teamId) {
+    public void setTeamId(int teamId) {
         this.teamId = teamId;
     }
     public String getName() {
@@ -62,7 +62,7 @@ public class Team {
     public Team() {
 
     }
-    public Team(String teamId, String name, String spoLeader, int level, String sport, String location, int membership,
+    public Team(int teamId, String name, String spoLeader, int level, String sport, String location, int membership,
             String rival) {
         super();
         this.teamId = teamId;

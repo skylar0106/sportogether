@@ -3,7 +3,7 @@ package model.service.dto;
 public class Rival {
     /* 라이벌 팀을 추천하기위한 dto*/
     private String teamName;
-    private String teamId;
+    private int teamId;
     private float rate;
     
     public String getTeamName() {
@@ -12,10 +12,10 @@ public class Rival {
     public void setTeamName(String teamName) {
         this.teamName = teamName;
     }
-    public String getTeamId() {
+    public int getTeamId() {
         return teamId;
     }
-    public void setTeamId(String teamId) {
+    public void setTeamId(int teamId) {
         this.teamId = teamId;
     }
     public float getRate() {
@@ -28,7 +28,7 @@ public class Rival {
     public Rival() {
     }
     
-    public Rival(String teamName, String teamId, float rate) {
+    public Rival(String teamName, int teamId, float rate) {
         super();
         this.teamName = teamName;
         this.teamId = teamId;
