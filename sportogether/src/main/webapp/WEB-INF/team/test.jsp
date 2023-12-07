@@ -24,7 +24,6 @@ function totalLanking(targetUri) {
 </head>
 <body>
 <br>
-
 <form name="form" method="POST" action="<c:url value='/team/portfolio' />">
   <table style="width:100%">
 	<tr>
