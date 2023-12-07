@@ -3,7 +3,7 @@
     	align-items: center; /* 수직 가운데 정렬 */
     	justify-content: space-between; /* 내용을 양 끝으로 펼침 */
   		/*background-color: red;*/
-  		height:80vh;
+  		height:60vh;
   		overflow: hidden;
   	}
   	.myLankingArea {
