@@ -1,16 +1,23 @@
+DROP TABLE spouser CASCADE CONSTRAINTS;
+DROP TABLE spoleader CASCADE CONSTRAINTS;
+DROP TABLE teamscore CASCADE CONSTRAINTS;
+DROP TABLE team CASCADE CONSTRAINTS;
 CREATE TABLE team
 (
-   teamID                INTEGER  NOT NULL ,
-   name                 VARCHAR2(30)  NOT NULL ,
-   spoleader            VARCHAR2(18)  NOT NULL ,
-   "LEVEL"                INTEGER  NULL ,
-   sport                VARCHAR2(18)  NOT NULL ,
-   location             VARCHAR2(100)  NULL ,
-   membership           INTEGER  NULL ,
-   rival                VARCHAR2(18)  NULL,
-   comment				NVARCHAR(255) NULL
-   FOREIGN KEY (spoleader) REFERENCES spoleader (userID) on DELETE CASCADE
+   teamID       INTEGER  NOT NULL ,
+   name         VARCHAR2(30)  NOT NULL ,
+   spoleader        VARCHAR2(18)  NOT NULL ,
+   tlevel      INTEGER  NULL ,
+   sport        VARCHAR2(18)  NOT NULL ,
+   location     VARCHAR2(100)  NULL ,
+   membership       INTEGER  NULL ,
+   rival        VARCHAR2(18)  NULL,
+   tcomment      VARCHAR2(255) NULL
 );
+
+ALTER TABLE team
+   ADD (
+CONSTRAINT R_1 FOREIGN KEY (spoleader) REFERENCES spoleader (USERID));
 
 CREATE UNIQUE INDEX XPKteam ON team
 (teamID   ASC);
@@ -55,7 +62,9 @@ ALTER TABLE match
     
 CREATE TABLE spoleader
 (
-   userID               VARCHAR2(18)  NOT NULL );
+   userID               VARCHAR2(18)  NOT NULL,
+    message      VARCHAR2(255) NULL   
+);
 
 CREATE TABLE spouser
 (
@@ -90,7 +99,7 @@ CREATE TABLE spomember
    userID               VARCHAR2(18)  NOT NULL ,
    message            NVARCHAR2(255)  NULL, 
    teamID              INTEGER NOT NULL,
-   FOREIGN KEY (teamID) REFERENCES teamID (teamID) on DELETE CASCADE
+   FOREIGN KEY (teamID) REFERENCES team (teamID) on DELETE CASCADE
 );
 
 CREATE UNIQUE INDEX XPKmember ON spomember
@@ -136,3 +145,46 @@ ALTER TABLE REQUEST
 CREATE INDEX IX_REQUEST_TEAM_USER ON REQUEST
 (teamId   ASC, userId   ASC);
 
+-- spouser 테이블에 데이터 삽입
+INSERT INTO spouser (userID, name, nickname, sex, birth, password, picture)
+VALUES 
+  ('user1', 'John Doe', 'Johnny', 'Male', '19900101', 'password1', null);
+INSERT INTO spouser (userID, name, nickname, sex, birth, password, picture)
+VALUES 
+  ('user2', 'Jane Doe', 'Janie', 'Female', '19910201', 'password2', null);
+INSERT INTO spouser (userID, name, nickname, sex, birth, password, picture)
+VALUES 
+  ('user3', 'Alice Smith', 'Ally', 'Female', '19920301', 'password3', null);
+
+-- spoleader 테이블에 데이터 삽입
+INSERT INTO spoleader (userID, message)
+VALUES 
+  ('user1', 'Message for leader1');
+INSERT INTO spoleader (userID, message)
+VALUES
+  ('user2', 'Message for leader2');
+INSERT INTO spoleader (userID, message)
+VALUES
+  ('user3', 'Message for leader3');
+
+-- team 테이블에 데이터 삽입
+INSERT INTO team (teamID, name, spoleader, tlevel, sport, location, membership, rival, tcomment)
+VALUES 
+  (1, 'TeamA', 'user1', 1, 'Football', 'City Stadium', 50, 'Team B', 'Comment for Team A');
+INSERT INTO team (teamID, name, spoleader, tlevel, sport, location, membership, rival, tcomment)
+VALUES 
+  (2, 'TeamB', 'user2', 1, 'Basketball', 'Arena Center', 40, 'Team A', 'Comment for Team B');
+INSERT INTO team (teamID, name, spoleader, tlevel, sport, location, membership, rival, tcomment)
+VALUES 
+  (3, 'TeamC', 'user3', 1, 'Soccer', 'Field Park', 30, 'Team D', 'Comment for Team C');
+
+-- teamScore 테이블에 데이터 삽입
+INSERT INTO teamScore (teamID, matches, win, lose, ranking, draw, rate)
+VALUES 
+  (1, 10, 6, 4, 1, 0, 60.0);
+INSERT INTO teamScore (teamID, matches, win, lose, ranking, draw, rate)
+VALUES 
+  (2, 10, 5, 5, 2, 0, 50.0);
+INSERT INTO teamScore (teamID, matches, win, lose, ranking, draw, rate)
+VALUES 
+  (3, 10, 4, 6, 3, 0, 40.0);
