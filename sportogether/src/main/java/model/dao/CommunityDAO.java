@@ -135,7 +135,7 @@ public class CommunityDAO {
 					commId,
 					rs.getString("cName"),
 					rs.getString("descr"),
-					rs.getDate("startDate"),
+					null,
 					rs.getString("chairId"),
 					rs.getString("chairName"));
 			}

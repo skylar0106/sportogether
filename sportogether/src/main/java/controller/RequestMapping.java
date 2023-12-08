@@ -43,6 +43,10 @@ public class RequestMapping {
         mappings.put("/community/create", new CreateCommunityController());
         mappings.put("/community/update", new UpdateCommunityController());
         
+        
+        //메인 페이지
+        mappings.put("/mainPage", new ForwardController("/mainPage.jsp"));
+        
         // 검색, 라이벌 관련 controller
         mappings.put("/team/test", new ForwardController("/team/test.jsp"));
         mappings.put("/team/search", new SearchTeamController());

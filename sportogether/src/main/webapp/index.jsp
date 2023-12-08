@@ -1,1 +1,2 @@
-<% response.sendRedirect(request.getContextPath() + "/team/test"); %>
+<% response.sendRedirect(request.getContextPath() + "/mainPage"); %>
+<!-- /team/test -->

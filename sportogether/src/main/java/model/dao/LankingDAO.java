@@ -50,7 +50,7 @@ public class LankingDAO {
         StringBuilder sql = new StringBuilder();
         sql.append("SELECT teamId, matches, win, lose, ranking, draw, rate, name ");
         sql.append("FROM teamScore JOIN team USING (teamId) ");
-        sql.append("ORDER BY rate ");
+        sql.append("ORDER BY ranking ");
         
         jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {});       // JDBCUtil에 query문 설정
                     

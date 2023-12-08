@@ -14,7 +14,8 @@ public class SearchTeamController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
-        String teamName = request.getParameter("teamName");
+//        String teamName = request.getParameter("teamName");
+        String teamName = "TeamA";
         // 로그인 여부 확인
     	
     	
