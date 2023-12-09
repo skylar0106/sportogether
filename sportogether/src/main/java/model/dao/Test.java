@@ -17,15 +17,17 @@ public class Test {
     public static void main(String[] args) throws SQLException {        
         Scanner scanner = new Scanner(System.in);
         
-        System.out.print("팀명을 입력하시오: ");
-        String teamName = scanner.next();
+        System.out.print("팀아이디를 입력하시오: ");
+        String teamId = scanner.next();
         System.out.println();
         
-         Team tm = compDao.findByTeamName(teamName);        
+        int teamIdAsInt = Integer.parseInt(teamId);
+        
+         Team tm = compDao.findByTeamName(teamIdAsInt);        
 
          System.out.println("<팀정보>");
          System.out.println("팀ID: " + tm.getTeamId());
-         System.out.println("팀명: " + teamName);
+         System.out.println("팀명: " + teamId);
          System.out.println("리더: " + tm.getSpoLeader());
          System.out.println("레벨: " + tm.getLevel());
          System.out.println("종목: " + tm.getSport());
@@ -42,7 +44,7 @@ public class Test {
          Iterator<Lanking> iter = lk.iterator();
          while(iter.hasNext()) {
              Lanking emp = iter.next();
-             int teamId = emp.getTeamID();
+             int id = emp.getTeamID();
              int match = emp.getMatches();
              int win = emp.getWin();
              int lose = emp.getLose();

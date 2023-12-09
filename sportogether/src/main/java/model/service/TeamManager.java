@@ -46,17 +46,25 @@ public class TeamManager {
     }
     
     /*라이벌 찾기*/
-    public Rival findRivalTeam(String name)
+    public Rival findRivalTeam(int teamId)
             throws SQLException, UserNotFoundException {
-            Team tm = rivalDAO.findByTeamName(name);
-            if (tm == null) {
-                throw new UserNotFoundException(name + "는 존재하지 않는 아이디입니다.");
-            }   
-            
-            Rival rival = rivalDAO.getMatchList(tm);
-            if (rival == null) {
-                throw new UserNotFoundException("라이벌이 존재하지 않습니다.");
-            }          
+            Team tm = null;
+            Rival rival = null;
+            if (teamId == 0) {
+                rival = new Rival ("로그인 해주세요", teamId, 0);
+            }
+            else {
+                tm = rivalDAO.findByTeamName(teamId);
+                if (tm == null) {
+                    throw new UserNotFoundException(teamId + "는 존재하지 않는 아이디입니다.");
+                }   
+                
+                rival = rivalDAO.getMatchList(tm);
+                if (rival == null) {
+                    throw new UserNotFoundException("라이벌이 존재하지 않습니다.");
+                }         
+            }
+             
             return rival;
         }
     

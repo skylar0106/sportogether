@@ -20,21 +20,21 @@ private JDBCUtil jdbcUtil = null;
      * 같은 레벨인 모든 팀 검색
      * 승률이 가장 비슷한 팀 이름 반환
      * */
-    public Team findByTeamName(String name) {
+    public Team findByTeamName(int teamId) {
         StringBuilder query = new StringBuilder();
         query.append("SELECT * ");
         query.append("FROM team ");
-        query.append("WHERE name = ? ");
+        query.append("WHERE teamId = ? ");
         
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{name}); // JDBCUtil에 질의문과 파라미터 설정   
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{teamId}); // JDBCUtil에 질의문과 파라미터 설정   
         
         try {
             ResultSet rs = jdbcUtil.executeQuery();
             
             if (rs.next()) {        // 검색 결과 존재
                 Team tm = new Team();          
-                 tm.setTeamId(rs.getInt("teamid"));
-                 tm.setName(name);
+                 tm.setTeamId(teamId);
+                 tm.setName(rs.getString("name"));
                  tm.setSpoLeader(rs.getString("spoleader"));
                  tm.setLevel(rs.getInt("tlevel"));
                  tm.setSport(rs.getString("sport"));
