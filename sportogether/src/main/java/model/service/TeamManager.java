@@ -60,7 +60,17 @@ public class TeamManager {
             return rival;
         }
     
-    /*랭킹리스트 가져오기*/
+    /*내 팀 랭킹 반환*/
+    public Lanking findTeamLanking(int teamId)
+            throws SQLException, UserNotFoundException {
+            Lanking lanking = lankingDAO.findTeamLanking(teamId);
+            if (lanking == null) {
+                throw new UserNotFoundException(teamId + "는 존재하지 않는 아이디입니다.");
+            }              
+            return lanking;
+        }
+    
+    /*랭킹리스트 반환*/
     public List<Lanking> findLankingList()
             throws SQLException, UserNotFoundException { 
             List<Lanking> lankingList = lankingDAO.findTeamLankingList();

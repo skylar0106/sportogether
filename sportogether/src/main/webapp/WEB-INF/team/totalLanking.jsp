@@ -15,9 +15,9 @@
   <hr>
   <div class="mainContent">
 	  <div class="myLankingArea">
-	  	<p class="myLanking">1st</p>
-	  	<p class="myTeam">5벤져스</p>
-	  	<p class="myTeamScore">15전 10승 3패 2무</p>
+	  	<p class="myLanking">${lanking.getRanking()}st</p>
+	  	<p class="myTeam">${lanking.getTeamName()}</p>
+	  	<p class="myTeamScore">${lanking.getMatches()}전 ${lanking.getWin()}승 ${lanking.getLose()}패 ${lanking.getDraw()}무</p>
 	  </div>
 	  <div class="lankingListArea">
 	  	<ul>

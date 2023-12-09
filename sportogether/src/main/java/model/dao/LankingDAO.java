@@ -14,24 +14,25 @@ public class LankingDAO {
         jdbcUtil = new JDBCUtil();  // JDBCUtil 객체 생성
     }
 
-    public User findTeamLanking(String userId) throws SQLException {
-        String sql = "SELECT password, name, email, phone, commId, cName "
-                    + "FROM USERINFO u LEFT OUTER JOIN Community c ON u.commId = c.cId "
-                    + "WHERE userid=? ";              
-        jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});   // JDBCUtil에 query문과 매개 변수 설정
+    public Lanking findTeamLanking(int teamId) throws SQLException {
+        String sql = "SELECT teamId, matches, win, lose, ranking, draw, rate, name "
+                    + "FROM teamScore JOIN team USING (teamId) "
+                    + "WHERE teamId=? ";              
+        jdbcUtil.setSqlAndParameters(sql, new Object[] {teamId});   // JDBCUtil에 query문과 매개 변수 설정
 
         try {
             ResultSet rs = jdbcUtil.executeQuery();     // query 실행
             if (rs.next()) {                        // 학생 정보 발견
-                User user = new User(       // User 객체를 생성하여 학생 정보를 저장
-                    userId,
-                    rs.getString("password"),
-                    rs.getString("name"),
-                    rs.getString("email"),
-                    rs.getString("phone"),
-                    rs.getInt("commId"),                    
-                    rs.getString("cName"));
-                return user;
+                Lanking lanking = new Lanking(           // User 객체를 생성하여 현재 행의 정보를 저장
+                        rs.getString("teamId"),
+                        rs.getInt("matches"),
+                        rs.getInt("win"),
+                        rs.getInt("lose"),
+                        rs.getInt("ranking"),
+                        rs.getInt("draw"),
+                        rs.getFloat("rate"),
+                        rs.getString("name"));
+                return lanking;
             }
         } catch (Exception ex) {
             ex.printStackTrace();

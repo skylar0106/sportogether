@@ -9,7 +9,7 @@ import model.service.TeamManager;
 import model.service.UserManager;
 import model.service.dto.*;
 
-public class LankingListController implements Controller {
+public class LankingController implements Controller {
     // private static final int countPerPage = 100; // 한 화면에 출력할 사용자 수
 
     @Override
@@ -24,12 +24,15 @@ public class LankingListController implements Controller {
             currentPage = Integer.parseInt(currentPageStr);
         }       
         */
+        int teamId = 1;
         
         TeamManager manager = TeamManager.getInstance();
+        Lanking lanking = manager.findTeamLanking(teamId);
         List<Lanking> lankingList  = manager.findLankingList();
         // List<User> userList = manager.findUserList(currentPage, countPerPage);
 
         // userList 객체와 현재 로그인한 사용자 ID를 request에 저장하여 전달
+        request.setAttribute("lanking", lanking);     
         request.setAttribute("lankingList", lankingList);               
 //      request.setAttribute("curUserId", 
 //              UserSessionUtils.getLoginUserId(request.getSession()));     
