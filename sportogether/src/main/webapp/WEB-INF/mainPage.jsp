@@ -7,8 +7,9 @@
 <head>
 <title>mainPage</title>
 <script>
-function rivalMatching() {
-	
+function rivalMatching(targetUri) {
+	form.action = targetUri;
+	form.method="POST";		
 	form.submit();
 }
 function totalLanking(targetUri) {
@@ -20,7 +21,6 @@ function totalLanking(targetUri) {
 <style>
 body, html {
     height: 100%;
-
     margin: 0;
 }
 
@@ -104,7 +104,8 @@ body, html {
 		<img class="logo" src="<c:url value='/images/logo.png' />" alt="logo"/>
         <ul>
             <li><a class="menuLink" href="#">사이트 소개</a></li>
-            <li><a class="menuLink" href="javascript:rivalMatching()">팀 찾기</a></li>
+            <li><a class="menuLink" href="javascript:rivalMatching(
+            	'<c:url value='/team/search'/>')">팀 찾기</a></li>
             <li><a class="menuLink" href="javascript:totalLanking(
 				'<c:url value='/team/lankingList'/>')">전체 랭킹</a></li>
             <li><a class="menuLink" href="#">팀 커뮤니티</a></li>
