@@ -14,52 +14,94 @@ public class TeamDAO {
         jdbcUtil = new JDBCUtil();
         member = new MemberDAO();
     }
-     // 새로운 팀 생성
-    public Team newTeam(Team team) {
-        ResultSet rs = null;
+    
+     // Team 테이블에 새로운 팀 생성
+    public Team create(Team team) {
+        StringBuilder query = new StringBuilder();
 
+        query.append("INSERT into TEAM ");
+        query.append("values(teamId_seq.nextval,?, ?, ?, ?) ");
+        //이거하려면 db에 sequence 설정해줘야함 기억하기*******************
+        // Team의 teamid은 PK => sequence로 자동 생성해주기!!
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{team.getName(), 
+        			team.getSpoleader(), team.getLocation(), team.getSport()});
+        
+        String key[] = {"teamId"};	//pk 컬럼의이름
         try {
-            StringBuilder query = new StringBuilder();
-
-            query.append("INSERT into TEAM ");
-            query.append("(name, spoleader, \"LEVEL\", sport, location, membership, rival) ");
-            query.append("values(?, ?, ?, ?, ?, ?, ?) ");
-            jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{team.getName(), team.getSpoleader(),
-                    team.getLevel(), team.getSport(), team.getLocation(), team.getMembership(), team.getRival()});
-            rs = jdbcUtil.executeQuery();
-
-        } catch (SQLException ex) {
+        	jdbcUtil.executeUpdate(key);	//insert문 실행
+            ResultSet rs = jdbcUtil.getGeneratedKeys();
+            if(rs.next()) {
+            	int generatedKey = rs.getInt(1);	// 생성된 pk값
+            	team.setTeamId(generatedKey);	//teamId 필드에 저장
+            }
+            return team;
+            //return result;
+        } catch (Exception ex) {
+        	jdbcUtil.rollback();
             ex.printStackTrace();
         } finally {
+        	jdbcUtil.commit();
             jdbcUtil.close();
         }
         return null;
     }
 
-    // 팀 정보 변경
-    public Team changeTeamInfo(Team team) {
-        ResultSet rs = null;
+
+    
+    // 팀 정보 수정
+    public int update(Team team) throws SQLException{
 
         try {
             StringBuilder query = new StringBuilder();
 
             query.append("UPDATE TEAM ");
-            query.append("SET name = ?, spoleader = ?, \"LEVEL\" = ?, sport = ?, location = ?, membership = ?, rival = ? ");
+            query.append("SET name = ?, spoleader = ?, location = ?, sport = ? ");
             query.append("WHERE teamId = ? ");
-            jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{team.getName(), team.getSpoleader(),
-                    team.getLevel(), team.getSport(), team.getLocation(), team.getMembership(), team.getRival(),
-                    team.getTeamId()});
-            rs = jdbcUtil.executeQuery();
-        } catch (SQLException ex) {
+            
+            String leaderId = team.getSpoleader();
+            
+            if(leaderId.equals("")) leaderId = null;
+            
+            jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{team.getName(), team.getSpoleader(), 
+            		 team.getSport(), team.getLocation()});
+            int result = jdbcUtil.executeUpdate();
+            return result;
+        } catch (Exception ex) {
+        	jdbcUtil.rollback();
             ex.printStackTrace();
         } finally {
+        	jdbcUtil.commit();
             jdbcUtil.close();
         }
-        return null;
+        return 0;
+    }
+    
+    
+    //team테이블에서 해당팀의 리더를 변경(spoleader만 update해주면 될듯...?) 근데 이걸 어디다..?  
+    public int updateLeader(Team team) {
+    	String sql = "UPDATE team "
+    				+ "SET spoleader = ? "
+					+ "WHERE teamId=?";
+    	Object[] param = new Object[] {team.getSpoleader(), team.getTeamId()};				
+    	jdbcUtil.setSqlAndParameters(sql, param);	// JDBCUtil에 update문과 매개 변수 설정
+		
+    	try {				
+    		int result = jdbcUtil.executeUpdate();	// update 문 실행
+    		return result;
+    	} catch (Exception ex) {
+    		jdbcUtil.rollback();
+    		ex.printStackTrace();
+    	}
+   		finally {
+   			jdbcUtil.commit();
+   			jdbcUtil.close();	// resource 반환
+   		}		
+    	return 0;
     }
 
+    
     // 팀 정보 삭제
-    public boolean deleteTeam(String teamID) {
+    public boolean deleteTeam(Team teamID) {
         boolean success = false;
         ResultSet rs = null;
 
@@ -74,15 +116,18 @@ public class TeamDAO {
             jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{teamID});
             rs = jdbcUtil.executeQuery();
             success = true;
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
+        	jdbcUtil.rollback();
             ex.printStackTrace();
         } finally {
+        	jdbcUtil.commit();
             jdbcUtil.close();
         }
 
         return success;
     }
 
+    
     // 모든 팀 정보 검색해서 리스트에 저장 후 반환
     public List<Team> getTeamList() {
         List<Team> teamList = null;
@@ -119,6 +164,7 @@ public class TeamDAO {
         return teamList;
     }
     
+    
     // 팀 이름으로 팀 검색
     public Team findTeamByName(String teamName) {
         Team team = new Team();
@@ -151,6 +197,76 @@ public class TeamDAO {
         return team;
     }
 
+    
+	// 주어진  ID에 해당하는 팀 정보를 데이터베이스에서 찾아 Team 도메인 클래스에 저장하여 반환.
+	public Team findTeam(int teamId) throws SQLException {
+		Team team = null;
+		ResultSet rs = null;
+		
+		StringBuilder sql = new StringBuilder();
+//		sql.append("SELECT t.name, teamid, spoleader ");
+//		sql.append("FROM Team t LEFT OUTER JOIN spouser u ON t.spoleader = u.userId ");
+//		sql.append("WHERE teamId=? ");
+
+		
+		sql.append("SELECT * ");
+		sql.append("FROM team ");
+		sql.append("WHERE teamid=? ");
+		
+		jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {teamId});	// JDBCUtil에 query문과 매개 변수 설정
+
+		try {
+			rs = jdbcUtil.executeQuery();		// query 실행
+			if (rs.next()) {						// 학생 정보 발견
+				team = new Team(		// Team 객체를 생성하여 커뮤니티 정보를 저장
+					teamId,
+					rs.getString("name"),
+					rs.getString("spoleader"),
+					rs.getString("location"),
+					rs.getString("sport")
+					);
+			}
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return team;
+	}
+	
+	
+	// TeamList 찾기
+	public List<Team> findTeamList() throws SQLException {
+
+		StringBuilder sql = new StringBuilder();
+		sql.append("SELECT teamId, name, spoleader ");
+		sql.append("FROM Team ");
+		sql.append("GROUP BY teamId, name, spoleader ");
+		sql.append("ORDER BY teamId");
+        
+		jdbcUtil.setSqlAndParameters(sql.toString(), null);		// JDBCUtil에 query문 설정
+					
+		try {
+			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
+			List<Team> teamList = new ArrayList<Team>();	// Team들의 리스트 생성
+			while (rs.next()) {
+				Team team = new Team(			// Team 객체를 생성하여 현재 행의 정보를 저장
+						rs.getInt("teamId"),
+						rs.getString("name"),
+						rs.getString("spoleader")
+						);
+				teamList.add(team);				// List에 Team 객체 저장
+			}		
+			return teamList;					
+			
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		} finally {
+			jdbcUtil.close();		// resource 반환
+		}
+		return null;
+	}
+    
     // 랭킹 리스트 조회
     public List<Team> findRankingList() {
         List<Team> sortedTeamList = null;
@@ -186,6 +302,7 @@ public class TeamDAO {
         return sortedTeamList;
     }
     
+    
     // 특정 팀의 멤버 목록을 반환
     public List<User> getMemberListByTeamName(String teamName) {
         List<User> memberList = null;
@@ -205,7 +322,7 @@ public class TeamDAO {
                 User m = new User();
                 m.setUserId(rs.getString("userid"));
                 m.setName(rs.getString("name"));
-                m.setBirth(rs.getDate("birth"));
+                m.setBirth(rs.getString("birth"));
                 m.setPosition(rs.getString("birth"));
                 m.setNickName(rs.getString("nickname"));
                 memberList.add(m);
@@ -218,6 +335,7 @@ public class TeamDAO {
 
         return memberList;
     }
+    
     
     /*
      * REQUEST 테이블 추가 : 가입 신청 정보, (teamid, userid,  massage, date)로 구성
@@ -260,17 +378,17 @@ public class TeamDAO {
     }
 
     // 요청 승인 시 팀 멤버로 추가
-    public boolean approveRequest(String teamID, String userID) {
-        // 요청을 승인하면 SPOMEMBER 테이블에 추가
-        boolean success = member.addMember(userID, null, teamID);
-
-        // 승인한 경우 요청 목록에서 해당 요청 삭제
-        if (success) {
-            removeRequest(teamID, userID);
-        }
-
-        return success;
-    }
+//    public boolean approveRequest(String teamID, String userID) {
+//        // 요청을 승인하면 SPOMEMBER 테이블에 추가
+//        boolean success = member.addMember(userID, null, teamID);
+//
+//        // 승인한 경우 요청 목록에서 해당 요청 삭제
+//        if (success) {
+//            removeRequest(teamID, userID);
+//        }
+//
+//        return success;
+//    }
 
     // 요청 거절 시 요청 목록에서 제거
     public boolean rejectRequest(String teamID, String userID) {
@@ -288,7 +406,7 @@ public class TeamDAO {
             jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{teamID, userID});
             jdbcUtil.executeQuery();
             success = true;
-        } catch (SQLException ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
         } finally {
             jdbcUtil.close();
@@ -296,4 +414,10 @@ public class TeamDAO {
 
         return success;
     }
+
+
+
+
 }
+
+

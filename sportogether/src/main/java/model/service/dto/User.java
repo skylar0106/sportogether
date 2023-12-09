@@ -1,55 +1,67 @@
 package model.service.dto;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class User {
+	private int teamId; //추가한 정보
     private String userId;
     private String name;
     private String nickName;
     private String sex;
-    private Date birth;
+    private String birth;
     private String password;
-    private String picture;
+    private String position;
+    
     //추가
     private String comment;
     private List<String> interests;
     private String career;
+    private String picture;
 
-    public String getPicture() {
-        return picture;
-    }
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
     
     //기본 생성자
     public User() {}
     
-    //password 없는 생성자
-    public User(String userId, String name, String nickName, String sex, Date birth,
-            String picture) {
-    	this.userId = userId;
+    //일반 생성자(개인정보 수정할 때 사용)
+    public User(String name, String nickName, String sex, String birth, String position, String password) {
+        super();
         this.name = name;
         this.nickName = nickName;
         this.sex = sex;
         this.birth = birth;
-        this.picture = picture;
+        this.position = position;
+        this.password = password;
     }
     
-    public User(String userId, String name, String nickName, String sex, Date birth, String password,
-            String picture) {
-        super();
+    
+    public User(String userId, String name, String nickName, String sex, String birth, String position, String password) {
         this.userId = userId;
         this.name = name;
         this.nickName = nickName;
         this.sex = sex;
         this.birth = birth;
+        this.position = position;
         this.password = password;
-        this.picture = picture;
     }
+    
+    
+    //find하는 용도
+    public User(String userId, int teamId, String name, String nickName, String sex, String birth, String position, String password) {
+        super();
+        this.userId = userId;
+        this.teamId = teamId;
+        this.name = name;
+        this.nickName = nickName;
+        this.sex = sex;
+        this.birth = birth;
+        this.position = position;
+        this.password = password;
+    }
+    
 
-    public User(String userId, String name, String nickName, String sex, Date birth, 
+    //password없는 생성자(포트폴리오 수정시 사용)
+    public User(String userId, String name, String nickName, String sex, String birth, 
             String picture, String comment, List<String> interests, String career) {
         this.userId = userId;
         this.name = name;
@@ -80,17 +92,23 @@ public class User {
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
+    public String getBirth() {
+        return birth;
+    }
+    public void setBirth(String birth) {
+        this.birth = birth;
+    }
     public String getSex() {
         return sex;
     }
     public void setSex(String sex) {
         this.sex = sex;
     }
-    public Date getBirth() {
-        return birth;
+    public String getPosition() {
+    	return position;
     }
-    public void setBirth(Date birth) {
-        this.birth = birth;
+    public void setPosition(String position) {
+    	this.position = position;
     }
     public String getPassword() {
         return password;
@@ -116,4 +134,51 @@ public class User {
     public void setCareer(String career) {
         this.career = career;
     }
+    public String getPicture() {
+        return picture;
+    }
+    public void setPicture(String picture) {
+        this.picture = picture;
+    }
+//	public String getLeaderName() {
+//		return leaderName;
+//	}
+//
+//	public void setLeaderName(String leaderName) {
+//		this.leaderName = leaderName;
+//	}
+//
+//	public String getLeaderId() {
+//		return leaderId;
+//	}
+//
+//	public void setLeaderId(String leaderId) {
+//		this.leaderId = leaderId;
+//	}
+
+	public int getTeamId() {
+		return teamId;
+	}
+
+	public void setTeamId(int teamId) {
+		this.teamId = teamId;
+	}
+	
+    
+	/* 비밀번호 검사 */
+	public boolean matchPassword(String password) {
+		if (password == null) {
+			return false;
+		}
+		return this.password.equals(password);
+	}
+	
+	public boolean isSameUser(String userid) {
+        return this.userId.equals(userid);
+    }
+
+
+
+
 }
+
