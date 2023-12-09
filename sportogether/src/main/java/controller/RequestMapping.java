@@ -57,7 +57,7 @@ public class RequestMapping {
         // 랭킹 관련 controller
         mappings.put("/team/lankingList", new LankingController());
         
-        //마이페이지
+        //마이페이지 관련 controller
         mappings.put("/user/myTeamLanking", new MyTeamLankingController());
         
         logger.info("Initialized Request Mapping!");

@@ -19,7 +19,7 @@ function totalLanking(targetUri) {
 }
 function myPage(targetUri) {
 	form.action = targetUri;
-	form.method="GET";		
+	form.method="POST";		
 	form.submit();
 }
 </script>
@@ -116,11 +116,12 @@ body, html {
         </ul>
         <div class="userActions">
         	<p>${user.getName()}회원&nbsp;&nbsp;</p>
-        	<input class="join" type="button" value="마이페이지" onClick="myPage(
-        		'<c:url value='/user/myTeamLanking'>
-        		<c:param name='userId' value='${user.userId}'/>
-        		</c:url>')"> &nbsp;
-    
+	        <form name="form" method="GET"  action="<c:url value='/user/login' />">
+	        	<input class="join" type="button" value="마이페이지" onClick="myPage(
+	        		'<c:url value='/user/myTeamLanking'>
+	        		<c:param name='teamId' value='${user.teamId}'/>
+	        		</c:url>')"> &nbsp;
+	    	</form>
         </div>
     </nav>
     
