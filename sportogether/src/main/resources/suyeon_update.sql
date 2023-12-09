@@ -2,15 +2,24 @@ DROP TABLE spouser CASCADE CONSTRAINTS;
 DROP TABLE spoleader CASCADE CONSTRAINTS;
 DROP TABLE teamscore CASCADE CONSTRAINTS;
 DROP TABLE team CASCADE CONSTRAINTS;
+
+-- DROP SEQUENCE teamID_sequence;
+CREATE SEQUENCE teamID_sequence
+START WITH 1
+INCREMENT BY 1
+NOCACHE;
+
+
+
 CREATE TABLE team
 (
-   teamID       INTEGER  NOT NULL ,
+   teamID       INTEGER DEFAULT teamID_sequence.NEXTVAL NOT NULL,
    name         VARCHAR2(30)  NOT NULL ,
    spoleader        VARCHAR2(18)  NOT NULL ,
    tlevel      INTEGER  NULL ,
-   sport        VARCHAR2(18)  NOT NULL ,
+   sport        VARCHAR2(18)  NULL ,
    location     VARCHAR2(100)  NULL ,
-   membership       INTEGER  NULL ,
+   membersCount       INTEGER  NULL ,
    rival        VARCHAR2(18)  NULL,
    tcomment      VARCHAR2(255) NULL
 );
@@ -18,9 +27,6 @@ CREATE TABLE team
 ALTER TABLE team
    ADD (
 CONSTRAINT R_1 FOREIGN KEY (spoleader) REFERENCES spoleader (USERID));
-
-CREATE UNIQUE INDEX XPKteam ON team
-(teamID   ASC);
 
 ALTER TABLE team
    ADD CONSTRAINT  XPKteam PRIMARY KEY (teamID);
@@ -35,9 +41,6 @@ CREATE TABLE teamScore
    draw                 INTEGER  NULL ,
    rate                 FLOAT  NULL 
 );
-
-CREATE UNIQUE INDEX XPKteamScore ON teamScore
-(teamID   ASC);
 
 ALTER TABLE teamScore
    ADD CONSTRAINT  XPKteamScore PRIMARY KEY (teamID);
@@ -145,18 +148,21 @@ ALTER TABLE REQUEST
 CREATE INDEX IX_REQUEST_TEAM_USER ON REQUEST
 (teamId   ASC, userId   ASC);
 
--- spouser Å×ÀÌºí¿¡ µ¥ÀÌÅÍ »ðÀÔ
+-- spouser ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 INSERT INTO spouser (userID, name, nickname, sex, birth, password, picture)
 VALUES 
   ('user1', 'John Doe', 'Johnny', 'Male', '19900101', 'password1', null);
 INSERT INTO spouser (userID, name, nickname, sex, birth, password, picture)
 VALUES 
-  ('user2', 'Jane Doe', 'Janie', 'Female', '19910201', 'password2', null);
+  ('user2', 'Kamel', 'Janie', 'Female', '19910201', 'password2', null);
 INSERT INTO spouser (userID, name, nickname, sex, birth, password, picture)
 VALUES 
   ('user3', 'Alice Smith', 'Ally', 'Female', '19920301', 'password3', null);
+INSERT INTO spouser (userID, name, nickname, sex, birth, password, picture)
+VALUES 
+  ('user4', 'Jully', 'J', 'Female', '19920301', 'password4', null);
 
--- spoleader Å×ÀÌºí¿¡ µ¥ÀÌÅÍ »ðÀÔ
+-- spoleader ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 INSERT INTO spoleader (userID, message)
 VALUES 
   ('user1', 'Message for leader1');
@@ -166,25 +172,42 @@ VALUES
 INSERT INTO spoleader (userID, message)
 VALUES
   ('user3', 'Message for leader3');
+INSERT INTO spoleader (userID, message)
+VALUES
+  ('user4', 'Message for leader4');
 
--- team Å×ÀÌºí¿¡ µ¥ÀÌÅÍ »ðÀÔ
-INSERT INTO team (teamID, name, spoleader, tlevel, sport, location, membership, rival, tcomment)
+-- team ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+INSERT INTO team (name, spoleader, tlevel, sport, location, membersCount, rival, tcomment)
 VALUES 
-  (1, 'TeamA', 'user1', 1, 'Football', 'City Stadium', 50, 'Team B', 'Comment for Team A');
-INSERT INTO team (teamID, name, spoleader, tlevel, sport, location, membership, rival, tcomment)
+  ('TeamA', 'user1', 1, 'Football', 'City Stadium', 1, 'null', 'Comment for Team A');
+INSERT INTO team (name, spoleader, tlevel, sport, location, membersCount, rival, tcomment)
 VALUES 
-  (2, 'TeamB', 'user2', 1, 'Basketball', 'Arena Center', 40, 'Team A', 'Comment for Team B');
-INSERT INTO team (teamID, name, spoleader, tlevel, sport, location, membership, rival, tcomment)
+  ('TeamB', 'user2', 1, 'Basketball', 'Arena Center', 1, 'null', 'Comment for Team B');
+INSERT INTO team ( name, spoleader, tlevel, sport, location, membersCount, rival, tcomment)
 VALUES 
-  (3, 'TeamC', 'user3', 1, 'Soccer', 'Field Park', 30, 'Team D', 'Comment for Team C');
+  ('TeamC', 'user3', 1, 'Soccer', 'Field Park', 1, 'null', 'Comment for Team C');
+INSERT INTO team ( name, spoleader, tlevel, sport, location, membersCount, rival, tcomment)
+VALUES 
+  ('TeamD', 'user4', 1, 'Football', 'City Park', 1, 'null', 'Comment for Team D');
 
--- teamScore Å×ÀÌºí¿¡ µ¥ÀÌÅÍ »ðÀÔ
+-- teamScore ï¿½ï¿½ï¿½Ìºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 INSERT INTO teamScore (teamID, matches, win, lose, ranking, draw, rate)
-VALUES 
-  (1, 10, 6, 4, 1, 0, 60.0);
+SELECT teamID, 10, 6, 4, 1, 0, 60.0
+FROM team
+WHERE name = 'TeamA';
+
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 INSERT INTO teamScore (teamID, matches, win, lose, ranking, draw, rate)
-VALUES 
-  (2, 10, 5, 5, 2, 0, 50.0);
+SELECT teamID, 10, 5, 5, 2, 0, 50.0
+FROM team
+WHERE name = 'TeamB';
 INSERT INTO teamScore (teamID, matches, win, lose, ranking, draw, rate)
-VALUES 
-  (3, 10, 4, 6, 3, 0, 40.0);
+SELECT teamID, 10, 4, 6, 3, 0, 40.0
+FROM team
+WHERE name = 'TeamC';
+
+-- ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+INSERT INTO teamScore (teamID, matches, win, lose, ranking, draw, rate)
+SELECT teamID, 10, 3, 7, 4, 0, 30.0
+FROM team
+WHERE name = 'TeamD';
