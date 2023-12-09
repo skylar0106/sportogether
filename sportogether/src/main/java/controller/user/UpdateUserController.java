@@ -12,7 +12,7 @@ import org.slf4j.LoggerFactory;
 import controller.Controller;
 import model.service.UserManager;
 import model.Community;
-import model.User;
+import model.service.dto.*;
 
 public class UpdateUserController implements Controller {
     private static final Logger log = LoggerFactory.getLogger(UpdateUserController.class);
@@ -36,8 +36,9 @@ public class UpdateUserController implements Controller {
 				UserSessionUtils.isLoginUser("admin", session)) {
 				// 현재 로그인한 사용자가 수정 대상 사용자이거나 관리자인 경우 -> 수정 가능
 								
-				List<Community> commList = manager.findCommunityList();	// 커뮤니티 리스트 검색
-				request.setAttribute("commList", commList);	
+//				List<Community> commList = manager.findCommunityList();	// 커뮤니티 리스트 검색
+			    List<Community> commList = null;
+			    request.setAttribute("commList", commList);	
 				
 				return "/user/updateForm.jsp";   // 검색한 사용자 정보 및 커뮤니티 리스트를 updateForm으로 전송     
 			}    
@@ -47,21 +48,22 @@ public class UpdateUserController implements Controller {
 			request.setAttribute("exception", 
 					new IllegalStateException("타인의 정보는 수정할 수 없습니다."));            
 			return "/user/view.jsp";	// 사용자 보기 화면으로 이동 (forwarding)
-	    }	
+	    }
+        return null;	
     	
     	// POST request (회원정보가 parameter로 전송됨)
-    	User updateUser = new User(
-    		request.getParameter("userId"),
-    		request.getParameter("password"),
-    		request.getParameter("name"),
-    		request.getParameter("email"),
-    		request.getParameter("phone"),
-			Integer.parseInt(request.getParameter("commId")));
-
-    	log.debug("Update User : {}", updateUser);
-
-		UserManager manager = UserManager.getInstance();
-		manager.update(updateUser);			
-        return "redirect:/user/list";			
+//    	User updateUser = new User(
+//    		request.getParameter("userId"),
+//    		request.getParameter("password"),
+//    		request.getParameter("name"),
+//    		request.getParameter("email"),
+//    		request.getParameter("phone"),
+//			Integer.parseInt(request.getParameter("commId")));
+//
+//    	log.debug("Update User : {}", updateUser);
+//
+//		UserManager manager = UserManager.getInstance();
+//		manager.update(updateUser);			
+//        return "redirect:/user/list";			
     }
 }

@@ -24,7 +24,7 @@ public class LankingDAO {
             ResultSet rs = jdbcUtil.executeQuery();     // query 실행
             if (rs.next()) {                        // 학생 정보 발견
                 Lanking lanking = new Lanking(           // User 객체를 생성하여 현재 행의 정보를 저장
-                        rs.getString("teamId"),
+                        rs.getInt("teamId"),
                         rs.getInt("matches"),
                         rs.getInt("win"),
                         rs.getInt("lose"),
@@ -60,7 +60,7 @@ public class LankingDAO {
             List<Lanking> lankingList = new ArrayList<Lanking>();    // User들의 리스트 생성
             while (rs.next()) {
                 Lanking lanking = new Lanking(           // User 객체를 생성하여 현재 행의 정보를 저장
-                    rs.getString("teamId"),
+                    rs.getInt("teamId"),
                     rs.getInt("matches"),
                     rs.getInt("win"),
                     rs.getInt("lose"),

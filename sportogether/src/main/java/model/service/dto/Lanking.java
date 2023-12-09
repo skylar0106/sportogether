@@ -1,7 +1,7 @@
 package model.service.dto;
 
 public class Lanking {
-    private String teamID;
+    private int teamID;
     private int matches;
     private int win;
     private int lose;
@@ -12,7 +12,7 @@ public class Lanking {
     
     public Lanking() {}
     
-    public Lanking(String teamID, int matches, int win, int lose, int ranking, int draw, float rate, String teamName) {
+    public Lanking(int teamID, int matches, int win, int lose, int ranking, int draw, float rate, String teamName) {
         super();
         this.teamID = teamID;
         this.matches = matches;
@@ -24,10 +24,10 @@ public class Lanking {
         this.teamName = teamName;
     }
 
-    public String getTeamID() {
+    public int getTeamID() {
         return teamID;
     }
-    public void setTeamID(String teamID) {
+    public void setTeamID(int teamID) {
         this.teamID = teamID;
     }
     public int getMatches() {

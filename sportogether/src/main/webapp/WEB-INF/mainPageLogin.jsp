@@ -17,7 +17,7 @@ function totalLanking(targetUri) {
 	form.method="GET";		
 	form.submit();
 }
-function login(targetUri) {
+function myPage(targetUri) {
 	form.action = targetUri;
 	form.method="GET";		
 	form.submit();
@@ -115,13 +115,15 @@ body, html {
             <li><a class="menuLink" href="#">팀 커뮤니티</a></li>
         </ul>
         <div class="userActions">
-        	<form name="form" method="POST"  action="<c:url value='/user/login' />">
-	        	<input class="join" type="button" value="로그인" onClick="login(
-	        		'<c:url value='/user/login/form'/>')"> &nbsp;
-				<input class="sign" type="button" value="회원가입" onClick=> &nbsp;
-        	</form>
+        	<p>${user.getName()}회원&nbsp;&nbsp;</p>
+        	<input class="join" type="button" value="마이페이지" onClick="myPage(
+        		'<c:url value='/user/myTeamLanking'>
+        		<c:param name='userId' value='${user.userId}'/>
+        		</c:url>')"> &nbsp;
+    
         </div>
     </nav>
+    
 	<div class="mainContent">
 		<img class="background" src="<c:url value='/images/mainBackground2.png' />" alt="background"/>
 	

@@ -42,7 +42,7 @@ public class Test {
          Iterator<Lanking> iter = lk.iterator();
          while(iter.hasNext()) {
              Lanking emp = iter.next();
-             String teamId = emp.getTeamID();
+             int teamId = emp.getTeamID();
              int match = emp.getMatches();
              int win = emp.getWin();
              int lose = emp.getLose();

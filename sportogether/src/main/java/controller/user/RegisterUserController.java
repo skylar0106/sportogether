@@ -23,8 +23,9 @@ public class RegisterUserController implements Controller {
     		// GET request: 회원정보 등록 form 요청	
     		log.debug("RegisterForm Request");
 
-    		List<Community> commList = UserManager.getInstance().findCommunityList();	// 커뮤니티 리스트 검색
-			request.setAttribute("commList", commList);	
+//    		List<Community> commList = UserManager.getInstance().findCommunityList();	// 커뮤니티 리스트 검색
+            List<Community> commList = null;
+    		request.setAttribute("commList", commList);	
 		
 			return "/user/registerForm.jsp";   // 검색한 커뮤니티 리스트를 registerForm으로 전송     	
 	    }	
@@ -40,17 +41,18 @@ public class RegisterUserController implements Controller {
 		
         log.debug("Create User : {}", user);
 
-		try {
-			UserManager manager = UserManager.getInstance();
-			manager.create(user);
-	        return "redirect:/user/list";	// 성공 시 사용자 리스트 화면으로 redirect
-	        
-		} catch (ExistingUserException e) {	// 예외 발생 시 회원가입 form으로 forwarding
-            request.setAttribute("registerFailed", true);
-			request.setAttribute("exception", e);
-			request.setAttribute("user", user);
-			return "/user/registerForm.jsp";
-		}
+//		try {
+//			UserManager manager = UserManager.getInstance();
+//			manager.create(user);
+//	        return "redirect:/user/list";	// 성공 시 사용자 리스트 화면으로 redirect
+//	        
+//		} catch (ExistingUserException e) {	// 예외 발생 시 회원가입 form으로 forwarding
+//            request.setAttribute("registerFailed", true);
+//			request.setAttribute("exception", e);
+//			request.setAttribute("user", user);
+//			return "/user/registerForm.jsp";
+//		}
+        return "redirect:/user/list";  
     }
 }
 

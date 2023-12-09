@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.user.*;
-import controller.comm.*;
 import controller.team.*;
 
 public class RequestMapping {
@@ -37,15 +36,16 @@ public class RequestMapping {
         mappings.put("/user/delete", new DeleteUserController());
         
         // 커뮤니티 관련 request URI 추가
-        mappings.put("/community/list", new ListCommunityController());
-        mappings.put("/community/view", new ViewCommunityController());
-        mappings.put("/community/create/form", new ForwardController("/community/creationForm.jsp"));
-        mappings.put("/community/create", new CreateCommunityController());
-        mappings.put("/community/update", new UpdateCommunityController());
+//        mappings.put("/community/list", new ListCommunityController());
+//        mappings.put("/community/view", new ViewCommunityController());
+//        mappings.put("/community/create/form", new ForwardController("/community/creationForm.jsp"));
+//        mappings.put("/community/create", new CreateCommunityController());
+//        mappings.put("/community/update", new UpdateCommunityController());
         
         
         //메인 페이지
         mappings.put("/mainPage", new ForwardController("/mainPage.jsp"));
+        mappings.put("/mainPageLogin", new MainPageLoginController());
         
         // 검색, 라이벌 관련 controller
         mappings.put("/team/test", new ForwardController("/team/test.jsp"));
@@ -53,8 +53,12 @@ public class RequestMapping {
         
         // team controller
         mappings.put("/team/portfolio", new TeamPortfolioController());
+        
         // 랭킹 관련 controller
         mappings.put("/team/lankingList", new LankingController());
+        
+        //마이페이지
+        mappings.put("/user/myTeamLanking", new MyTeamLankingController());
         
         logger.info("Initialized Request Mapping!");
     }
