@@ -39,7 +39,7 @@ private JDBCUtil jdbcUtil = null;
                  tm.setLevel(rs.getInt("tlevel"));
                  tm.setSport(rs.getString("sport"));
                  tm.setLocation(rs.getString("location"));
-                 tm.setMembership(rs.getInt("membership"));
+                 tm.setMembership(rs.getInt("membersCount"));
                  tm.setRival(rs.getString("rival"));
                 return tm;
             }
