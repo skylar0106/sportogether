@@ -55,15 +55,14 @@ public class TeamDAO {
             StringBuilder query = new StringBuilder();
 
             query.append("UPDATE TEAM ");
-            query.append("SET name = ?, spoleader = ?, location = ?, sport = ? ");
+            query.append("SET name = ?, sport = ?, location = ? ");
             query.append("WHERE teamId = ? ");
             
             String leaderId = team.getSpoleader();
             
             if(leaderId.equals("")) leaderId = null;
             
-            jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{team.getName(), team.getSpoleader(), 
-            		 team.getSport(), team.getLocation()});
+            jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{team.getName(), team.getSport(), team.getLocation(), team.getTeamId()});
             int result = jdbcUtil.executeUpdate();
             return result;
         } catch (Exception ex) {

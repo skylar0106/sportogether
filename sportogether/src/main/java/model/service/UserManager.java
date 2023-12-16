@@ -111,32 +111,32 @@ public class UserManager {
 	
 
 	
-	public Team createTeam(Team team) throws SQLException {
-		return teamDAO.create(team);		
-	}
-
-	public int updateTeam(Team team) throws SQLException {
-		return teamDAO.update(team);				
-	}
-	
-	public Team findTeam(int teamId) throws SQLException {
-		Team team = teamDAO.findTeam(teamId); 
-		
-		List<User> memberList = userDAO.findUsersInTeam(teamId);
-		team.setMemberList(memberList);
-		
-		int numOfMembers = userDAO.getNumberOfUsersInTeam(teamId);
-		team.setNumofMembers(numOfMembers);
-		return team;
-	}
-	
-	public List<Team> findTeamList() throws SQLException {
-		return teamDAO.findTeamList();
-	}
-	
-	public List<User> findTeamMembers(int teamId) throws SQLException {
-		return userDAO.findUsersInTeam(teamId);
-	}
+//	public Team createTeam(Team team) throws SQLException {
+//		return teamDAO.create(team);		
+//	}
+//
+//	public int updateTeam(Team team) throws SQLException {
+//		return teamDAO.update(team);				
+//	}
+//	
+//	public Team findTeam(int teamId) throws SQLException {
+//		Team team = teamDAO.findTeam(teamId); 
+//		
+//		List<User> memberList = userDAO.findUsersInTeam(teamId);
+//		team.setMemberList(memberList);
+//		
+//		int numOfMembers = userDAO.getNumberOfUsersInTeam(teamId);
+//		team.setNumofMembers(numOfMembers);
+//		return team;
+//	}
+//	
+//	public List<Team> findTeamList() throws SQLException {
+//		return teamDAO.findTeamList();
+//	}
+//	
+//	public List<User> findTeamMembers(int teamId) throws SQLException {
+//		return userDAO.findUsersInTeam(teamId);
+//	}
 
 	public UserDAO getUserDAO() {
 		return this.userDAO;

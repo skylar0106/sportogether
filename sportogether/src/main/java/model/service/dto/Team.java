@@ -39,13 +39,12 @@ public class Team {
 	}
 
     // 팀의 정보 수정 & 생성용
-	public Team(int teamId, String name, String spoleader, String location, String sport) {
+	public Team(int teamId, String name, String sport, String location) {
 		super();
 		this.teamId = teamId;
 		this.name = name;
-		this.spoleader = spoleader;
-		this.location = location;
 		this.sport = sport;
+		this.location = location;
 	}
     
     
