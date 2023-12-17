@@ -71,7 +71,7 @@
         <div style="width: 100%; height: 100%; position: relative; background: white">
 
             <div style="width: 1280px; height: 185px; left: 0px; top: 0px; position: absolute">
-                <img style="width: 1280px; height: 185px; left: 0px; top: 0px; position: absolute" src="/images/Rectangle20.png" />
+                <img style="width: 1280px; height: 185px; left: 0px; top: 0px; position: absolute" src="<c:url value='/images/Rectangle20.png' />" />
                 <div style="left: 14px; top: 16px; position: absolute"><span style="color: #555B65; font-size: 35px; font-family: Inter; font-weight: 600; word-wrap: break-word">sport</span><span style="color: #1C437C; font-size: 35px; font-family: Inter; font-weight: 600; word-wrap: break-word">ogether</span></div>
                 <div style="left: 14px; top: 103px; position: absolute; color: #555B65; font-size: 48px; font-family: Inter; font-weight: 600; word-wrap: break-word">TEAM MANAGE</div>
             </div>
@@ -89,8 +89,13 @@
             <div style="width: 1260px; height: 0px; left: 9px; top: 243.07px; position: absolute; border: 1px black solid"></div>
 
 
+			<div style="left: 531px; top: 560px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">팀 ID</div>
+            <input type = "text" style="width: 406px; height: 23px; left: 570px; top: 550px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "teamId" value = "${team.teamId}" readonly>
+            
+
             <div style="left: 531px; top: 603px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">팀명</div>
             <input type = "text" style="width: 406px; height: 23px; left: 570px; top: 600px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "name" value = "${team.name}">
+            
             
            <!--  <div style="left: 517px; top: 439px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">팀로고</div>
             <div style="width: 240px; height: 240px; left: 643px; top: 328px; position: absolute; background: #D9D9D9; border-radius: 9999px"></div>
@@ -102,6 +107,9 @@
 
 
             <div style="left: 531px; top: 652px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">종목</div>
+            <input type = "text" style="width: 406px; height: 23px; left: 570px; top: 650px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "sport" value = "${team.sport}">           
+           
+           <!-- 
             <div class = "form_radio_btn" style="left: 570px; top: 652px; position: absolute; color: #7D7C7C; font-size: 12px; font-family: Inter; font-weight: 100; word-wrap: break-word">
                 <input id = "radio1" type = "radio" name = "sports" value = "soccer">
      
@@ -127,6 +135,7 @@
                 <input id = "radio5" type = "radio" name = "sports" value = "badminton">
                 <label for = "radio5">배드민턴</label>
             </div>
+             -->
             
         
             <div style=" left: 1086px; top: 764px; position: absolute">

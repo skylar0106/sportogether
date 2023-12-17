@@ -10,10 +10,7 @@
 <head>
 <meta charset="UTF-8">
 
-<script type = "text/javascript">
-function save(){
-	alert("저장이 완료 되었습니다.");
-}
+<script>
 
 function userModify() {
 	if (form.password.value != form.password2.value) {
@@ -21,25 +18,14 @@ function userModify() {
 		form.name.focus();
 		return false;
 	}
-	var emailExp = /^[A-Za-z0-9_\.\-]+@[A-Za-z0-9\-]+\.[A-Za-z0-9\-]+/;
-	if(emailExp.test(form.email.value)==false) {
-		alert("이메일 형식이 올바르지 않습니다.");
-		form.email.focus();
-		return false;
-	}
-	var phoneExp = /^\d{2,3}-\d{3,4}-\d{4}$/;
-	if(phoneExp.test(form.phone.value)==false) {
-		alert("전화번호 형식이 올바르지 않습니다.");
-		form.phone.focus();
-		return false;
-	}
+
 	form.submit();
 }
 
-function updateSubmit(targetUri) {
-	form.action = targetUri;
-	form.submit();
-}
+//function updateSubmit(targetUri) {
+//	form.action = targetUri;
+//	form.submit();
+//}
 </script>
 
     <style>
@@ -95,7 +81,7 @@ function updateSubmit(targetUri) {
         <div style="width: 100%; height: 100%; position: relative; background: white">
 
             <div style="width: 1280px; height: 185px; left: 0px; top: 0px; position: absolute">
-                <img style="width: 1280px; height: 185px; left: 0px; top: 0px; position: absolute" src="/images/Rectangle20.png" />
+                <img style="width: 1280px; height: 185px; left: 0px; top: 0px; position: absolute" src="<c:url value='/images/Rectangle20.png' />" />
                 <div style="left: 14px; top: 16px; position: absolute"><span style="color: #555B65; font-size: 35px; font-family: Inter; font-weight: 600; word-wrap: break-word">sport</span><span style="color: #1C437C; font-size: 35px; font-family: Inter; font-weight: 600; word-wrap: break-word">ogether</span></div>
                 <div style="left: 14px; top: 103px; position: absolute; color: #555B65; font-size: 48px; font-family: Inter; font-weight: 600; word-wrap: break-word">MY PAGE</div>
             </div>
@@ -117,8 +103,11 @@ function updateSubmit(targetUri) {
                 <div style="left: 596px; top: 375px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">이름</div>
                 <input type = "text" style = "width: 219px; height: 23px; left: 635px; top: 372px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "name" value = "${user.name}">
 
-                <!--성별 선택-->
+                <!--성별 선택-->                
                 <div style="left: 596px; top: 530px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">성별</div>
+                <input type = "text" style = "width: 219px; height: 23px; left: 635px; top: 530px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "sex" value = "${user.sex}">
+                
+                <!-- 
                 <div>
                     <div class = "form_radio_btn male" style="left: 642px; top: 530px; position: absolute; color: #7D7C7C; font-size: 12px; font-family: Inter; font-weight: 100; word-wrap: break-word">
                     <input id = "radio1" type = "radio" name = "sex" value = "Male">
@@ -130,9 +119,14 @@ function updateSubmit(targetUri) {
                     <label for = "radio2">여자</label>
                 </div>
                 </div>
-
+ 				-->
+ 				
+ 				
+				<div style="left: 568px; top: 580px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">팀포지션</div>
+				<input type = "text" style = "width: 219px; height: 23px; left: 635px; top: 575px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "position" value = "${user.position}">
+				
                 <!--포지션 선택-->
-                <div style="left: 568px; top: 580px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">팀포지션</div>
+                <!-- 
                 <div>
                     <div class = "form_radio_btn leader" style="left: 642px; top: 580px; position: absolute; color: #7D7C7C; font-size: 12px; font-family: Inter; font-weight: 100; word-wrap: break-word">
                     <input id = "radio3" type = "radio" name = "position" value = "leader">
@@ -144,6 +138,8 @@ function updateSubmit(targetUri) {
                     <label for = "radio4">팀원</label>
                 </div>
                 </div>
+                 -->
+                
                 
                 <!-- 닉네임 -->
                 <div style="left: 583px; top: 427px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">닉네임</div>

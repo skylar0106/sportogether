@@ -58,9 +58,9 @@ public class TeamDAO {
             query.append("SET name = ?, sport = ?, location = ? ");
             query.append("WHERE teamId = ? ");
             
-            String leaderId = team.getSpoleader();
+          //  String leaderId = team.getSpoleader();
             
-            if(leaderId.equals("")) leaderId = null;
+          //  if(leaderId.equals("")) leaderId = null;
             
             jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{team.getName(), team.getSport(), team.getLocation(), team.getTeamId()});
             int result = jdbcUtil.executeUpdate();
