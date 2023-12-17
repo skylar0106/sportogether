@@ -46,7 +46,7 @@ public class UpdateTeamController implements Controller {
 
     	
  
-    	log.debug("Update Community : {}", team);
+    	log.debug("Update Team : {}", team);
 
 		TeamManager tmanager = TeamManager.getInstance();
 		tmanager.updateTeam(team);

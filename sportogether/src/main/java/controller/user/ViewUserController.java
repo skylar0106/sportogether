@@ -6,7 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import controller.Controller;
 import model.service.UserManager;
 import model.service.UserNotFoundException;
-import model.User;
+import model.service.dto.*;
 
 public class ViewUserController implements Controller {
     @Override

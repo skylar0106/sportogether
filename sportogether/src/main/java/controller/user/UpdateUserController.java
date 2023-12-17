@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
+import model.service.TeamManager;
 import model.service.UserManager;
 import model.service.dto.*;
 import model.service.dto.User;
@@ -37,9 +38,10 @@ public class UpdateUserController implements Controller {
 //			if (UserSessionUtils.isLoginUser(updateId, session) ||
 //				UserSessionUtils.isLoginUser("admin", session)) {
 				// 현재 로그인한 사용자가 수정 대상 사용자이거나 관리자인 경우 -> 수정 가능
-								
-				List<Team> teamList = manager.findTeamList();	// 팀 리스트 검색
-				request.setAttribute("teamList", teamList);	
+				
+				//TeamManager tmanager = TeamManager.getInstance();
+				//List<Team> teamList = tmanager.findTeamList();	// 팀 리스트 검색
+				//request.setAttribute("teamList", teamList);	
 				
 				return "/mypage_leader_myinfo2.jsp";   // 검색한 사용자 정보 및 커뮤니티 리스트를 updateForm으로 전송     
 //			}    

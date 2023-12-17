@@ -28,7 +28,8 @@ public class MemberDAO {
             if (rs.next()) {
                 member = new Member(
                         rs.getString("userID"),
-                        rs.getString("message")
+                        rs.getString("message"),
+                        rs.getString("teamId")
                 );
             }
         } catch (SQLException e) {
@@ -41,7 +42,7 @@ public class MemberDAO {
     }
 
     // 모든 MEMBER 정보 조회
-    public List<Member> getAllMembers() {
+    public List<Member> getAllMembers(Team team) {
         List<Member> members = new ArrayList<>();
         ResultSet rs = null;
         StringBuilder sql = new StringBuilder();
@@ -50,7 +51,7 @@ public class MemberDAO {
         sql.append("JOIN team ON spomember.teamID = team.teamID ");
         sql.append("WHERE team.teamID = ? ");
 
-	jdbcUtil.setSqlAndParameters(sql.toString(), new Object[]{teamID});
+	jdbcUtil.setSqlAndParameters(sql.toString(), new Object[]{team.getTeamId()});
 
         try {
             rs = jdbcUtil.executeQuery();
@@ -58,7 +59,7 @@ public class MemberDAO {
                 Member member = new Member(
                         rs.getString("userID"),
                         rs.getString("message"),
-			rs.getString("teamID")
+                        rs.getString("teamID")
                 );
                 members.add(member);
             }
@@ -72,21 +73,31 @@ public class MemberDAO {
     }
 
     // MEMBER 정보 추가
-    public boolean addMember(Member member) {
+    public int addMember(Member member) {
         StringBuilder sql = new StringBuilder();
         sql.append("INSERT INTO spomember (userID, message) ");
         sql.append("VALUES (?, ?)");
 
         jdbcUtil.setSqlAndParameters(sql.toString(), new Object[]{
                 member.getUserID(),
-                NULL
+                null
         });
 
-        return jdbcUtil.executeUpdate() > 0;
+		try {				
+			int result = jdbcUtil.executeUpdate();	// insert 문 실행
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		} finally {		
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}		
+		return 0;	
     }
 
     // MEMBER 코멘트 수정
-    public boolean updateMember(Member member) {
+    public int updateMember(Member member) {
         StringBuilder sql = new StringBuilder();
         sql.append("UPDATE spomember ");
         sql.append("SET message = ? ");
@@ -97,17 +108,51 @@ public class MemberDAO {
                 member.getUserID()
         });
 
-        return jdbcUtil.executeUpdate() > 0;
+		try {				
+			int result = jdbcUtil.executeUpdate();	// update 문 실행
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}		
+		return 0;
     }
 
     // MEMBER 정보 삭제
-    public boolean deleteMember(String userID) {
+    public int deleteMember(String userID) {
         StringBuilder sql = new StringBuilder();
         sql.append("DELETE FROM spomember ");
         sql.append("WHERE userID = ? ");
 
         jdbcUtil.setSqlAndParameters(sql.toString(), new Object[]{userID});
 
-        return jdbcUtil.executeUpdate() > 0;
+		try {				
+			int result = jdbcUtil.executeUpdate();	// delete 문 실행
+			return result;
+		} catch (Exception ex) {
+			jdbcUtil.rollback();
+			ex.printStackTrace();
+		}
+		finally {
+			jdbcUtil.commit();
+			jdbcUtil.close();	// resource 반환
+		}		
+		return 0;
+    }
+    
+    //Member의 팀 정보 삭제
+    public Member removeMembersByTeam(Team teamId) {
+		StringBuilder sql = new StringBuilder();
+		
+		sql.append("UPDATE member ");
+		sql.append("SET teamID = null ");
+		sql.append("WHERE teamId = ?");
+    	
+    	return null;
+    	
     }
 }

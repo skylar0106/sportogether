@@ -198,19 +198,49 @@ public class TeamDAO {
 
     
 	// 주어진  ID에 해당하는 팀 정보를 데이터베이스에서 찾아 Team 도메인 클래스에 저장하여 반환.
+//	public Team findTeam(int teamId) throws SQLException {
+//		Team team = null;
+//		ResultSet rs = null;
+//		
+//		StringBuilder sql = new StringBuilder();
+////		sql.append("SELECT t.name, teamid, spoleader ");
+////		sql.append("FROM Team t LEFT OUTER JOIN spouser u ON t.spoleader = u.userId ");
+////		sql.append("WHERE teamId=? ");
+//
+//		
+//		sql.append("SELECT * ");
+//		sql.append("FROM team ");
+//		sql.append("WHERE teamid=? ");
+//		
+//		jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {teamId});	// JDBCUtil에 query문과 매개 변수 설정
+//
+//		try {
+//			rs = jdbcUtil.executeQuery();		// query 실행
+//			if (rs.next()) {						// 학생 정보 발견
+//				team = new Team(		// Team 객체를 생성하여 커뮤니티 정보를 저장
+//					teamId,
+//					rs.getString("name"),
+//					rs.getString("spoleader"),
+//					rs.getString("location"),
+//					rs.getString("sport")
+//					);
+//			}
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		} finally {
+//			jdbcUtil.close();		// resource 반환
+//		}
+//		return team;
+//	}
+	
 	public Team findTeam(int teamId) throws SQLException {
 		Team team = null;
 		ResultSet rs = null;
 		
 		StringBuilder sql = new StringBuilder();
-//		sql.append("SELECT t.name, teamid, spoleader ");
-//		sql.append("FROM Team t LEFT OUTER JOIN spouser u ON t.spoleader = u.userId ");
-//		sql.append("WHERE teamId=? ");
-
-		
-		sql.append("SELECT * ");
-		sql.append("FROM team ");
-		sql.append("WHERE teamid=? ");
+		sql.append("SELECT name, sport, location ");
+		sql.append("FROM Team t ");
+		sql.append("WHERE teamId=? ");
 		
 		jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {teamId});	// JDBCUtil에 query문과 매개 변수 설정
 
@@ -220,9 +250,8 @@ public class TeamDAO {
 				team = new Team(		// Team 객체를 생성하여 커뮤니티 정보를 저장
 					teamId,
 					rs.getString("name"),
-					rs.getString("spoleader"),
-					rs.getString("location"),
-					rs.getString("sport")
+					rs.getString("sport"),
+					rs.getString("location")
 					);
 			}
 		} catch (Exception ex) {
@@ -232,8 +261,7 @@ public class TeamDAO {
 		}
 		return team;
 	}
-	
-	
+    
 	// TeamList 찾기
 	public List<Team> findTeamList() throws SQLException {
 
