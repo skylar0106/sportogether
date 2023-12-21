@@ -19,7 +19,7 @@ public class UserDAO {
     
     // 회원가입(spouser에 user한명 추가)
 	public int create(User user) throws SQLException {
-		String sql = "INSERT INTO spouser VALUES (?, ?, ?, ?, ?, ?, ?)";		
+		String sql = "INSERT INTO spouser(userid, name, nickname, birth, sex, position, password) VALUES (?, ?, ?, ?, ?, ?, ?)";		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {user.getUserId(), user.getName(), 
 				user.getNickName(), user.getBirth(), user.getSex(),
 				user.getPosition(), user.getPassword()});	// JDBCUtil 에 insert문과 매개 변수 설정		
@@ -39,7 +39,7 @@ public class UserDAO {
 	
     // 존재하는 아이디인지 확인
 	public boolean existingUser(String userId) throws SQLException {
-		String sql = "SELECT count(*) FROM USERINFO WHERE userid=?";      
+		String sql = "SELECT count(*) FROM spouser WHERE userid=?";      
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 query문과 매개 변수 설정
 
 		try {
@@ -131,6 +131,7 @@ public class UserDAO {
     		jdbcUtil.rollback();
         	ex.printStackTrace();
     	} finally {
+        	jdbcUtil.commit();
         	jdbcUtil.close();
     	}
     	return 0;

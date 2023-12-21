@@ -32,7 +32,7 @@ public class UpdateTeamController implements Controller {
 //			request.setAttribute("members", members);
 			
 			// 우리가 이동할 주소로 변경해야함!
-			return "/teamManage_modi.jsp";   // 검색한 정보를 update form으로 전송     
+			return "/team/teamManage_modi.jsp";   // 검색한 정보를 update form으로 전송     
 	    }	
     	
     	// POST request (커뮤니티 정보가 parameter로 전송됨)
@@ -52,6 +52,6 @@ public class UpdateTeamController implements Controller {
 		tmanager.updateTeam(team);
 		//이것도 우리가 변경해줘야함
 		// 정보가 수정된 상태로 updateForm에 redirect됨
-        return "/teamManage_modi.jsp";			
+        return "redirect:/team/update";			
     }
 }

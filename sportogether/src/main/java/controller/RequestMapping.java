@@ -18,12 +18,14 @@ public class RequestMapping {
     public void initMapping() {
     	// 각 uri에 대응되는 controller 객체를 생성 및 저장
         mappings.put("/", new ForwardController("index.jsp"));
-        mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
-        mappings.put("/user/login", new LoginController());
-        mappings.put("/user/logout", new LogoutController());
-        mappings.put("/user/list", new ListUserController());
-        mappings.put("/user/view", new ViewUserController());
-        
+//      
+        mappings.put("/home/main", new ForwardController("/home/mainPage_member.jsp"));
+//        mappings.put("/user/login/form", new ForwardController("/user/loginForm.jsp"));
+//        mappings.put("/user/login", new LoginController());
+//        mappings.put("/user/logout", new LogoutController());
+//        mappings.put("/user/list", new ListUserController());
+//        mappings.put("/user/view", new ViewUserController());
+//       
         // 회원 가입 폼 요청과 가입 요청 처리 병합 (폼에 커뮤니티 선택 메뉴 추가를 위함)
 //      mappings.put("/user/register/form", new ForwardController("/user/registerForm.jsp"));
 //      mappings.put("/user/register", new RegisterUserController());
@@ -34,7 +36,7 @@ public class RequestMapping {
 //      mappings.put("/user/update", new UpdateUserController());        
         mappings.put("/user/update", new UpdateUserController());
         
-        mappings.put("/user/delete", new DeleteUserController());
+//       mappings.put("/user/delete", new DeleteUserController());
         
         // 커뮤니티 관련 request URI 추가
 //        mappings.put("/community/list", new ListCommunityController());

@@ -18,7 +18,8 @@ function userModify() {
 		form.name.focus();
 		return false;
 	}
-
+	
+	alert("저장이 완료 되었습니다.");
 	form.submit();
 }
 

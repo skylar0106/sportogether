@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.Controller;
-import model.Community;
 import model.service.ExistingUserException;
 import model.service.UserManager;
 import model.service.dto.*;
@@ -19,15 +18,15 @@ public class RegisterUserController implements Controller {
 
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
-//       	if (request.getMethod().equals("GET")) {	
+       	if (request.getMethod().equals("GET")) {	
 //    		// GET request: 회원정보 등록 form 요청	
 //    		log.debug("RegisterForm Request");
 //
 //    		List<Team> TeamList = UserManager.getInstance().findTeamList();	// 커뮤니티 리스트 검색
 //			request.setAttribute("teamList", teamList);	
 //		
-//			return "/user/registerForm.jsp";   // 검색한 커뮤니티 리스트를 registerForm으로 전송     	
-//	    }	
+			return "/user/signUp3.jsp";   // 검색한 커뮤니티 리스트를 registerForm으로 전송     	
+	    }	
 
     	// POST request (회원정보가 parameter로 전송됨)
        	User user = new User(
@@ -45,13 +44,15 @@ public class RegisterUserController implements Controller {
 		try {
 			UserManager manager = UserManager.getInstance();
 			manager.create(user);
-	        return "redirect:/user/list";	// 성공 시 사용자 리스트 화면으로 redirect
+			
+			//return "/home/mainPage.jsp";
+			return "/user/signUp4.jsp";
 	        
 		} catch (ExistingUserException e) {	// 예외 발생 시 회원가입 form으로 forwarding
             request.setAttribute("registerFailed", true);
 			request.setAttribute("exception", e);
 			request.setAttribute("user", user);
-			return "/user/register";
+			return "redirect:/user/register";
 		}
     }
 }

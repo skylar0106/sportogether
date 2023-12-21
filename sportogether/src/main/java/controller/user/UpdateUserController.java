@@ -43,7 +43,7 @@ public class UpdateUserController implements Controller {
 				//List<Team> teamList = tmanager.findTeamList();	// 팀 리스트 검색
 				//request.setAttribute("teamList", teamList);	
 				
-				return "/mypage_leader_myinfo2.jsp";   // 검색한 사용자 정보 및 커뮤니티 리스트를 updateForm으로 전송     
+				return "/user/mypage_leader_myinfo2.jsp";   // 검색한 사용자 정보 및 커뮤니티 리스트를 updateForm으로 전송     
 //			}    
 			
 			// else (수정 불가능한 경우) 사용자 보기 화면으로 오류 메세지를 전달
@@ -55,7 +55,7 @@ public class UpdateUserController implements Controller {
 	    }
     		
     	
-    	// POST request (회원정보가 parameter로 전송됨)
+    	// POST request (회원정보가 parameter로 전	송됨)
     	User updateUser = new User(
     		request.getParameter("userId"),
     		request.getParameter("name"),
@@ -73,6 +73,7 @@ public class UpdateUserController implements Controller {
 	
 		
 		// redirect 어디로 되는지 우리의 것으로 수정
-        return "/mainpage.jsp";			
+
+		  return "redirect:/user/update";
     }
 }
