@@ -1,1 +1,1 @@
-<% response.sendRedirect(request.getContextPath() + "/update/user"); %>
+<% response.sendRedirect(request.getContextPath() + "/user/update"); %>
