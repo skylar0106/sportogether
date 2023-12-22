@@ -19,7 +19,7 @@ public class UserDAO {
     
     // 회원가입(spouser에 user한명 추가)
 	public int create(User user) throws SQLException {
-		String sql = "INSERT INTO spouser(userid, name, nickname, sex, password) VALUES (?, ?, ?, ?, ?, ?, ?)";		
+		String sql = "INSERT INTO spouser(userid, name, nickname, sex, password) VALUES (?, ?, ?, ?, ?)";		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {user.getUserId(), user.getName(), 
 				user.getNickName(), user.getSex(), user.getPassword()});	// JDBCUtil 에 insert문과 매개 변수 설정		
 		try {				
@@ -56,43 +56,6 @@ public class UserDAO {
 	}
 	
 	
-    /*
-     * 유저 아이디로 유저 검색
-     * User 객체 반환
-     * 로그인, 사용자 정보 수정, 팀 멤버 조회 등에 사용?
-     * 
-     * */
-    public User getUserById(String userId) {
-        User user = null;
-        ResultSet rs = null;
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT * ");
-        sql.append("FROM spouser ");
-        sql.append("WHERE userID = ? "); // 이 부분 변경하면 다른 필드로도 검색
-        jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {userId});
-
-        try {
-            rs = jdbcUtil.executeQuery();
-            if (rs.next()) {
-                user = new User(
-                    rs.getString("userID"),
-                    rs.getString("name"),
-                    rs.getString("nickName"),
-                    rs.getString("sex"),
-                    rs.getString("picture"),
-                    rs.getString("comment"), // 추가된 부분
-                    getInterestsList(rs.getString("interests")), // 추가된 부분
-                    rs.getString("career") // 추가된 부분
-                );
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            jdbcUtil.close();
-        }
-
-        return user;
-    }
 
     // interests를 문자열로 변환
     private static List<String> getInterestsList(String interestsString) {

@@ -24,7 +24,9 @@
 <body>
         <div style="width: 100%; height: 100%; position: relative; background: white">
             <div style="width: 1280px; height: 185px; left: 0px; top: 0px; position: absolute">
+            <!-- 
                 <img style="width: 1280px; height: 185px; left: 0px; top: 0px; position: absolute" src="<c:url value='/images/Rectangle20.png' />" />
+                 -->
                 <div style="left: 14px; top: 16px; position: absolute"><span style="color: #555B65; font-size: 35px; font-family: Inter; font-weight: 600; word-wrap: break-word">sport</span><span style="color: #1C437C; font-size: 35px; font-family: Inter; font-weight: 600; word-wrap: break-word">ogether</span></div>
                 <div style="left: 14px; top: 103px; position: absolute; color: #555B65; font-size: 48px; font-family: Inter; font-weight: 600; word-wrap: break-word">JOIN US</div>
             </div>

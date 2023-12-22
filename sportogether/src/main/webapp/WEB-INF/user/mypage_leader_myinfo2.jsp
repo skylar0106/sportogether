@@ -30,38 +30,6 @@ function userModify() {
 </script>
 
     <style>
-        .form_radio_btn {
-         width: 106px;
-         height : 23px;
-         border: 1px solid #EAE7E7;
-          border-radius: 10px;
-        }
-       
-        .form_radio_btn input[type=radio] {
-        display: none;
-        }
-       
-        .form_radio_btn label {
-        display: block;
-        border-radius: 10px;
-        margin: 0 auto;
-        text-align: center;
-        height: -webkit-fill-available;
-        line-height: 25px;
-        }
- 
-        /* Checked */
-        .form_radio_btn input[type=radio]:checked + label {
-        background: #8AD6D9;
-        color: #fff;
-        }
-        
-        /* Disabled */
-        .form_radio_btn input[type=radio] + label {
-        background: #F9FAFC;
-        color: #666;
-    }
-
       .button{
         width: 118px; height: 36px;
         background: #8AD6D9;
@@ -112,42 +80,7 @@ function userModify() {
                 <!--성별 선택-->                
                 <div style="left: 596px; top: 470px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">성별</div>
                 <input type = "text" style = "width: 219px; height: 23px; left: 635px; top: 470px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "sex" value = "${user.sex}" readonly>
-                
-                <!-- 
-                <div>
-                    <div class = "form_radio_btn male" style="left: 642px; top: 530px; position: absolute; color: #7D7C7C; font-size: 12px; font-family: Inter; font-weight: 100; word-wrap: break-word">
-                    <input id = "radio1" type = "radio" name = "sex" value = "Male">
-                    <label for = "radio1">남자</label>
-                </div>
-
-                <div class = "form_radio_btn female" style="left: 752px; top: 530px; position: absolute; color: #7D7C7C; font-size: 12px; font-family: Inter; font-weight: 100; word-wrap: break-word">
-                    <input id = "radio2" type = "radio" name = "sex" value = "Female">
-                    <label for = "radio2">여자</label>
-                </div>
-                </div>
- 				-->
- 				
- 				<!-- 
-				<div style="left: 568px; top: 580px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">팀포지션</div>
-				<input type = "text" style = "width: 219px; height: 23px; left: 635px; top: 575px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "position" value = "${user.position}">
-				 -->
-				 
-                <!--포지션 선택-->
-                <!-- 
-                <div>
-                    <div class = "form_radio_btn leader" style="left: 642px; top: 580px; position: absolute; color: #7D7C7C; font-size: 12px; font-family: Inter; font-weight: 100; word-wrap: break-word">
-                    <input id = "radio3" type = "radio" name = "position" value = "leader">
-                    <label for = "radio3">팀장</label>
-                </div>
-
-                <div class = "form_radio_btn member" style="left: 752px; top: 580px; position: absolute; color: #7D7C7C; font-size: 12px; font-family: Inter; font-weight: 100; word-wrap: break-word">
-                    <input id = "radio4" type = "radio" name = "position" value = "member">
-                    <label for = "radio4">팀원</label>
-                </div>
-                </div>
-                 -->
-                
-                
+            
 
                 <!-- 비번 -->
                 <div style="left: 568px; top: 520px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">비밀번호</div>
