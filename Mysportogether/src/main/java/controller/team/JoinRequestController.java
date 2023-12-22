@@ -5,6 +5,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.dao.JoinRequestDAO;
 import model.dao.TeamDAO;
 import model.service.TeamManager;
 import model.service.UserManager;
@@ -12,9 +13,9 @@ import model.service.dto.Request;
 
 public class JoinRequestController {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
-     
+     //가입 요청 삭제 수정 
         TeamDAO teamDAO = new TeamDAO();
-        
+        JoinRequestDAO joinRequestDAO = new JoinRequestDAO();
         String teamId = request.getParameter("teamId");
         String userId = request.getParameter("userId");
         
