@@ -6,8 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import controller.user.*;
-import controller.comm.*;
 import controller.team.UpdateTeamController;
+import controller.team.CreateTeamController;
 
 public class RequestMapping {
     private static final Logger logger = LoggerFactory.getLogger(DispatcherServlet.class);
@@ -41,6 +41,7 @@ public class RequestMapping {
 
         
         mappings.put("/team/update", new UpdateTeamController());	// 팀 정보 업데이트
+        mappings.put("/team/register", new CreateTeamController());
         
         logger.info("Initialized Request Mapping!");
     }

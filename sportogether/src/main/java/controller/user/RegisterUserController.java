@@ -43,7 +43,6 @@ public class RegisterUserController implements Controller {
 			UserManager manager = UserManager.getInstance();
 			manager.create(user);
 			
-			//return "/home/mainPage.jsp";
 			return "/user/signUp4.jsp";
 	        
 		} catch (ExistingUserException e) {	// 예외 발생 시 회원가입 form으로 forwarding

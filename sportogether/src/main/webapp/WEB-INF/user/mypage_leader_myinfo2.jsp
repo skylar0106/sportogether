@@ -3,9 +3,6 @@
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@page import="model.service.dto.*" %>
 
-<%
-	User user = (User)request.getAttribute("user");
-%>
 <html>
 <head>
 <meta charset="UTF-8">

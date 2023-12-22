@@ -19,12 +19,11 @@ public class TeamDAO {
     public Team create(Team team) {
         StringBuilder query = new StringBuilder();
 
-        query.append("INSERT into TEAM ");
-        query.append("values(teamId_seq.nextval,?, ?, ?, ?) ");
+        query.append("INSERT into TEAM(teamid, name, sport, location) ");
+        query.append("values(teamId_seq.nextval,?, ?, ?) ");
         //이거하려면 db에 sequence 설정해줘야함 기억하기*******************
         // Team의 teamid은 PK => sequence로 자동 생성해주기!!
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{team.getName(), 
-        			team.getSpoleader(), team.getLocation(), team.getSport()});
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{team.getName(), team.getSport(), team.getLocation()});
         
         String key[] = {"teamId"};	//pk 컬럼의이름
         try {
