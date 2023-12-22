@@ -107,8 +107,7 @@ public class UserDAO {
 					rs.getString("nickname"),
 					rs.getString("sex"),
 					rs.getString("password"),
-					rs.getString("picture"),
-					rs.getInt("leader"),					
+					rs.getString("leader"),					
 					rs.getInt("teamid"));
 				return user;
 			}
@@ -157,6 +156,7 @@ public class UserDAO {
 	 * 전체 사용자 정보를 검색한 후 현재 페이지와 페이지당 출력할 사용자 수를 이용하여
 	 * 해당하는 사용자 정보만을 List에 저장하여 반환.
 	 */
+	//
 //	public List<User> findUserList(int currentPage, int countPerPage) throws SQLException {
 //		String sql = "SELECT userId, name, email, NVL(commId, 0) AS commId, cName " 
 //					+ "FROM USERINFO u LEFT OUTER JOIN Community c ON u.commId = c.cId "
@@ -239,7 +239,6 @@ public class UserDAO {
 		}
 		return 0;
 	}
-	
 	/**
 	 * 주어진 사용자 ID에 해당하는 사용자가 존재하는지 검사 
 	 */

@@ -246,7 +246,7 @@ public class TeamDAO {
                 Request r = new Request();
                 r.setTeamId(rs.getString("teamid"));
                 r.setUserId(rs.getString("userid"));
-                r.setDate(rs.getDate("date"));
+                r.setDate(rs.getString("date"));
                 r.setMassage(rs.getString("massage"));
                 requestList.add(r);
             }

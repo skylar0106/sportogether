@@ -4,25 +4,20 @@ import java.sql.Date;
 import java.util.List;
 
 public class User {
+	
+	//spouser(userid, name, nickname, sex, password, leader, teamid)
     private String userId;
     private String name;
     private String nickName;
     private String sex;
     private String password;
-    private String picture;
     private String leader;
-    private String teamId;
+    private int teamId;
     //추가
     private String comment;
     private List<String> interests;
     private String career;
 
-    public String getPicture() {
-        return picture;
-    }
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
     
     //기본 생성자
     public User() {}
@@ -35,32 +30,29 @@ public class User {
         this.nickName = nickName;
         this.sex = sex;
 
-        this.picture = picture;
     }
     
     public User(String userId, String name, String nickName, String sex, String password,
-            String picture, String leader, String teamId) {
+             String leader,int teamId) {
         super();
         this.userId = userId;
         this.name = name;
         this.nickName = nickName;
         this.sex = sex;
         this.password = password;
-        this.picture = picture;
         this.leader = leader;
         this.teamId = teamId;
     }
-    public User (String teamId) {
+    public User (int teamId) {
         this.teamId = teamId;
     }
 
     public User(String userId, String name, String nickName, String sex,
-            String picture, String comment, List<String> interests, String career) {
+            String comment, List<String> interests, String career) {
         this.userId = userId;
         this.name = name;
         this.nickName = nickName;
         this.sex = sex;
-        this.picture = picture;
         this.comment = comment;
         this.interests = interests;
         this.career = career;
@@ -123,10 +115,10 @@ public class User {
     public void setLeader(String leader) {
         this.leader = leader;
     }
-    public String getTeamId() {
+    public int getTeamId() {
         return teamId;
     }
-    public void setTeamId(String teamId) {
+    public void setTeamId(int teamId) {
         this.teamId = teamId;
     }
     
