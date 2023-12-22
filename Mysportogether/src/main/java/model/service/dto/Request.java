@@ -1,31 +1,24 @@
 package model.service.dto;
 
-import java.sql.Date;
 
 public class Request {
+	
+	//db순서 teamid, teamname, userid, username, message, date
     private String teamId;
     private String teamName;
-    private String userName;
     private String userId;
+    private String userName;
     private String massage;
-    private Date date;
+    private String date;
     
    public Request() {}
-    
-    public Request(String teamId, String userId, String massage, Date date) {
-        super();
-        this.teamId = teamId;
-        this.userId = userId;
-        this.massage = massage;
-        this.date = date;
-    }
-    
-    public Request(String teamId, String teamName, String userName, String userId, String massage, Date date) {
+ 
+    public Request(String teamId, String teamName, String userId, String userName, String massage, String date) {
         super();
         this.teamId = teamId;
         this.teamName = teamName;
-        this.userName = userName;
         this.userId = userId;
+        this.userName = userName;
         this.massage = massage;
         this.date = date;
     }
@@ -64,10 +57,10 @@ public class Request {
     public void setMassage(String massage) {
         this.massage = massage;
     }
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        return this.date;
     }
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
     

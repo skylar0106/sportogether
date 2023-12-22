@@ -1,17 +1,19 @@
 package model.service.dto;
 
 public class Member {
+	private String teamID;	
     private String userID;
     private String message;
-    private String teamID;	
 
     public Member() {
+    	
     }
 
-    public Member(String userID, String message, String teamID) {
+    public Member(String teamID,  String userID, String message) {
+    	super();
+    	this.teamID = teamID;
         this.userID = userID;
         this.message = message;
-        this.teamID = teamID;
     }
 
     public String getUserID() {
