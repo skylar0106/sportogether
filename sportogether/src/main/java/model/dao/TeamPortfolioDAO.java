@@ -32,7 +32,7 @@ public class TeamPortfolioDAO {
 		                rs.getInt("teamID"),
 		                rs.getString("name"),
 		                rs.getString("spoleader"),
-		                rs.getInt("level"),
+		                rs.getInt("tlevel"),
 		                rs.getString("sport"),
 		                rs.getString("location"),
 		                rs.getInt("membership"),

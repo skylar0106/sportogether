@@ -3,6 +3,7 @@ package model.service;
 import java.sql.SQLException;
 import java.util.List;
 import model.service.dto.*;
+import model.dao.MyPortfolioDAO;
 import model.dao.TeamDAO;
 import model.dao.UserDAO;
 
@@ -86,6 +87,17 @@ public class UserManager {
       }
         return userDAO.updateInfo(user);
     } 
+    
+    //myportfolio
+    public User getUserInfo(String userID) throws SQLException {
+        MyPortfolioDAO myPortfolioDAO = new MyPortfolioDAO();
+        return myPortfolioDAO.getUserInfo(userID);
+    }
+    
+    public int updateMyPotpolio(User usr) throws SQLException{
+       MyPortfolioDAO myPortfolioDAO = new MyPortfolioDAO();
+       return myPortfolioDAO.updateMyPotpolio(usr);
+    }
     
     
     //spouser에서 user를 삭제하는 것!

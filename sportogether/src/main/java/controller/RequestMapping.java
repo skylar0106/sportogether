@@ -57,12 +57,20 @@ public class RequestMapping {
         // team controller
         mappings.put("/team/portfolio", new TeamPortfolioController());
         
+     // 나의 포트폴리오 controller
+        mappings.put("/user/portfolio", new MyPortfolioController());
+        
         // 랭킹 관련 controller
         mappings.put("/team/lankingList", new LankingController());
         
         //마이페이지 관련 controller
         mappings.put("/user/myTeamLanking", new MyTeamLankingController());
         mappings.put("/user/update", new UpdateUserController());	// 팀 정보 업데이트
+        
+      //대결 신청, 승인 거절
+//        mappings.put("/team/request",new ViewBattleRequestController() );
+//        mappings.put("/team/request/approve",new BattleRequestController() );
+//        mappings.put("/team/request/reject",new BattleRequestController() );
         
         logger.info("Initialized Request Mapping!");
     }

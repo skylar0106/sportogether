@@ -25,7 +25,7 @@ public class User {
         this.teamId = teamId;
     }
     
-    public User( String userId, String name, String nickName, String sex, String password) {
+    public User(String userId, String name, String nickName, String sex, String password) {
         super();
         this.userId = userId;
         this.name = name;
@@ -33,7 +33,7 @@ public class User {
         this.sex = sex;
         this.password = password;
     }
-    public User(  String name, String nickName, String sex, int leader, String password,
+    public User(String name, String nickName, String sex, int leader, String password,
             String position, String comment, String interests, String career) {
         super();
         this.name = name;
@@ -51,6 +51,17 @@ public class User {
         this.password = password;
         this.leader = leader;
         this.teamId = teamId;
+    }
+    
+    public User(String userId, String name, String nickName, String sex,
+            String comment, String interests, String career) {
+        this.userId = userId;
+        this.name = name;
+        this.nickName = nickName;
+        this.sex = sex;
+        this.comment = comment;
+        this.interests = interests;
+        this.career = career;
     }
     
     public User(int teamId, String userId, String name, String nickName, String sex, int leader, String password,

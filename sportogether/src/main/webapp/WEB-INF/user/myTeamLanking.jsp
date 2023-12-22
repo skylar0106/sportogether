@@ -24,6 +24,11 @@
 			form.method="POST";	
 			form.submit();
 		}
+		function userPortfolio(targetUri){
+			form.action = targetUri;
+			form.method="POST";	
+			form.submit();
+		}
 	</script>
 </head>
 <body>
@@ -41,7 +46,9 @@
 	        		</c:url>')"></center>
 	</div>
 	<div class = "d3">
-		<center><input type = "button" value = "MY PORTFOLIO" onClick="menu_choice(3)"></center>
+		<center><input type = "button" value = "MY PORTFOLIO" onClick="myPortfolio(
+    		'<c:url value='/user/portfolio'>
+    		</c:url>')"></center>
 	</div>
 	<div class = "d4">
 		<center><input type = "button" value = "내 정보 수정" onClick="userUpdate(
