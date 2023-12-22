@@ -49,16 +49,6 @@ public class UserManager {
 	// 정보 수정(해당 사람이 팀 리더인데 팀을 변경할 경우 팀 리더를 null로 변경)
 	// 우리는 spoleader dto도 변경해줘야함!
 	public int update(User user) throws SQLException, UserNotFoundException {
-//		int oldTeamId = findUser(user.getUserId()).getTeamId(); // 현재 소속된 팀
-//		if (user.getTeamId() != oldTeamId) { 	// 소속 팀이 변경됨
-//			Team team = teamDAO.findTeam(oldTeamId);  // 기존 소속 팀
-//			if (team != null && user.getUserId().equals(team.getSpoleader())) {
-//				// 사용자가 기존 소속 팀의 리더인 경우 -> 그 팀의 리더를 null로 변경 및 저장
-//				// 우리는 position이라는 data가 있으니... "position이 leader이면~"의 조건문으로 변경도 가능
-//				team.setSpoleader(null);
-//				teamDAO.updateLeader(team);
-//			}
-//		}
 		return userDAO.updateInfo(user);
 	}	
 	
@@ -88,6 +78,7 @@ public class UserManager {
 			return user;
 		}
 
+	
 //	public List<User> findUserList() throws SQLException {
 //		return userDAO.findUserList();
 //	}

@@ -219,6 +219,7 @@ public class UserDAO {
 //	}
 	
 	
+	
 	 // 특정 팀에 속한 사용자들의 수를 count하여 반환
 	public int getNumberOfUsersInTeam(int teamId) {
 		StringBuilder sql = new StringBuilder();
