@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,6 +20,15 @@
             border: none;
         }
     </style>
+    <script>
+
+function main(targetUri) {
+	form.action = targetUri;
+	form.method="GET";		
+	form.submit();
+}
+
+</script>
     <title>signUp4</title>
 </head>
 <body>
@@ -32,10 +42,12 @@
             <div style="left: 22px; top: 268px; position: absolute; color: #0F0F0F; font-size: 20px; font-family: Inter; font-weight: 100; word-wrap: break-word">회원가입 완료</div>
             <div style="left: 449px; top: 427px; position: absolute; color: #3C3C3C; font-size: 40px; font-family: Inter; font-weight: 400; word-wrap: break-word">가입이 완료되었습니다</div>
             <div style="width: 1260px; height: 0px; left: 9px; top: 247px; position: absolute; border: 1px black solid"></div>
-           
+           <form name="form" method="GET"  action="<c:url value='/mainPage' />">
             <div style="left: 545px; top: 500px; position: absolute">
-                <button class = "button" onClick="location.href = '/home/mainPage.jsp'">메인화면</button>
+                <button class = "button" onClick="main(
+	        		'<c:url value='/mainPage'/>')">메인화면</button>
             </div>
+            </form>
         </div>
 </body>
 </html>

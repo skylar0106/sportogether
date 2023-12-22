@@ -91,23 +91,22 @@ public class UserDAO {
 
     
     // 회원가입(spouser에 user한명 추가)
-	public int create(User user) throws SQLException {
-		String sql = "INSERT INTO spouser(userid, name, nickname, birth, sex, position, password) VALUES (?, ?, ?, ?, ?, ?, ?)";		
-		jdbcUtil.setSqlAndParameters(sql, new Object[] {user.getUserId(), user.getName(), 
-				user.getNickName(), user.getSex(),
-				user.getPosition(), user.getPassword()});	// JDBCUtil 에 insert문과 매개 변수 설정		
-		try {				
-			int result = jdbcUtil.executeUpdate();	// insert 문 실행
-			return result;
-		} catch (Exception ex) {
-			jdbcUtil.rollback();
-			ex.printStackTrace();
-		} finally {		
-			jdbcUtil.commit();
-			jdbcUtil.close();	// resource 반환
-		}		
-		return 0;			
-	}
+	 public int create(User user) throws SQLException {
+	      String sql = "INSERT INTO spouser(userid, name, nickname, sex, password) VALUES (?, ?, ?, ?, ?)";      
+	      jdbcUtil.setSqlAndParameters(sql, new Object[] {user.getUserId(), user.getName(), 
+	            user.getNickName(), user.getSex(), user.getPassword()});   // JDBCUtil 에 insert문과 매개 변수 설정      
+	      try {            
+	         int result = jdbcUtil.executeUpdate();   // insert 문 실행
+	         return result;
+	      } catch (Exception ex) {
+	         jdbcUtil.rollback();
+	         ex.printStackTrace();
+	      } finally {      
+	         jdbcUtil.commit();
+	         jdbcUtil.close();   // resource 반환
+	      }      
+	      return 0;         
+	   }
 	
 	
     // 존재하는 아이디인지 확인
@@ -178,45 +177,37 @@ public class UserDAO {
         return interestsList;
     }
 
-    //User 정보 수정
+  //User 정보 수정
     public int updateInfo(User user) {
-    	StringBuilder query = new StringBuilder();
+        StringBuilder query = new StringBuilder();
 
-    	query.append("UPDATE SPOUSER ");
-    	query.append("SET userid = ?, name = ?, nickname = ?, birth = ?, sex = ?, position = ?, password = ?");
-    	query.append("WHERE userID = ? ");
-    	jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{
-    			user.getUserId(),
-    			user.getName(),	
+        query.append("UPDATE SPOUSER ");
+        query.append("SET userid = ?, name = ?, nickname = ?, sex = ?, password = ? ");
+        query.append("WHERE userID = ? ");
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{
+                user.getUserId(),
+                user.getName(), 
                 user.getNickName(),
                 user.getSex(),
-                user.getPosition(),
                 user.getPassword(),
                 user.getUserId()
         });
-    	try {
-    		int result = jdbcUtil.executeUpdate();
-    		return result;
-    	} catch (Exception ex) {
-    		jdbcUtil.rollback();
-        	ex.printStackTrace();
-    	} finally {
-        	jdbcUtil.commit();
-        	jdbcUtil.close();
-    	}
-    	return 0;
-	}
+        try {
+            int result = jdbcUtil.executeUpdate();
+            return result;
+        } catch (Exception ex) {
+            jdbcUtil.rollback();
+            ex.printStackTrace();
+        } finally {
+            jdbcUtil.commit();
+            jdbcUtil.close();
+        }
+        return 0;
+    }
     
     
-	 //주어진 사용자 ID에 해당하는 사용자 정보를 spouser 데이터베이스에서 찾아 User 도메인 클래스에 저장하여 반환.
-	
 
-
-	/**
-	 * 주어진 사용자 ID에 해당하는 사용자 정보를 데이터베이스에서 찾아 User 도메인 클래스에 
-	 * 저장하여 반환.
-	 */
-	public User findUser(String userId) throws SQLException {
+    public User findUser(String userId) throws SQLException {
         String sql = "SELECT name, nickname, sex, password, leader, teamid  "
                     + "FROM spouser "
                     + "WHERE userid=? ";              
@@ -242,6 +233,18 @@ public class UserDAO {
         }
         return null;
     }
+
+    
+    
+	 //주어진 사용자 ID에 해당하는 사용자 정보를 spouser 데이터베이스에서 찾아 User 도메인 클래스에 저장하여 반환.
+	
+
+
+	/**
+	 * 주어진 사용자 ID에 해당하는 사용자 정보를 데이터베이스에서 찾아 User 도메인 클래스에 
+	 * 저장하여 반환.
+	 */
+	
 	
 //	 // 전체 사용자 정보를 검색하여 List에 저장 및 반환
 //	public List<User> findUserList() throws SQLException {

@@ -33,6 +33,17 @@ public class User {
         this.sex = sex;
         this.password = password;
     }
+    
+    public User(String userId, int teamId,  String name, String nickName, String sex, String password) {
+        super();
+        this.userId = userId;
+        this.teamId = teamId;
+        this.name = name;
+        this.nickName = nickName;
+        this.sex = sex;
+        this.password = password;
+    }
+    
     public User(String name, String nickName, String sex, int leader, String password,
             String position, String comment, String interests, String career) {
         super();

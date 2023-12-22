@@ -43,7 +43,7 @@ private static final Logger logger = (Logger) LoggerFactory.getLogger(TeamPortfo
                  tm.setTeamId(teamId);
                  tm.setName(rs.getString("name"));
                  tm.setSpoLeader(rs.getString("spoleader"));
-                 tm.setLevel(rs.getInt("LEVEL"));
+                 tm.setLevel(rs.getInt("tlevel"));
                  tm.setSport(rs.getString("sport"));
                  tm.setLocation(rs.getString("location"));
                  tm.setMembership(rs.getInt("membersCount"));

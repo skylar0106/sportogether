@@ -112,7 +112,7 @@ body, html {
 			 		 </c:url>">팀 찾기</a></li>
             <li><a class="menuLink" href="<c:url value='/team/lankingList'>	   
 			 		 </c:url>">전체 랭킹</a></li>
-            <li><a class="menuLink" href="#">팀 커뮤니티</a></li>
+            <li><a class="menuLink" href="#">팀 관리</a></li>
         </ul>
         <div class="userActions">
         	<p>${user.getName()}회원&nbsp;&nbsp;</p>

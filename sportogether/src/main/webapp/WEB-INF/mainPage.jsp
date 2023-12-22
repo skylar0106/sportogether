@@ -22,6 +22,11 @@ function login(targetUri) {
 	form.method="GET";		
 	form.submit();
 }
+function userRegister(targetUri) {
+	form.action = targetUri;
+	form.method="GET";		// register form 요청
+	form.submit();
+}
 </script>
 <style>
 body, html {
@@ -112,13 +117,14 @@ body, html {
 			 		 </c:url>">팀 찾기</a></li>
             <li><a class="menuLink" href="<c:url value='/team/lankingList'>	   
 			 		 </c:url>">전체 랭킹</a></li>
-            <li><a class="menuLink" href="#">팀 커뮤니티</a></li>
+            <li><a class="menuLink" href="#">팀 관리</a></li>
         </ul>
         <div class="userActions">
         	<form name="form" method="GET"  action="<c:url value='/user/login' />">
 	        	<input class="join" type="button" value="로그인" onClick="login(
 	        		'<c:url value='/user/login/form'/>')"> &nbsp;
-				<input class="sign" type="button" value="회원가입" onClick=> &nbsp;
+				<input class="sign" type="button" value="회원가입" onClick="userRegister(
+	        		'<c:url value='/user/register'/>')"> &nbsp;
         	</form>
         </div>
     </nav>
