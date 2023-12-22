@@ -18,7 +18,7 @@ public class TeamPortfolioDAO {
 		 jdbcUtil = new JDBCUtil();
 	 }
 	
-	 public Team getTeamInfo(String teamID) {
+	 public Team getTeamInfo(int teamID) {
 		    Team team = null;
 		    ResultSet rs = null;
 		    StringBuilder sql = new StringBuilder();
@@ -60,7 +60,7 @@ public class TeamPortfolioDAO {
     		rs = jdbcUtil.executeQuery();
     		if (rs != null && rs.next()) {  // rs가 null이 아니고 다음 레코드가 있는 경우에만 처리
                 teamscore = new TeamScore(
-                        rs.getString("teamID"),
+                        rs.getInt("teamID"),
                         rs.getInt("matches"),
                         rs.getInt("win"),
                         rs.getInt("lose"),
@@ -80,7 +80,7 @@ public class TeamPortfolioDAO {
     }
 
     // 최근 매치 일자 가져오기
-    public String getRecentMatchDate(String teamID) {
+    public String getRecentMatchDate(int teamID) {
     	String date = null;
     	String recentDate = null;
     	ResultSet rs = null;
@@ -118,7 +118,7 @@ public class TeamPortfolioDAO {
     }
 
     // 팀 멤버 수 가져오기
-    public int getTeamMemberCount(String teamID) {
+    public int getTeamMemberCount(int teamID) {
     	ResultSet rs = null;
     	StringBuilder sql = new StringBuilder();
     	sql.append("SELECT COUNT(*) AS memberCount FROM spomember WHERE teamID = ?");
@@ -140,7 +140,7 @@ public class TeamPortfolioDAO {
     }
 
     // 팀 소개 멘트 가져오기
-    public String getTeamIntroduction(String teamID) {
+    public String getTeamIntroduction(int teamID) {
     	String comment = "";
     	ResultSet rs = null;
     	StringBuilder sql = new StringBuilder();
@@ -230,7 +230,7 @@ public class TeamPortfolioDAO {
     	}
     }
 
-	public TeamScore getTeamScore(String teamID) {
+	public TeamScore getTeamScore(int teamID) {
 		TeamScore teamScore = null;
 	    ResultSet rs = null;
 	    StringBuilder sql = new StringBuilder();
@@ -241,7 +241,7 @@ public class TeamPortfolioDAO {
 	        rs = jdbcUtil.executeQuery();
 	        if (rs != null && rs.next()) {
 	            teamScore = new TeamScore(
-	                rs.getString("teamID"),
+	                rs.getInt("teamID"),
 	                rs.getInt("matches"),
 	                rs.getInt("win"),
 	                rs.getInt("lose"),

@@ -225,27 +225,27 @@ public class TeamManager {
         return this.userDAO;
     }
 
-	public TeamScore getTeamScore(String teamID) {
+	public TeamScore getTeamScore(int teamID) {
 		TeamPortfolioDAO teamPortfolioDAO = new TeamPortfolioDAO();
 	    return teamPortfolioDAO.getTeamScore(teamID);
 	}
 	
-	public String getRecentMatchDate(String teamId) throws SQLException {
+	public String getRecentMatchDate(int teamId) throws SQLException {
 	    TeamPortfolioDAO teamPortfolioDAO = new TeamPortfolioDAO();
 	    return teamPortfolioDAO.getRecentMatchDate(teamId);
 	}
 
-	public Team getTeamInfo(String teamID) throws SQLException {
+	public Team getTeamInfo(int teamID) throws SQLException {
 	    TeamPortfolioDAO teamPortfolioDAO = new TeamPortfolioDAO();
 	    return teamPortfolioDAO.getTeamInfo(teamID);
 	}
 	
-	public int getTeamMemberCount(String teamID) throws SQLException {
+	public int getTeamMemberCount(int teamID) throws SQLException {
 	    TeamPortfolioDAO teamPortfolioDAO = new TeamPortfolioDAO();
 	    return teamPortfolioDAO.getTeamMemberCount(teamID);
 	}
 	
-	public String getTeamIntroduction(String teamID) throws SQLException {
+	public String getTeamIntroduction(int teamID) throws SQLException {
 	    TeamPortfolioDAO teamPortfolioDAO = new TeamPortfolioDAO();
 	    return teamPortfolioDAO.getTeamIntroduction(teamID);
 	}

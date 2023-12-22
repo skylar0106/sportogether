@@ -19,6 +19,11 @@
 			form.action = targetUri;	
 			form.submit();
 		}
+		function teamPortfolio(targetUri){
+			form.action = targetUri;
+			form.method="POST";	
+			form.submit();
+		}
 	</script>
 </head>
 <body>
@@ -30,7 +35,10 @@
 		<center><input type = "button" value = "TEAM LANKING" onClick="menu_choice(1)"></center>
 	</div>
 	<div class = "d2">
-		<center><input type = "button" value = "TEAM PORTFOLIO" onClick="menu_choice(2)"></center>
+		<center><input type = "button" value = "TEAM PORTFOLIO" onClick="teamPortfolio(
+    		'<c:url value='/team/portfolio'>
+	        		<c:param name='teamId' value='${user.teamId}'/>
+	        		</c:url>')"></center>
 	</div>
 	<div class = "d3">
 		<center><input type = "button" value = "MY PORTFOLIO" onClick="menu_choice(3)"></center>

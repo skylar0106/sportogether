@@ -20,17 +20,27 @@ function totalLanking(targetUri) {
 	form.method="GET";		
 	form.submit();
 }
+function teamPortfolioShow(targetUri) {
+	form.action = targetUri;
+	form.method="POST";
+	if (form.value == "") {
+		alert("TeamID를 입력하십시오.");
+		form.teamID.focus();
+		return false;
+	} 	
+	form.submit();
+}
 </script>
 </head>
 <body>
 <br>
-<!-- login form  -->
+
 <form name="form" method="POST" action="<c:url value='/team/search' />">
   <table style="width:100%">
 	<tr>
 	  <td width="20"></td>
 	  <td>
-	  	<b>UserMan3</b><br><br>
+	  	<b>라이벌</b><br><br>
 	   	<table>
 	   	  <tr>
 		    <td class="title">&nbsp;&nbsp;Rival매칭 - TestPage&nbsp;&nbsp;</td>
@@ -62,7 +72,33 @@ function totalLanking(targetUri) {
 	    </table>
 	  </td>	  
 	</tr>
-  </table>  
+  </table>
+  <table style="width:100%">
+	<tr>
+	  <td width="20"></td>
+	  <td>
+	   	<table>
+	   	  <tr>
+		    <td class="title">&nbsp;&nbsp;팀 포트폴리오 - TestPage&nbsp;&nbsp;</td>
+		  </tr>
+	    </table> 
+	    <br>	  
+	    <table style="background-color: YellowGreen">
+	  	  <tr height="40">
+			<td width="150" align="center" bgcolor="E6ECDE">teamID</td>
+			<td width="250" bgcolor="ffffff" style="padding-left:10">
+				<input type="text" style="width:240" name="teamID">
+			</td>
+		  </tr>
+		  <tr>
+		  	<td colspan = '2'><input type = "button" value="팀 포트폴리오 보기" onClick="totalLanking(
+				'<c:url value='/team/portfolio'/>')"></td>
+		  </tr>
+	    </table>
+	    <br>	 
+	  </td>	  
+	</tr>
+  </table>    
 </form>
 </body>
 </html>

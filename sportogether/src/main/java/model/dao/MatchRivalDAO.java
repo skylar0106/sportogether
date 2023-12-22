@@ -4,16 +4,23 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.slf4j.LoggerFactory;
+
+import ch.qos.logback.classic.Logger;
+import controller.team.TeamPortfolioController;
 import model.*;
 import model.service.dto.*;
 
 public class MatchRivalDAO {
     
 private JDBCUtil jdbcUtil = null;
+private static final Logger logger = (Logger) LoggerFactory.getLogger(TeamPortfolioController.class);
     
     public MatchRivalDAO() {
         jdbcUtil = new JDBCUtil();
     }
+    
     
     /*
      * 라이벌 팀을 추천하기
@@ -36,7 +43,7 @@ private JDBCUtil jdbcUtil = null;
                  tm.setTeamId(teamId);
                  tm.setName(rs.getString("name"));
                  tm.setSpoLeader(rs.getString("spoleader"));
-                 tm.setLevel(rs.getInt("tlevel"));
+                 tm.setLevel(rs.getInt("LEVEL"));
                  tm.setSport(rs.getString("sport"));
                  tm.setLocation(rs.getString("location"));
                  tm.setMembership(rs.getInt("membersCount"));
@@ -74,6 +81,7 @@ private JDBCUtil jdbcUtil = null;
             }
             /*상대팀 정보 구하기*/
             StringBuilder sql2 = new StringBuilder();
+
             sql2.append("SELECT name, team.teamId, rate ");
             sql2.append("FROM teamScore JOIN team ON teamScore.teamID = team.teamID ");
             sql2.append("WHERE tlevel = ? ");
@@ -83,6 +91,7 @@ private JDBCUtil jdbcUtil = null;
             
             teamList = new ArrayList<Rival>();
             rs =  jdbcUtil.executeQuery();
+            logger.debug("TEAMlIST: {}", rs);
             
             while(rs.next()) {
                 Rival r = new Rival(rs.getString("name"), 
@@ -90,6 +99,9 @@ private JDBCUtil jdbcUtil = null;
                             rs.getFloat("rate"));
                 if(r.getTeamId()!= tm.getTeamId())
                     teamList.add(r);
+                logger.debug("TEAMlIST: {}", teamList);
+                logger.debug("TEAMlIST: {}", tm.getTeamId());
+                logger.debug("TEAMlIST: {}", r.getTeamId());
             }
             /*라이벌 찾기*/
             gap = 1000;

@@ -1,7 +1,7 @@
 package model.service.dto;
 
 public class TeamScore {
-    private String teamID;
+    private int teamID;
     private int matches;
     private int win;
     private int lose;
@@ -11,7 +11,7 @@ public class TeamScore {
     
     public TeamScore() {}
     
-    public TeamScore(String teamID, int matches, int win, int lose, int ranking, int draw, double rate) {
+    public TeamScore(int teamID, int matches, int win, int lose, int ranking, int draw, double rate) {
         this.teamID = teamID;
         this.matches = matches;
         this.win = win;
@@ -21,10 +21,10 @@ public class TeamScore {
         this.rate = rate;
     }
 
-    public String getTeamID() {
+    public int getTeamID() {
         return teamID;
     }
-    public void setTeamID(String teamID) {
+    public void setTeamID(int teamID) {
         this.teamID = teamID;
     }
     public int getMatches() {
