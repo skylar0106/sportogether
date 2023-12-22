@@ -8,45 +8,35 @@ public class User {
     private String name;
     private String nickName;
     private String sex;
-    private String password;
-    private String picture;
     private int leader;
     private int teamId;
     //추가
     private String comment;
     private List<String> interests;
     private String career;
+    private String password;
 
-    public String getPicture() {
-        return picture;
-    }
-    public void setPicture(String picture) {
-        this.picture = picture;
-    }
     
     //기본 생성자
     public User() {}
     
     //password 없는 생성자
-    public User(String userId, String name, String nickName, String sex,
-            String picture) {
+    public User(String userId, String name, String nickName, String sex) {
     	this.userId = userId;
         this.name = name;
         this.nickName = nickName;
         this.sex = sex;
 
-        this.picture = picture;
     }
     
     public User(String userId, String name, String nickName, String sex, String password,
-            String picture, int leader, int teamId) {
+             int leader, int teamId) {
         super();
         this.userId = userId;
         this.name = name;
         this.nickName = nickName;
         this.sex = sex;
         this.password = password;
-        this.picture = picture;
         this.leader = leader;
         this.teamId = teamId;
     }
@@ -55,12 +45,11 @@ public class User {
     }
 
     public User(String userId, String name, String nickName, String sex,
-            String picture, String comment, List<String> interests, String career) {
+             String comment, List<String> interests, String career) {
         this.userId = userId;
         this.name = name;
         this.nickName = nickName;
         this.sex = sex;
-        this.picture = picture;
         this.comment = comment;
         this.interests = interests;
         this.career = career;

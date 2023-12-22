@@ -93,8 +93,8 @@ public class UserDAO {
 	 * 저장하여 반환.
 	 */
 	public User findUser(String userId) throws SQLException {
-        String sql = "SELECT name, nickname, sex, password, picture, leader, teamid  "
-        			+ "FROM sspouser "
+        String sql = "SELECT name, nickname, sex, password, leader, teamid  "
+        			+ "FROM spouser "
         			+ "WHERE userid=? ";              
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});	// JDBCUtil에 query문과 매개 변수 설정
 
@@ -107,7 +107,6 @@ public class UserDAO {
 					rs.getString("nickname"),
 					rs.getString("sex"),
 					rs.getString("password"),
-					rs.getString("picture"),
 					rs.getInt("leader"),					
 					rs.getInt("teamid"));
 				return user;
