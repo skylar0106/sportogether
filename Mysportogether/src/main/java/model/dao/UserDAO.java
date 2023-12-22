@@ -107,7 +107,7 @@ public class UserDAO {
 					rs.getString("nickname"),
 					rs.getString("sex"),
 					rs.getString("password"),
-					rs.getString("leader"),					
+					rs.getInt("leader"),					
 					rs.getInt("teamid"));
 				return user;
 			}

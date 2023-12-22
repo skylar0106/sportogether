@@ -55,7 +55,7 @@ public class JoinRequestDAO {
      * */
     
     // 팀에 들어온 가입 신청 목록 반환
-    public List<Request> getRequestList(String teamId) {
+    public List<Request> getRequestList(int teamId) {
         List<Request> requestList = null;
         ResultSet rs = null;
 

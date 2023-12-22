@@ -11,7 +11,7 @@ public class User {
     private String nickName;
     private String sex;
     private String password;
-    private String leader;
+    private int leader;
     private int teamId;
     //추가
     private String comment;
@@ -33,7 +33,7 @@ public class User {
     }
     
     public User(String userId, String name, String nickName, String sex, String password,
-             String leader,int teamId) {
+             int leader,int teamId) {
         super();
         this.userId = userId;
         this.name = name;
@@ -109,10 +109,10 @@ public class User {
     }
     
     
-    public String getLeader() {
+    public int getLeader() {
         return leader;
     }
-    public void setLeader(String leader) {
+    public void setLeader(int leader) {
         this.leader = leader;
     }
     public int getTeamId() {

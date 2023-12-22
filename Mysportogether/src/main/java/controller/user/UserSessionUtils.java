@@ -2,9 +2,13 @@ package controller.user;
 
 import javax.servlet.http.HttpSession;
 
+import model.dao.UserDAO;
+import model.service.dto.User;
+
 public class UserSessionUtils {
     public static final String USER_SESSION_KEY = "userId";
-
+    static UserDAO userDao = new UserDAO();
+    
     /* 현재 로그인한 사용자의 ID를 구함 */
     public static String getLoginUserId(HttpSession session) {
         String userId = (String)session.getAttribute(USER_SESSION_KEY);
@@ -27,4 +31,40 @@ public class UserSessionUtils {
         }
         return loginUser.equals(userId);
     }
+    
+	public static boolean hasTeam(HttpSession session) {
+		String userId = getLoginUserId(session);
+		try {
+		User user = userDao.findUser(userId);
+		if(user.getTeamId() <= 0) { //없음
+			return false;
+		}
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+		return true;
+	}
+	
+	public static User getUser(HttpSession session) {
+		String userId = getLoginUserId(session);
+		User user = ()
+	}
+	
+	//리더이면 t, 아니면 f
+	public static boolean isLeader(HttpSession session) {
+		String userId = getLoginUserId(session);
+		try {
+			User user = userDao.findUser(userId);
+			if(hasTeam(session)) {
+				if(user.getLeader() == 1) {
+					return true;
+				}
+			}
+			
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return false;
+	}
 }

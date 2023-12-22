@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import controller.Controller;
 import model.dao.JoinRequestDAO;
-import model.service.TeamManager;
-import model.service.UserManager;
 import model.service.dto.Request;
 
 public class ViewJoinRequestConroller implements Controller{
@@ -16,11 +14,15 @@ public class ViewJoinRequestConroller implements Controller{
    
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
        JoinRequestDAO joinRequestDao = new JoinRequestDAO();
+       int teamId = Integer.parseInt(request.getParameter("teamId"));
        
-       String teamId = request.getParameter("teamId");
-       
-       List<Request> requestList = joinRequestDao.getRequestList(teamId);
+       try {
+       List<Request> requestList= joinRequestDao.getRequestList(teamId);
        request.setAttribute("requestList", requestList);
+       }catch(Exception e) {
+    	   e.printStackTrace();
+    	   request.setAttribute("joinRequestListException", e);
+       }
        
        return "/user/leader/joinTeam/form.jsp";
     }

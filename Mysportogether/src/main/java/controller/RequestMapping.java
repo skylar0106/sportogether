@@ -51,6 +51,11 @@ public class RequestMapping {
         mappings.put("/team/test", new ForwardController("/team/test.jsp"));
         mappings.put("/team/search", new SearchTeamController());
         
+        //가입 신청 관련
+        mappings.put("/team/search/join", new ViewJoinRequestConroller()); //가입신청함
+        mappings.put("/team/search/approve", new JoinRequestController()); //가입신청 승인
+        mappings.put("/team/search/reject", new JoinRequestController()); //가입신청 거절
+        
         // team controller
         mappings.put("/team/portfolio", new TeamPortfolioController());
         
