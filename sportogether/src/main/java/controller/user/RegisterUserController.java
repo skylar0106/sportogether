@@ -34,8 +34,6 @@ public class RegisterUserController implements Controller {
 			request.getParameter("name"),
 			request.getParameter("nickName"),
 			request.getParameter("sex"),
-			request.getParameter("birth"),
-			request.getParameter("position"),
 			request.getParameter("password")
 			);
 		

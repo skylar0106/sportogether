@@ -336,7 +336,7 @@ public class TeamDAO {
         ResultSet rs = null;
 
         StringBuilder sql = new StringBuilder();
-        sql.append("SELECT userid, name, nickname, birth, position, team ");
+        sql.append("SELECT userid, name, nickname, position, team ");
         sql.append("FROM USER JOIN TEAM USING(teamId) ");
         sql.append("ORDER BY position, nickname, birth ");
 
@@ -349,7 +349,6 @@ public class TeamDAO {
                 User m = new User();
                 m.setUserId(rs.getString("userid"));
                 m.setName(rs.getString("name"));
-                m.setBirth(rs.getString("birth"));
                 m.setPosition(rs.getString("birth"));
                 m.setNickName(rs.getString("nickname"));
                 memberList.add(m);

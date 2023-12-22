@@ -19,7 +19,7 @@ function userModify() {
 		return false;
 	}
 	
-	alert("저장이 완료 되었습니다.");
+	alert("저장이 완료 되었습니다.");	
 	form.submit();
 }
 
@@ -103,10 +103,15 @@ function userModify() {
                 <!-- 이름 -->
                 <div style="left: 596px; top: 375px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">이름</div>
                 <input type = "text" style = "width: 219px; height: 23px; left: 635px; top: 372px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "name" value = "${user.name}">
+            
+                <!-- 닉네임 -->
+                <div style="left: 583px; top: 427px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">닉네임</div>
+                <input type = "text" style="width: 219px; height: 23px; left: 635px; top: 424px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "nickName" value = "${user.nickName}">
+            
 
                 <!--성별 선택-->                
-                <div style="left: 596px; top: 530px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">성별</div>
-                <input type = "text" style = "width: 219px; height: 23px; left: 635px; top: 530px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "sex" value = "${user.sex}">
+                <div style="left: 596px; top: 470px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">성별</div>
+                <input type = "text" style = "width: 219px; height: 23px; left: 635px; top: 470px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "sex" value = "${user.sex}" readonly>
                 
                 <!-- 
                 <div>
@@ -122,10 +127,11 @@ function userModify() {
                 </div>
  				-->
  				
- 				
+ 				<!-- 
 				<div style="left: 568px; top: 580px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">팀포지션</div>
 				<input type = "text" style = "width: 219px; height: 23px; left: 635px; top: 575px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "position" value = "${user.position}">
-				
+				 -->
+				 
                 <!--포지션 선택-->
                 <!-- 
                 <div>
@@ -142,24 +148,17 @@ function userModify() {
                  -->
                 
                 
-                <!-- 닉네임 -->
-                <div style="left: 583px; top: 427px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">닉네임</div>
-                <input type = "text" style="width: 219px; height: 23px; left: 635px; top: 424px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "nickName" value = "${user.nickName}">
 
-                <!-- 생년월일 -->                
-                <div style="left: 568px; top: 479px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">생년월일</div>  
-                <input type = "text" style="width: 219px; height: 23px; left: 635px; top: 476px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "birth" value = "${user.birth}">
-            
                 <!-- 비번 -->
-                <div style="left: 568px; top: 632px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">비밀번호</div>
-                <input type = "password" style = "width: 219px; height: 23px; left: 635px; top: 629px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "password" value = "${user.password}">
+                <div style="left: 568px; top: 520px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">비밀번호</div>
+                <input type = "password" style = "width: 219px; height: 23px; left: 635px; top: 520px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "password" value = "${user.password}">
               
                 <!-- 비번 확인 -->
-                <div style="left: 536px; top: 681px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">비밀번호 확인</div>
-                <input type = "password" style="width: 219px; height: 23px; left: 635px; top: 678px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "password2" value = "${user.password}" >
+                <div style="left: 536px; top: 560px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">비밀번호 확인</div>
+                <input type = "password" style="width: 219px; height: 23px; left: 635px; top: 560px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "password2" value = "${user.password}" >
             
             
-                <div style="left: 685px; top: 738px; position: absolute">
+                <div style="left: 685px; top: 610px; position: absolute">
         		 <input type = "button" value = "저장" class = "button" onClick = "userModify()"/>
             	</div>
             

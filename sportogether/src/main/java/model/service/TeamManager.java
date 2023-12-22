@@ -55,8 +55,8 @@ public class TeamManager {
 	public List<Team> findTeamList() throws SQLException {
 		return teamDAO.findTeamList();
 	}
-	
-	public List<User> findTeamMembers(int teamId) throws SQLException {
-		return userDAO.findUsersInTeam(teamId);
-	}
+//	
+//	public List<User> findTeamMembers(int teamId) throws SQLException {
+//		return userDAO.findUsersInTeam(teamId);
+//	}
 }

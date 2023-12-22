@@ -9,7 +9,6 @@ public class User {
     private String name;
     private String nickName;
     private String sex;
-    private String birth;
     private String password;
     private String position;
     
@@ -23,51 +22,35 @@ public class User {
     //기본 생성자
     public User() {}
     
-    //일반 생성자(개인정보 수정할 때 사용)
-    public User(String name, String nickName, String sex, String birth, String position, String password) {
-        super();
-        this.name = name;
-        this.nickName = nickName;
-        this.sex = sex;
-        this.birth = birth;
-        this.position = position;
-        this.password = password;
-    }
     
-    
-    public User(String userId, String name, String nickName, String sex, String birth, String position, String password) {
+    public User(String userId, String name, String nickName, String sex, String password) {
         this.userId = userId;
         this.name = name;
         this.nickName = nickName;
         this.sex = sex;
-        this.birth = birth;
-        this.position = position;
         this.password = password;
     }
     
     
     //find하는 용도
-    public User(String userId, int teamId, String name, String nickName, String sex, String birth, String position, String password) {
+    public User(String userId, int teamId, String name, String nickName, String sex, String password) {
         super();
         this.userId = userId;
         this.teamId = teamId;
         this.name = name;
         this.nickName = nickName;
         this.sex = sex;
-        this.birth = birth;
-        this.position = position;
         this.password = password;
     }
     
 
     //password없는 생성자(포트폴리오 수정시 사용)
-    public User(String userId, String name, String nickName, String sex, String birth, 
+    public User(String userId, String name, String nickName, String sex, 
             String picture, String comment, List<String> interests, String career) {
         this.userId = userId;
         this.name = name;
         this.nickName = nickName;
         this.sex = sex;
-        this.birth = birth;
         this.picture = picture;
         this.comment = comment;
         this.interests = interests;
@@ -91,12 +74,6 @@ public class User {
     }
     public void setNickName(String nickName) {
         this.nickName = nickName;
-    }
-    public String getBirth() {
-        return birth;
-    }
-    public void setBirth(String birth) {
-        this.birth = birth;
     }
     public String getSex() {
         return sex;

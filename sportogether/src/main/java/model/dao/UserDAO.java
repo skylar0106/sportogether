@@ -19,10 +19,9 @@ public class UserDAO {
     
     // 회원가입(spouser에 user한명 추가)
 	public int create(User user) throws SQLException {
-		String sql = "INSERT INTO spouser(userid, name, nickname, birth, sex, position, password) VALUES (?, ?, ?, ?, ?, ?, ?)";		
+		String sql = "INSERT INTO spouser(userid, name, nickname, sex, password) VALUES (?, ?, ?, ?, ?, ?, ?)";		
 		jdbcUtil.setSqlAndParameters(sql, new Object[] {user.getUserId(), user.getName(), 
-				user.getNickName(), user.getBirth(), user.getSex(),
-				user.getPosition(), user.getPassword()});	// JDBCUtil 에 insert문과 매개 변수 설정		
+				user.getNickName(), user.getSex(), user.getPassword()});	// JDBCUtil 에 insert문과 매개 변수 설정		
 		try {				
 			int result = jdbcUtil.executeUpdate();	// insert 문 실행
 			return result;
@@ -80,7 +79,6 @@ public class UserDAO {
                     rs.getString("name"),
                     rs.getString("nickName"),
                     rs.getString("sex"),
-                    rs.getString("birth"),
                     rs.getString("picture"),
                     rs.getString("comment"), // 추가된 부분
                     getInterestsList(rs.getString("interests")), // 추가된 부분
@@ -112,18 +110,16 @@ public class UserDAO {
     	StringBuilder query = new StringBuilder();
 
     	query.append("UPDATE SPOUSER ");
-    	query.append("SET userid = ?, name = ?, nickname = ?, birth = ?, sex = ?, position = ?, password = ?");
+    	query.append("SET userid = ?, name = ?, nickname = ?, sex = ?, password = ? ");
     	query.append("WHERE userID = ? ");
     	jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{
     			user.getUserId(),
     			user.getName(),	
                 user.getNickName(),
-                user.getBirth(),
                 user.getSex(),
-                user.getPosition(),
                 user.getPassword(),
                 user.getUserId()
-        });
+    	});
     	try {
     		int result = jdbcUtil.executeUpdate();
     		return result;
@@ -142,7 +138,7 @@ public class UserDAO {
 	public User findUser(String userId) throws SQLException {
 		StringBuilder sql = new StringBuilder();
 		
-        sql.append("SELECT name, teamid, nickName, sex, birth, position, password ");
+        sql.append("SELECT name, teamid, nickName, sex, password ");
         sql.append("FROM SPOUSER ");
         sql.append("WHERE userid=? ");
         
@@ -158,8 +154,6 @@ public class UserDAO {
 					rs.getString("name"),
 					rs.getString("nickName"),
 					rs.getString("sex"),
-					rs.getString("birth"),
-					rs.getString("position"),
 					rs.getString("password")
 					);
 				return user;
@@ -173,42 +167,40 @@ public class UserDAO {
 	}
 
 	
-	 // 전체 사용자 정보를 검색하여 List에 저장 및 반환
-	public List<User> findUserList() throws SQLException {
-		StringBuilder sql = new StringBuilder();
-		
-		sql.append("SELECT userid, u.name, nickname, sex, birth, position, NVL(teamId,0) AS teamid, t.name ");
-		sql.append("FROM spouser u LEFT JOIN team t ");
-		sql.append("ON u.teamid = t.teamid ");
-		sql.append("ORDER BY userid");
-		
-		jdbcUtil.setSqlAndParameters(sql.toString(), null);		// JDBCUtil에 query문 설정
-					
-		try {
-			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
-			List<User> userList = new ArrayList<User>();	// User들의 리스트 생성
-			while (rs.next()) {
-				User user = new User(			// User 객체를 생성하여 현재 행의 정보를 저장
-						rs.getString("userId"),
-						rs.getInt("teamId"),
-						rs.getString("u.name"),
-						rs.getString("nickName"),
-						rs.getString("sex"),
-						rs.getString("birth"),
-						rs.getString("position"),
-						null
-					);
-				userList.add(user);				// List에 User 객체 저장
-			}		
-			return userList;					
-			
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.close();		// resource 반환
-		}
-		return null;
-	}
+//	 // 전체 사용자 정보를 검색하여 List에 저장 및 반환
+//	public List<User> findUserList() throws SQLException {
+//		StringBuilder sql = new StringBuilder();
+//		
+//		sql.append("SELECT userid, u.name, nickname, sex, NVL(teamId,0) AS teamid, t.name ");
+//		sql.append("FROM spouser u LEFT JOIN team t ");
+//		sql.append("ON u.teamid = t.teamid ");
+//		sql.append("ORDER BY userid");
+//		
+//		jdbcUtil.setSqlAndParameters(sql.toString(), null);		// JDBCUtil에 query문 설정
+//					
+//		try {
+//			ResultSet rs = jdbcUtil.executeQuery();			// query 실행			
+//			List<User> userList = new ArrayList<User>();	// User들의 리스트 생성
+//			while (rs.next()) {
+//				User user = new User(			// User 객체를 생성하여 현재 행의 정보를 저장
+//						rs.getString("userId"),
+//						rs.getInt("teamId"),
+//						rs.getString("u.name"),
+//						rs.getString("nickName"),
+//						rs.getString("sex"),
+//						null
+//					);
+//				userList.add(user);				// List에 User 객체 저장
+//			}		
+//			return userList;					
+//			
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		} finally {
+//			jdbcUtil.close();		// resource 반환
+//		}
+//		return null;
+//	}
 	
 	
 	 // 사용자 ID에 해당하는 사용자를 삭제.
@@ -232,38 +224,36 @@ public class UserDAO {
 	
 
 
-	// 특정 커뮤니티에 속한 사용자들을 검색하여 List에 저장 및 반환
-	public List<User> findUsersInTeam(int teamId) throws SQLException {
-		StringBuilder sql = new StringBuilder();
-		
-		sql.append("SELECT userId, name, nickName, email, phone FROM spouser ");
-		sql.append("WHERE teamId = ?");
-                         
-		jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {teamId});	// JDBCUtil에 query문과 매개 변수 설정
-		
-		try {
-			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
-			List<User> userList = new ArrayList<User>();	// member들의 리스트 생성
-			while (rs.next()) {
-				User member = new User(		// User 객체를 생성하여 현재 행의 정보를 저장
-					rs.getString("userId"),
-					rs.getString("name"),
-					rs.getString("nickName"),
-					rs.getString("sex"),
-					rs.getString("birth"),
-					rs.getString("position")
-					);
-				userList.add(member);			// List에 Community 객체 저장
-			}		
-			return userList;					
-				
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		} finally {
-			jdbcUtil.close();		// resource 반환
-		}
-		return null;
-	}
+//	// 특정 커뮤니티에 속한 사용자들을 검색하여 List에 저장 및 반환
+//	public List<User> findUsersInTeam(int teamId) throws SQLException {
+//		StringBuilder sql = new StringBuilder();
+//		
+//		sql.append("SELECT userId, name, nickName, sex FROM spouser ");
+//		sql.append("WHERE teamId = ?");
+//                         
+//		jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {teamId});	// JDBCUtil에 query문과 매개 변수 설정
+//		
+//		try {
+//			ResultSet rs = jdbcUtil.executeQuery();		// query 실행
+//			List<User> userList = new ArrayList<User>();	// member들의 리스트 생성
+//			while (rs.next()) {
+//				User member = new User(		// User 객체를 생성하여 현재 행의 정보를 저장
+//					rs.getString("userId"),
+//					rs.getString("name"),
+//					rs.getString("nickName"),
+//					rs.getString("sex")
+//					);
+//				userList.add(member);			// List에 Community 객체 저장
+//			}		
+//			return userList;					
+//				
+//		} catch (Exception ex) {
+//			ex.printStackTrace();
+//		} finally {
+//			jdbcUtil.close();		// resource 반환
+//		}
+//		return null;
+//	}
 	
 	
 	 // 특정 팀에 속한 사용자들의 수를 count하여 반환

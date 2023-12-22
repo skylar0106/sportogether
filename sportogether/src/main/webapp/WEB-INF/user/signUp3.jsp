@@ -135,9 +135,18 @@ function userList(targetUri){
                 <div style="left: 496px; top: 487px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">생년월일</div>
                 <input type = "text" style="width: 219px; height: 23px; left: 563px; top: 484px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "birth">
                 
-                
+                 
                 <div style="left: 524px; top: 539px; position: absolute; color: #7D7C7C; font-size: 15px; font-family: Inter; font-weight: 100; word-wrap: break-word">성별</div>
+                
+                <!--
                 <input type = "text" style = "width: 219px; height: 23px; left: 563px; top: 535px; position: absolute; background: rgba(217, 217, 217, 0); border-radius: 10px; border: 1px #7D7C7C solid" name = "sex">
+                -->
+                 
+                 <select name = "sex" >
+                 	<option value = "Female"></option>
+                 	<option value = "Male"></option>
+                 </select>
+                 
                 <!-- 
                 <div>
                     <div class = "form_radio_btn male" style="left: 570px; top: 539px; position: absolute; color: #7D7C7C; font-size: 12px; font-family: Inter; font-weight: 100; word-wrap: break-word">
