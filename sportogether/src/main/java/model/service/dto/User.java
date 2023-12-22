@@ -1,36 +1,48 @@
 package model.service.dto;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 public class User {
+	private int teamId; //추가한 정보
     private String userId;
     private String name;
     private String nickName;
     private String sex;
     private int leader;
-    private int teamId;
-    //추가
-    private String comment;
-    private List<String> interests;
-    private String career;
     private String password;
+    private String position;
+    private String comment;
+    private String interests;
+    private String career;
+
 
     
     //기본 생성자
     public User() {}
     
-    //password 없는 생성자
-    public User(String userId, String name, String nickName, String sex) {
-    	this.userId = userId;
+    public User (int teamId) {
+        this.teamId = teamId;
+    }
+    
+    public User( String userId, String name, String nickName, String sex, String password) {
+        super();
+        this.userId = userId;
         this.name = name;
         this.nickName = nickName;
         this.sex = sex;
-
+        this.password = password;
+    }
+    public User(  String name, String nickName, String sex, int leader, String password,
+            String position, String comment, String interests, String career) {
+        super();
+        this.name = name;
+        this.nickName = nickName;
+        this.sex = sex;
+        this.password = password;
     }
     
-    public User(String userId, String name, String nickName, String sex, String password,
-             int leader, int teamId) {
+    public User( String userId, String name, String nickName, String sex, String password, int leader, int teamId) {
         super();
         this.userId = userId;
         this.name = name;
@@ -40,21 +52,25 @@ public class User {
         this.leader = leader;
         this.teamId = teamId;
     }
-    public User (int teamId) {
+    
+    public User(int teamId, String userId, String name, String nickName, String sex, int leader, String password,
+            String position, String comment, String interests, String career) {
+        super();
         this.teamId = teamId;
-    }
-
-    public User(String userId, String name, String nickName, String sex,
-             String comment, List<String> interests, String career) {
         this.userId = userId;
         this.name = name;
         this.nickName = nickName;
         this.sex = sex;
+        this.leader = leader;
+        this.password = password;
+        this.position = position;
         this.comment = comment;
         this.interests = interests;
         this.career = career;
     }
-    
+
+
+
     public String getUserId() {
         return userId;
     }
@@ -73,6 +89,7 @@ public class User {
     public void setNickName(String nickName) {
         this.nickName = nickName;
     }
+
     public String getSex() {
         return sex;
     }
@@ -80,6 +97,12 @@ public class User {
         this.sex = sex;
     }
 
+    public String getPosition() {
+    	return position;
+    }
+    public void setPosition(String position) {
+    	this.position = position;
+    }
     public String getPassword() {
         return password;
     }
@@ -92,10 +115,10 @@ public class User {
     public void setComment(String comment) {
         this.comment = comment;
     }
-    public List<String> getInterests() {
+    public String getInterests() {
         return interests;
     }
-    public void setInterests(List<String> interests) {
+    public void setInterests(String interests) {
         this.interests = interests;
     }
     public String getCareer() {
@@ -130,5 +153,6 @@ public class User {
     public boolean isSameUser(String userid) {
         return this.userId.equals(userid);
     }
-    
+
 }
+

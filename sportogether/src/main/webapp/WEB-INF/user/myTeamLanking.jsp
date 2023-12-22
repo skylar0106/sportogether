@@ -9,11 +9,15 @@
 <script>
 		function menu_choice(num){
 			switch(num){
-			case 1:parent.rigth.documnet.location.replace("/team/lanking.jsp'");break;
+			case 1:parent.rigth.documnet.location.replace("/user/myTeamLanking'");break;
 			case 1:parent.rigth.documnet.location.replace("/team/portfolio.jsp");break;
 			case 1:parent.rigth.documnet.location.replace("/user/portfolio.jsp");break;
-			case 1:parent.rigth.documnet.location.replace("/user/profile.jsp");break;
+			case 1:parent.rigth.documnet.location.replace("/user/update");break;
 			}
+		}
+		function userUpdate(targetUri){
+			form.action = targetUri;	
+			form.submit();
 		}
 	</script>
 </head>
@@ -21,6 +25,7 @@
   <img class="banner" src="<c:url value='/images/banner.png' />" alt="banner"/>
   <p class ='subTitle'>마이페이지</p>
   <hr>
+  <form name="form" method="GET"  >
   <div class = "d1">
 		<center><input type = "button" value = "TEAM LANKING" onClick="menu_choice(1)"></center>
 	</div>
@@ -31,8 +36,10 @@
 		<center><input type = "button" value = "MY PORTFOLIO" onClick="menu_choice(3)"></center>
 	</div>
 	<div class = "d4">
-		<center><input type = "button" value = "내 정보 수정" onClick="menu_choice(4)"></center>
+		<center><input type = "button" value = "내 정보 수정" onClick="userUpdate(
+    		'<c:url value='/user/update'/>')"></center>
 	</div>
+	</form>
   <div class="mainContent">
 	  <div class="myLankingArea">
 	  	<p class="myLanking">${lanking.getRanking()}st</p>

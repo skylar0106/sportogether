@@ -1,14 +1,12 @@
+
 package model.service;
 
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.List;
-
-import model.Community;
-import model.User;
-import model.dao.CommunityDAO;
 import model.dao.LankingDAO;
 import model.dao.MatchRivalDAO;
+import model.dao.TeamDAO;
 import model.dao.TeamPortfolioDAO;
 import model.dao.UserDAO;
 import model.service.dto.*;
@@ -23,8 +21,8 @@ import model.service.dto.*;
 public class TeamManager {
     private static TeamManager teamMan = new TeamManager();
     private UserDAO userDAO;
+    private TeamDAO teamDAO;
     private LankingDAO lankingDAO;
-    private CommunityDAO commDAO;
     private UserAnalysis userAanlysis;
     
     private MatchRivalDAO rivalDAO;
@@ -32,7 +30,7 @@ public class TeamManager {
     private TeamManager() {
         try {
             userDAO = new UserDAO();
-            commDAO = new CommunityDAO();
+            teamDAO = new TeamDAO();
             userAanlysis = new UserAnalysis(userDAO);
             rivalDAO = new MatchRivalDAO();
             lankingDAO = new LankingDAO();
@@ -104,6 +102,43 @@ public class TeamManager {
             return lankingList;
         }
     
+    public Team createTeam(Team team) throws SQLException {
+        return teamDAO.create(team);        
+    }
+
+    public int updateTeam(Team team) throws SQLException {
+        return teamDAO.update(team);                
+    }
+    
+//  Id로 팀찾는 경우
+    public Team findTeam(int teamId) throws SQLException {
+        Team team = teamDAO.findTeam(teamId); 
+        
+//      List<User> memberList = userDAO.findUsersInTeam(teamId);
+//      team.setMemberList(memberList);
+        
+//      int numOfMembers = userDAO.getNumberOfUsersInTeam(teamId);
+//      team.setNumofMembers(numOfMembers);
+        return team;
+    }
+    
+    public Team findTeamByName(String teamName) {
+        Team team = teamDAO.findTeamByName(teamName);
+        
+        return team; 
+    }
+    
+    
+    public List<Team> findTeamList() throws SQLException {
+        return teamDAO.findTeamList();
+    }
+    
+//    public List<User> findTeamMembers(int teamId) throws SQLException {
+//        return userDAO.findUsersInTeam(teamId);
+//    }
+    
+    
+    
 //    public int create(User user) throws SQLException, ExistingUserException {
 //        if (userDAO.existingUser(user.getUserId()) == true) {
 //            throw new ExistingUserException(user.getUserId() + "는 존재하는 아이디입니다.");
@@ -168,13 +203,7 @@ public class TeamManager {
 //        return userAanlysis.recommendFriends(userId);
 //    }
     
-    public Community createCommunity(Community comm) throws SQLException {
-        return commDAO.create(comm);        
-    }
 
-    public int updateCommunity(Community comm) throws SQLException {
-        return commDAO.update(comm);                
-    }
     
 //    public Community findCommunity(int commId) throws SQLException {
 //        Community comm = commDAO.findCommunity(commId); 
@@ -187,9 +216,6 @@ public class TeamManager {
 //        return comm;
 //    }
     
-    public List<Community> findCommunityList() throws SQLException {
-        return commDAO.findCommunityList();
-    }
     
 //    public List<User> findCommunityMembers(int commId) throws SQLException {
 //        return userDAO.findUsersInCommunity(commId);
@@ -225,3 +251,5 @@ public class TeamManager {
 	}
 
 }
+
+

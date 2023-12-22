@@ -162,39 +162,42 @@ public class TeamPortfolioDAO {
     	return comment;
     }
 
-    // 팀 레벨 업데이트
-    public void updateTeamLevel(int level, String teamID) {
-    	// LevelDAO를 사용하여 팀 레벨을 가져옴
-        LevelDAO levelDAO = new LevelDAO();
-        Team team = null;
 
-    	ResultSet rs = null;
-    	StringBuilder sql = new StringBuilder();
-    	sql.append("UPDATE Team SET level = ? WHERE teamID = ?");
-    	jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {level, teamID});
-    	   	
-    	try {
-    		rs = jdbcUtil.executeQuery();
-    		if(rs != null && rs.next()) {
-    			team = new Team(
-    				rs.getInt("teamID"),
-    				rs.getString("name"),
-    				rs.getString("spoleader"),
-    				rs.getInt("level"),
-    				rs.getString("sport"),
-    				rs.getString("location"),
-    				rs.getInt("membership"),
-    				rs.getString("rival")
-    			);
-    			level = levelDAO.getMatchList(team);
-    		}
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    	}finally {
-    		jdbcUtil.close();
-    	}
-    }
+
+
+//    // 팀 레벨 업데이트
+//    public void updateTeamLevel(int level, String teamID) {
+//    	// LevelDAO를 사용하여 팀 레벨을 가져옴
+//        LevelDAO levelDAO = new LevelDAO();
+//        Team team = null;
+//
+//    	ResultSet rs = null;
+//    	StringBuilder sql = new StringBuilder();
+//    	sql.append("UPDATE Team SET level = ? WHERE teamID = ?");
+//    	jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {level, teamID});
+//    	   	
+//    	try {
+//    		rs = jdbcUtil.executeQuery();
+//    		if(rs.next()) {
+//    			team = new Team(
+//    				rs.getString("teamID"),
+//    				rs.getString("name"),
+//    				rs.getString("spoleader"),
+//    				rs.getInt("level"),
+//    				rs.getString("sport"),
+//    				rs.getString("location"),
+//    				rs.getInt("membership"),
+//    				rs.getString("rival")
+//    			);
+//    			level = levelDAO.getMatchList(team);
+//    		}
+//    	}
+//    	catch(SQLException e){
+//    		e.printStackTrace();
+//    	}finally {
+//    		jdbcUtil.close();
+//    	}
+//    }
 
     // 새로운 팀 추가
     public void addNewTeam(String teamID) {
@@ -256,3 +259,4 @@ public class TeamPortfolioDAO {
 	    return teamScore;
 	}
 }
+

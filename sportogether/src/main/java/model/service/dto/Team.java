@@ -1,5 +1,7 @@
 package model.service.dto;
 
+import java.util.List;
+
 public class Team {
     private int teamId;
     private String name;
@@ -9,8 +11,45 @@ public class Team {
     private String location;
     private int membership;
     private String rival;
+	private List<User> memberList; // 추가한 정보(이건 db에는 추가 X)
+	private int numofMembers; // 추가한 정보 (이건 db에는 추가 X)
+
+
+    public Team(int teamId, String name, String spoleader) {
+    	super();
+    	this.teamId = teamId;
+    	this.name = name;
+    	this.spoLeader = spoleader;
+
+    }
+    public Team() {}
     
-    public int getTeamId() {
+    public Team(int teamId, String name, String spoLeader, int level, String sport, String location, int membership,
+            String rival) {
+        super();
+        this.teamId = teamId;
+        this.name = name;
+        this.spoLeader = spoLeader;
+        this.level = level;
+        this.sport = sport;
+        this.location = location;
+        this.membership = membership;
+        this.rival = rival;
+    }
+    
+
+    // 팀의 정보 수정 & 생성용
+	public Team(int teamId, String name, String sport, String location) {
+		super();
+		this.teamId = teamId;
+		this.name = name;
+		this.sport = sport;
+		this.location = location;
+	}
+    
+    
+
+	public int getTeamId() {
         return teamId;
     }
     public void setTeamId(int teamId) {
@@ -58,21 +97,23 @@ public class Team {
     public void setRival(String rival) {
         this.rival = rival;
     }
-    
-    public Team() {
 
-    }
-    public Team(int teamId, String name, String spoLeader, int level, String sport, String location, int membership,
-            String rival) {
-        super();
-        this.teamId = teamId;
-        this.name = name;
-        this.spoLeader = spoLeader;
-        this.level = level;
-        this.sport = sport;
-        this.location = location;
-        this.membership = membership;
-        this.rival = rival;
-    }
-    
+	public List<User> getMemberList() {
+		return memberList;
+	}
+
+
+	public void setMemberList(List<User> memberList) {
+		this.memberList = memberList;
+	}
+
+
+	public int getNumofMembers() {
+		return numofMembers;
+	}
+
+
+	public void setNumofMembers(int numofMembers) {
+		this.numofMembers = numofMembers;
+	}
 }
