@@ -10,7 +10,7 @@ import model.service.TeamManager;
 import model.service.UserManager;
 import model.service.dto.Request;
 
-public class ApproveJoinController {
+public class JoinRequestController {
     public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
      
         TeamDAO teamDAO = new TeamDAO();
