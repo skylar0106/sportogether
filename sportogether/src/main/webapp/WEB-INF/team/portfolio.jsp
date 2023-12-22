@@ -33,6 +33,7 @@
 </head>
 <body>
   <div class='portfolio'>
+  
   	<table cellpadding = "10px">
   		<tr>
   			<th colspan = '4' align = 'left'>

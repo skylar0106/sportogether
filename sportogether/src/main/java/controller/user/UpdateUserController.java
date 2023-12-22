@@ -21,13 +21,14 @@ public class UpdateUserController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
  
- 
+
     	if (request.getMethod().equals("GET")) {	
     		// GET request: 회원정보 수정 form 요청	
     		// 원래는 UpdateUserFormController가 처리하던 작업을 여기서 수행
     		
     		//String updateId = request.getParameter("userId");
-    		String updateId = "user1";
+    	    HttpSession session = request.getSession();
+    		String updateId = UserSessionUtils.getLoginUserId(session);
 
     		log.debug("UpdateForm Request : {}", updateId);
     		
