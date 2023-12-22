@@ -18,25 +18,21 @@ public class MyTeamLankingController implements Controller {
         if (!UserSessionUtils.hasLogined(request.getSession())) {
             return "redirect:/user/login/form";     // login form 요청으로 redirect
         }
-        
-        /*
-        String currentPageStr = request.getParameter("currentPage");    
-        int currentPage = 1;
-        if (currentPageStr != null && !currentPageStr.equals("")) {
-            currentPage = Integer.parseInt(currentPageStr);
-        }       
-        */
-        
-        if (!UserSessionUtils.hasLogined(request.getSession())) {
-            return "redirect:/user/login/form";     // login form 요청으로 redirect
-        }
+       
         
         UserManager uManager = UserManager.getInstance();
-        int teamId = Integer.parseInt(request.getParameter("teamId"));
-                     
+        String userId = UserSessionUtils.getLoginUserId(request.getSession());
+//        int teamId = Integer.parseInt(request.getParameter("teamId"));
+             
+        User user = null;
+        try {
+            user = uManager.findUser(userId);    // 사용자 정보 검색    
+        } catch (UserNotFoundException e) {             
+            return "/mainPage.jsp";
+        }  
         
         TeamManager manager = TeamManager.getInstance();
-        Lanking lanking = manager.findTeamLanking(teamId);
+        Lanking lanking = manager.findTeamLanking(user.getTeamId());
 
         request.setAttribute("lanking", lanking);                  
 

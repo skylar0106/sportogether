@@ -7,13 +7,10 @@
 <head>
   <title>search_team</title>
 <script>
-		function menu_choice(num){
-			switch(num){
-			case 1:parent.rigth.documnet.location.replace("/user/myTeamLanking'");break;
-			case 1:parent.rigth.documnet.location.replace("/team/portfolio.jsp");break;
-			case 1:parent.rigth.documnet.location.replace("/user/portfolio.jsp");break;
-			case 1:parent.rigth.documnet.location.replace("/user/update");break;
-			}
+		function teamLanking(targetUri){
+			form.action = targetUri;
+			form.method="POST";		
+			form.submit();
 		}
 		function userUpdate(targetUri){
 			form.action = targetUri;	
@@ -24,7 +21,7 @@
 			form.method="POST";	
 			form.submit();
 		}
-		function userPortfolio(targetUri){
+		function myPortfolio(targetUri){
 			form.action = targetUri;
 			form.method="POST";	
 			form.submit();
@@ -37,7 +34,10 @@
   <hr>
   <form name="form" method="GET"  >
   <div class = "d1">
-		<center><input type = "button" value = "TEAM LANKING" onClick="menu_choice(1)"></center>
+		<center><input type = "button" value = "TEAM LANKING" onClick="teamLanking(
+    		'<c:url value='/user/myTeamLanking'>
+    		<c:param name='teamId' value='${user.teamId}'/>
+    		</c:url>')"></center>
 	</div>
 	<div class = "d2">
 		<center><input type = "button" value = "TEAM PORTFOLIO" onClick="teamPortfolio(

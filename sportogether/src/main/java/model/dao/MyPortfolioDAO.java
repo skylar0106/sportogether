@@ -31,7 +31,7 @@ public class MyPortfolioDAO {
                      rs.getString("name"),
                      rs.getString("nickName"),
                      rs.getString("sex"),
-                     rs.getString("comment"),
+                     rs.getString("tcomment"),
                      rs.getString("interests"),
                      rs.getString("career")
                  );
@@ -49,7 +49,7 @@ public class MyPortfolioDAO {
     public int updateMyPotpolio(User usr) {
         int result = 0;
         
-        String query = "UPDATE SPOUSER SET COMMENT = ?, SET INTERESTS = ?, SET CAREER = ? WHERE USERID = ?";
+        String query = "UPDATE SPOUSER SET TCOMMENT = ?, INTERESTS = ?, CAREER = ? WHERE USERID = ?";
         Object[] param = new Object[] {usr.getComment(), usr.getInterests(), usr.getCareer(), usr.getUserId()};
         
         jdbcUtil.setSqlAndParameters(query, param);

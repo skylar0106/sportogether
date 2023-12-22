@@ -87,13 +87,13 @@
   </div>
 </form>
 <%
-	MyPortfolioDAO m = new MyPortfolioDAO();
-	int result = m.updateMyPotpolio(usr);
+//	MyPortfolioDAO m = new MyPortfolioDAO();
+//	int result = m.updateMyPotpolio(usr);
 	
-	if(result == 1){
-		System.out.println("추가 완료");
-	}
-	response.sendRedirect("/user/portfolio.jsp");
-%>
+//	if(result == 1){
+//		System.out.println("추가 완료");
+//	}
+//	response.sendRedirect("/user/portfolio.jsp");
+%> 
 </body>
 </html>

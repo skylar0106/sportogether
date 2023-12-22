@@ -41,6 +41,7 @@ public class MyPortfolioController implements Controller {
         
         // 팀 정보, 전적, 최근 경기 일자, 팀 멤버 수, 팀 소개 멘트를 request에 저장하여 전달
         request.setAttribute("user", user);
+        System.out.println(user.getUserId());
 
         // 팀 포트폴리오 화면으로 이동(forwarding)
         return "/user/portfolio.jsp";
