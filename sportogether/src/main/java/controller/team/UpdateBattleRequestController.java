@@ -29,7 +29,7 @@ public class UpdateBattleRequestController implements Controller{
         String teamName =  request.getParameter("teamName");
         
         Team team = teamDAO.findTeamByName(teamName);
-        int battleId = 1;
+        int battleId =Integer.parseInt(request.getParameter("battleId"));
         BattleRequest bq =  battleRequestDAO.getBattleRequestById(battleId); 
         try {
         

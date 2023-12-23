@@ -57,7 +57,7 @@ public class BattleRequestDAO {
         	battleRequestList = new ArrayList<>();
     		while(rs.next()) {
     			BattleRequest bq = new BattleRequest();
-       		 	bq.setTeamId(rs.getInt("rivalid"));
+       		 	bq.setTeamId(rs.getInt("rivalId"));
                 bq.setRivalId(rs.getInt("teamId"));
                 bq.setMessage(rs.getString("message"));
                 bq.setDate(rs.getDate("date").toLocalDate());
@@ -120,7 +120,7 @@ public class BattleRequestDAO {
     		StringBuilder sql = new StringBuilder();
         	sql.append("SELECT * ");
         	sql.append("FROM team t join battle b ");
-        	sql.append("on t.teamid = b.teamid ");
+        	sql.append("on t.teamid = b.rivalid ");
         	sql.append("where b.rivalid = ? ");
         	sql.append("order by b.battleid ");
         	
@@ -152,7 +152,7 @@ public class BattleRequestDAO {
     		StringBuilder sql = new StringBuilder();
         	sql.append("select * ");
         	sql.append("from team t join battle  b ");
-        	sql.append("on t.teamid = b.teamid ");
+        	sql.append("on t.teamid = b.rivalid ");
         	sql.append("where b.teamid = ? ");
         	sql.append("order by b.battleid ");
     	

@@ -159,10 +159,8 @@ body {
 	}
 	function cancelRequest(targetUri) {
 		confirm("대결 신청을 취소하시겠습니까?");
-		//location.href = targetUri;
-		form.action = targetUri;
-		form.method="GET";		// register form 요청
-		form.submit();
+		location.href = targetUri;
+		
 	}
 </script>
 </head>
@@ -219,9 +217,9 @@ body {
 									varStatus="i">
 									<tr>
 										<td class="partition_name">${sentRequestTeamList[i.index].name}</td>
-										<td><button name= "battleId" type="button" id="cancel" onclick="cancelRequest(
-								        		'<c:url value='/team/request/cancel'/>')"
-												value="1"></button></td>
+										<td><button name= "battleId" type="button" id="cancel" 
+										onClick="cancelRequest(
+	        		'<c:url value='/team/request/cancel'/>')"></button></td>
 									</tr>
 								</c:forEach>
 							</c:when>
@@ -239,12 +237,15 @@ body {
 				<div id="form2">
 					<form>
 						<table>
-						
 							<c:choose>
-								<c:when test="${ not empty ereceivedBattleRequestList}">
+								<c:when test="${ not empty rereceivedBattleRequestList}">
 									<c:forEach items="${receivedBattleRequestList}"
 										var="bq" varStatus="i">
 										<tr>
+										<!-- 
+										내가보낸리스트 : 
+										내가받은리스트teamId
+										 -->
 											<td class="partition_name">${receivedRequestTeamList[i.index].name}</td>
 											<td><button type="button" id="approve" onclick="approveRequest(
 								        		'<c:url value='/team/request/approve'/>')"

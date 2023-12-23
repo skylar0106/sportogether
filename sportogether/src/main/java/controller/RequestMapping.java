@@ -63,7 +63,7 @@ public class RequestMapping {
         mappings.put("/team/request/create", new CreateBattleRequestController()); //대결 신청함
         mappings.put("/team/request/approve",new UpdateBattleRequestController() ); // 받은 대결신청 승인
         mappings.put("/team/request/reject",new UpdateBattleRequestController() ); //받은 대결신청 승인
-        mappings.put("/team/request/cancel",new UpdateBattleRequestController() ); //보낸대결신청 취소
+        mappings.put("/team/request/cancel",new CancelBattleRequestController() ); //보낸대결신청 취소
         
         // team controller
         mappings.put("/team/portfolio", new TeamPortfolioController());
