@@ -12,9 +12,9 @@ public class User {
     private int leader;
     private String password;
     private String position;
-    private String comment;
-    private String interests;
     private String career;
+    private String interests;
+    private String comment;
 
 
     
@@ -70,9 +70,9 @@ public class User {
         this.name = name;
         this.nickName = nickName;
         this.sex = sex;
-        this.comment = comment;
         this.interests = interests;
         this.career = career;
+        this.comment = comment;
     }
     
     public User(int teamId, String userId, String name, String nickName, String sex, int leader, String password,
@@ -91,9 +91,14 @@ public class User {
         this.career = career;
     }
 
+    public User(String userId, String comment, String interests, String career) {
+    	this.userId = userId;
+    	this.comment = comment;
+        this.interests = interests;
+        this.career = career;
+	}
 
-
-    public String getUserId() {
+	public String getUserId() {
         return userId;
     }
     public void setUserId(String userId) {

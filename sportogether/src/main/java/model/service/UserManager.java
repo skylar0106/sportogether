@@ -79,17 +79,32 @@ public class UserManager {
         return userDAO.updateInfo(user);
     } 
     
+    public int update2(String userId, int teamId) throws SQLException, UserNotFoundException {
+
+        return userDAO.updateInfo2(userId, teamId);
+    }
+    
     //myportfolio
     public User getUserInfo(String userID) throws SQLException {
         MyPortfolioDAO myPortfolioDAO = new MyPortfolioDAO();
         return myPortfolioDAO.getUserInfo(userID);
     }
     
-    public int updateMyPotpolio(User usr) throws SQLException{
-       MyPortfolioDAO myPortfolioDAO = new MyPortfolioDAO();
-       return myPortfolioDAO.updateMyPotpolio(usr);
+    public int updateMyPotpolio(User user) throws SQLException, UserNotFoundException {
+        MyPortfolioDAO myPortfolioDAO = new MyPortfolioDAO();
+        return myPortfolioDAO.updateMyPortfolio(user);
     }
     
+    public User findUserForPortfolio(String userId)
+            throws SQLException, UserNotFoundException {
+                MyPortfolioDAO myPortfolioDAO = new MyPortfolioDAO();
+                User user = myPortfolioDAO.findUser(userId);
+                
+                if (user == null) {
+                    throw new UserNotFoundException(userId + "는 존재하지 않는 아이디입니다.");
+                }       
+                return user;
+            }
     
     //spouser에서 user를 삭제하는 것!
     // 삭제하려는 user가 특정 팀의 leader라면 그 팀의 leader를 null로 변경

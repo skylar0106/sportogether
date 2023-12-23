@@ -4,10 +4,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import controller.Controller;
+import controller.user.UserSessionUtils;
 import model.service.TeamManager;
 import model.service.UserManager;
 import model.service.dto.*;
@@ -18,9 +20,13 @@ public class UpdateTeamController implements Controller {
     @Override
     public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
     	
-    	int teamId = 1;
-		//int teamId = Integer.parseInt(request.getParameter("teamId"));
-		
+
+    	//로그인한 사람의 id찾기 -> teamId찾기!!
+		HttpSession session = request.getSession();
+    	String userId = UserSessionUtils.getLoginUserId(session);
+		UserManager manager = UserManager.getInstance();
+    	int teamId = manager.findUser(userId).getTeamId();
+//    	
 		if (request.getMethod().equals("GET")) {	
     		// GET request: 커뮤니티 수정 form 요청	
 //   		UserManager manager = UserManager.getInstance();

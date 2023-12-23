@@ -10,6 +10,7 @@ import java.time.LocalDate;
 import model.service.dto.Match;
 import model.service.dto.Team;
 import model.service.dto.TeamScore;
+import model.service.dto.User;
 
 public class TeamPortfolioDAO {
 	 private JDBCUtil jdbcUtil = null;
@@ -35,8 +36,9 @@ public class TeamPortfolioDAO {
 		                rs.getInt("tlevel"),
 		                rs.getString("sport"),
 		                rs.getString("location"),
-		                rs.getInt("membership"),
-		                rs.getString("rival")
+		                rs.getInt("memberscount"),
+		                rs.getString("rival"),
+		                rs.getString("tcomment")
 		            );
 		        }
 		    } catch (SQLException e) {
@@ -121,7 +123,7 @@ public class TeamPortfolioDAO {
     public int getTeamMemberCount(int teamID) {
     	ResultSet rs = null;
     	StringBuilder sql = new StringBuilder();
-    	sql.append("SELECT COUNT(*) AS memberCount FROM spomember WHERE teamID = ?");
+    	sql.append("SELECT COUNT(*) AS memberCount FROM spouser WHERE teamID = ?");
     	jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {teamID});
     	
     	try {
@@ -144,13 +146,13 @@ public class TeamPortfolioDAO {
     	String comment = "";
     	ResultSet rs = null;
     	StringBuilder sql = new StringBuilder();
-    	sql.append("SELECT \"COMMENT\" FROM Team WHERE teamID = ?");
+    	sql.append("SELECT tcomment FROM Team WHERE teamID = ?");
     	jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {teamID});
     	
     	try {
     		rs = jdbcUtil.executeQuery();
     		if(rs != null && rs.next()) {
-    			comment = rs.getString("comment");
+    			comment = rs.getString("tcomment");
     		}
     	}
     	catch(SQLException e){
@@ -161,9 +163,6 @@ public class TeamPortfolioDAO {
     	
     	return comment;
     }
-
-
-
 
 //    // 팀 레벨 업데이트
 //    public void updateTeamLevel(int level, String teamID) {
@@ -199,36 +198,6 @@ public class TeamPortfolioDAO {
 //    	}
 //    }
 
-    // 새로운 팀 추가
-    public void addNewTeam(String teamID) {
-    	ResultSet rs = null;
-    	@SuppressWarnings("unused")
-		Team team = null;
-    	StringBuilder sql = new StringBuilder();
-    	sql.append("INSERT INTO Team (teamID) VALUES (?)");
-    	jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {teamID});
-    	
-    	try {
-    		rs = jdbcUtil.executeQuery();
-    		if(rs != null && rs.next()) {
-    			team = new Team(
-        				rs.getInt("teamID"),
-        				rs.getString("name"),
-        				rs.getString("spoleader"),
-        				rs.getInt("level"),
-        				rs.getString("sport"),
-        				rs.getString("location"),
-        				rs.getInt("membership"),
-        				rs.getString("rival")
-        			);
-    		}
-    	}
-    	catch(SQLException e){
-    		e.printStackTrace();
-    	}finally {
-    		jdbcUtil.close();
-    	}
-    }
 
 	public TeamScore getTeamScore(int teamID) {
 		TeamScore teamScore = null;

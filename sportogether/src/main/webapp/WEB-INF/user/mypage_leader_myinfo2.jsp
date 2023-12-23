@@ -22,6 +22,25 @@ function userModify() {
 	alert("저장이 완료 되었습니다.");	
 	form.submit();
 }
+function teamLanking(targetUri){
+	form.action = targetUri;
+	form.method="POST";		
+	form.submit();
+}
+function userUpdate(targetUri){
+	form.action = targetUri;	
+	form.submit();
+}
+function teamPortfolio(targetUri){
+	form.action = targetUri;
+	form.method="POST";	
+	form.submit();
+}
+function myPortfolio(targetUri){
+	form.action = targetUri;
+	form.method="POST";	
+	form.submit();
+}
 
 //function updateSubmit(targetUri) {
 //	form.action = targetUri;
@@ -47,9 +66,8 @@ function userModify() {
     <title>leaderInfo2</title>
 </head>
 <body>
-        <div style="width: 100%; height: 100%; position: relative; background: white">
-
-            <div style="width: 1280px; height: 185px; left: 0px; top: 0px; position: absolute">
+         <img class="banner" src="<c:url value='/images/Rectangle20.png' />" alt="banner"/>
+  <div style="width: 1280px; height: 185px; left: 0px; top: 0px; position: absolute">
                 <img style="width: 1280px; height: 185px; left: 0px; top: 0px; position: absolute" src="<c:url value='/images/Rectangle20.png' />" />
                 <div style="left: 14px; top: 16px; position: absolute"><span style="color: #555B65; font-size: 35px; font-family: Inter; font-weight: 600; word-wrap: break-word">sport</span><span style="color: #1C437C; font-size: 35px; font-family: Inter; font-weight: 600; word-wrap: break-word">ogether</span></div>
                 <div style="left: 14px; top: 103px; position: absolute; color: #555B65; font-size: 48px; font-family: Inter; font-weight: 600; word-wrap: break-word">MY PAGE</div>
@@ -99,10 +117,23 @@ function userModify() {
             
 
 
-            <input type = "button" style="left: 22px; top: 294px; position: absolute; color: #7D7C7C; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word; border: 0; background-color: transparent" value = "TEAM RANKING">
-            <input type = "button" style="left: 22px; top: 370px; position: absolute; color: #7D7C7C; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word; border: 0; background-color: transparent" value = "TEAM  PORTFOLIO">
-            <input type = "button" style="left: 22px; top: 446px; position: absolute; color: #7D7C7C; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word; border: 0; background-color: transparent" value = "MY PORTFOLIO">
-            <input type = "button" style="left: 22px; top: 522px; position: absolute; color: #7D7C7C; font-size: 20px; font-family: Inter; font-weight: 900; word-wrap: break-word; border: 0; background-color: transparent" value = "내 정보 수정">
+            <input type = "button" style="left: 22px; top: 294px; position: absolute; color: #7D7C7C; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word; border: 0; background-color: transparent" 
+			value = "TEAM RANKING" onClick="teamLanking(
+    		'<c:url value='/user/myTeamLanking'>
+    		<c:param name='teamId' value='${user.teamId}'/>
+    		</c:url>')">
+    <input type = "button" style="left: 22px; top: 370px; position: absolute; color: #7D7C7C; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word; border: 0; background-color: transparent" 
+    		value = "TEAM  PORTFOLIO" onClick="teamPortfolio(
+    		'<c:url value='/team/portfolio'>
+	        		<c:param name='teamId' value='${user.teamId}'/>
+	        		</c:url>')">
+    <input type = "button" style="left: 22px; top: 446px; position: absolute; color: #7D7C7C; font-size: 20px; font-family: Inter; font-weight: 400; word-wrap: break-word; border: 0; background-color: transparent" 
+    		value = "MY PORTFOLIO" onClick="myPortfolio(
+    		'<c:url value='/user/portfolio'>
+    		</c:url>')">
+    <input type = "button" style="left: 22px; top: 522px; position: absolute; color: #7D7C7C; font-size: 20px; font-family: Inter; font-weight: 900; word-wrap: break-word; border: 0; background-color: transparent" 
+    		value = "내 정보 수정" onClick="userUpdate(
+    		'<c:url value='/user/update'/>')">
  
 
         </div>

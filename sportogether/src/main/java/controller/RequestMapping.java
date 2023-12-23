@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import controller.user.*;
 import controller.team.*;
-import controller.comm.*;
 import controller.team.UpdateTeamController;
 
 public class RequestMapping {
@@ -57,6 +56,8 @@ public class RequestMapping {
         
         // team controller
         mappings.put("/team/portfolio", new TeamPortfolioController());
+        mappings.put("/team/register", new CreateTeamController());
+        mappings.put("/team/update", new UpdateTeamController());
         
      // 나의 포트폴리오 controller
         mappings.put("/user/portfolio", new MyPortfolioController());
@@ -68,10 +69,19 @@ public class RequestMapping {
         mappings.put("/user/myTeamLanking", new MyTeamLankingController());
         mappings.put("/user/update", new UpdateUserController());	// 팀 정보 업데이트
         
-      //대결 신청, 승인 거절
-//        mappings.put("/team/request",new ViewBattleRequestController() );
-//        mappings.put("/team/request/approve",new BattleRequestController() );
-//        mappings.put("/team/request/reject",new BattleRequestController() );
+      //팀 검색하고 결과 Controller
+        mappings.put("/team/search/result", new SearchTeamListController());
+      
+      //대결 신청 관련 Controller
+        // mappings.put("/team/request",new ForwardController("/team/requestList.jsp") ); 
+         mappings.put("/team/request",new ViewBattleRequestController() ); //받거나 보낸 대결신청 조회
+         mappings.put("/team/request/create", new CreateBattleRequestController()); //대결 신청함
+         mappings.put("/team/request/approve",new UpdateBattleRequestController() ); // 받은 대결신청 승인
+         mappings.put("/team/request/reject",new UpdateBattleRequestController() ); //받은 대결신청 승인
+         mappings.put("/team/request/cancel",new CancelBattleRequestController() ); //보낸대결신청 취소
+        
+       //가입 신청 관련 Controller
+         mappings.put("/team/join/create", new TeamPortfolioController());
         
         logger.info("Initialized Request Mapping!");
     }

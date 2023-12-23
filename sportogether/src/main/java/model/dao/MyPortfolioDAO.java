@@ -46,22 +46,55 @@ public class MyPortfolioDAO {
      }
 
     // 나의 포트폴리오 업데이트
-    public int updateMyPotpolio(User usr) {
-        int result = 0;
-        
-        String query = "UPDATE SPOUSER SET TCOMMENT = ?, INTERESTS = ?, CAREER = ? WHERE USERID = ?";
-        Object[] param = new Object[] {usr.getComment(), usr.getInterests(), usr.getCareer(), usr.getUserId()};
-        
-        jdbcUtil.setSqlAndParameters(query, param);
-        try {
-            result = jdbcUtil.executeUpdate();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
-        } finally {
-            jdbcUtil.close();
-        }
-        
-        return result;
-    }
+     public int updateMyPortfolio(User user) {
+         StringBuilder query = new StringBuilder();
+
+         query.append("UPDATE SPOUSER ");
+         query.append("SET career = ?, interests = ?, tcomment = ?");
+         query.append("WHERE userID = ? ");
+         jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{
+                 user.getCareer(),
+                 user.getInterests(), 
+                 user.getComment(),
+                 user.getUserId()
+         });
+         try {
+             int result = jdbcUtil.executeUpdate();
+             return result;
+         } catch (Exception ex) {
+             jdbcUtil.rollback();
+             ex.printStackTrace();
+         } finally {
+             jdbcUtil.commit();
+             jdbcUtil.close();
+         }
+         return 0;
+     }
+     
+     public User findUser(String userId) throws SQLException {
+         String sql = "SELECT name, nickname, sex, career, interests, tcomment  "
+                     + "FROM spouser "
+                     + "WHERE userid=? ";              
+         jdbcUtil.setSqlAndParameters(sql, new Object[] {userId});   // JDBCUtil에 query문과 매개 변수 설정
+
+         try {
+             ResultSet rs = jdbcUtil.executeQuery();     // query 실행
+             if (rs.next()) {                        // 학생 정보 발견
+                 User user = new User(       // User 객체를 생성하여 학생 정보를 저장
+                     userId,
+                     rs.getString("name"),
+                     rs.getString("nickname"),
+                     rs.getString("sex"),
+                     rs.getString("career"),
+                     rs.getString("interests"),                    
+                     rs.getString("tcomment"));
+                 return user;
+             }
+         } catch (Exception ex) {
+             ex.printStackTrace();
+         } finally {
+             jdbcUtil.close();       // resource 반환
+         }
+         return null;
+     }
 }

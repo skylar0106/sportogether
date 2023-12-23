@@ -1,31 +1,25 @@
 package model.service.dto;
 
-import java.sql.Date;
+import java.time.LocalDate;
 
 public class Request {
-    private String teamId;
+    
+    //db순서 teamid, teamname, userid, username, message, date
+    private int teamId;
     private String teamName;
-    private String userName;
     private String userId;
+    private String userName;
     private String massage;
-    private Date date;
+    private LocalDate date;
     
    public Request() {}
-    
-    public Request(String teamId, String userId, String massage, Date date) {
-        super();
-        this.teamId = teamId;
-        this.userId = userId;
-        this.massage = massage;
-        this.date = date;
-    }
-    
-    public Request(String teamId, String teamName, String userName, String userId, String massage, Date date) {
+ 
+    public Request(int teamId, String teamName, String userId, String userName, String massage, LocalDate date) {
         super();
         this.teamId = teamId;
         this.teamName = teamName;
-        this.userName = userName;
         this.userId = userId;
+        this.userName = userName;
         this.massage = massage;
         this.date = date;
     }
@@ -46,10 +40,10 @@ public class Request {
         this.userName = userName;
     }
     
-    public String getTeamId() {
+    public int getTeamId() {
         return teamId;
     }
-    public void setTeamId(String teamId) {
+    public void setTeamId(int teamId) {
         this.teamId = teamId;
     }
     public String getUserId() {
@@ -64,10 +58,10 @@ public class Request {
     public void setMassage(String massage) {
         this.massage = massage;
     }
-    public Date getDate() {
-        return date;
+    public LocalDate getDate() {
+        return this.date;
     }
-    public void setDate(Date date) {
+    public void setDate(LocalDate date) {
         this.date = date;
     }
     

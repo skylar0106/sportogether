@@ -13,6 +13,8 @@ public class Team {
     private String rival;
 	private List<User> memberList; // 추가한 정보(이건 db에는 추가 X)
 	private int numofMembers; // 추가한 정보 (이건 db에는 추가 X)
+    private int memberscount;
+    private String tcomment;
 
 
     public Team(int teamId, String name, String spoleader) {
@@ -23,6 +25,20 @@ public class Team {
 
     }
     public Team() {}
+    
+    public Team(int teamId, String name, String spoLeader, int level, String sport, String location, int memberscount,
+            String rival, String tcomment) {
+        super();
+        this.teamId = teamId;
+        this.name = name;
+        this.spoLeader = spoLeader;
+        this.level = level;
+        this.sport = sport;
+        this.location = location;
+        this.memberscount = memberscount;
+        this.rival = rival;
+        this.tcomment = tcomment;
+    }
     
     public Team(int teamId, String name, String spoLeader, int level, String sport, String location, int membership,
             String rival) {
@@ -46,6 +62,16 @@ public class Team {
 		this.sport = sport;
 		this.location = location;
 	}
+	
+	// 팀의 정보 수정 & 생성용
+    public Team(int teamId, String name, String location,String sport,  String spoLeader) {
+        super();
+        this.teamId = teamId;
+        this.name = name;
+        this.location = location;
+        this.sport = sport;
+        this.spoLeader = spoLeader;
+    }
     
     
 
@@ -114,6 +140,20 @@ public class Team {
 
 
 	public void setNumofMembers(int numofMembers) {
-		this.numofMembers = numofMembers;
-	}
+        this.numofMembers = numofMembers;
+    }
+    public void setMemberscount(int memberscount) {
+        this.memberscount = memberscount;
+    }
+    public void setTcomment(String tcomment) {
+        this.tcomment = tcomment;
+    }
+    public int getMemberscount() {
+        return memberscount;
+    }
+    public String getTcomment() {
+        return tcomment;
+    }
+	
+	
 }

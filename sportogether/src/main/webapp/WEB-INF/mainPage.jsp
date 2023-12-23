@@ -106,18 +106,26 @@ body, html {
 
 
 </style>
+<script>
+function siteInfo() {
+    alert("여기는 Spotogether입니다. 다양한 팀과 스포츠를 즐겨보세요!");
+}
+function teamManage() {
+    alert("로그인 해주세요");
+}
+</script>
 
 </head>
 <body>
 	<nav id="topMenu" >
 		<img class="logo" src="<c:url value='/images/logo.png' />" alt="logo"/>
         <ul>
-            <li><a class="menuLink" href="#">사이트 소개</a></li>
+            <li><a class="menuLink" href="#" onclick="siteInfo()">사이트 소개</a></li>
             <li><a class="menuLink" href="<c:url value='/team/search'>
 			 		 </c:url>">팀 찾기</a></li>
             <li><a class="menuLink" href="<c:url value='/team/lankingList'>	   
 			 		 </c:url>">전체 랭킹</a></li>
-            <li><a class="menuLink" href="#">팀 관리</a></li>
+            <li><a class="menuLink" href="#" onclick="teamManage()">팀 관리</a></li>
         </ul>
         <div class="userActions">
         	<form name="form" method="GET"  action="<c:url value='/user/login' />">

@@ -205,6 +205,31 @@ public class UserDAO {
         return 0;
     }
     
+ // 팀 생성시 User 정보 수정(본인이 리더로, 팀아이디도 등록)
+    public int updateInfo2(String userId, int teamId) {
+       StringBuilder query = new StringBuilder();
+
+       query.append("UPDATE SPOUSER ");
+       query.append("SET teamId = ?, leader = ? ");
+       query.append("WHERE userID = ? ");
+       jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{
+             teamId,
+             1,
+             userId
+       });
+       try {
+          int result = jdbcUtil.executeUpdate();
+          return result;
+       } catch (Exception ex) {
+          jdbcUtil.rollback();
+           ex.printStackTrace();
+       } finally {
+           jdbcUtil.commit();
+           jdbcUtil.close();
+       }
+       return 0;
+   }
+    
     
 
     public User findUser(String userId) throws SQLException {

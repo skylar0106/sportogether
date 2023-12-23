@@ -35,7 +35,7 @@ function login() {
 		form.password.focus();
 		return false;
 	}		
-	alert("로그인 버튼이 클릭되었습니다.");
+	
 
 	form.submit();
 }

@@ -15,32 +15,31 @@ public class TeamDAO {
         member = new MemberDAO();
     }
     
-     // Team 테이블에 새로운 팀 생성
+ // Team 테이블에 새로운 팀 생성
     public Team create(Team team) {
         StringBuilder query = new StringBuilder();
 
-        query.append("INSERT into TEAM ");
-        query.append("values(teamId_seq.nextval,?, ?, ?, ?) ");
+        query.append("INSERT into TEAM(teamid, name, sport, location, spoleader) ");
+        query.append("values(teamId_sequence.nextval,?, ?, ?, ?) ");
         //이거하려면 db에 sequence 설정해줘야함 기억하기*******************
         // Team의 teamid은 PK => sequence로 자동 생성해주기!!
-        jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{team.getName(), 
-        			team.getSpoLeader(), team.getLocation(), team.getSport()});
+        jdbcUtil.setSqlAndParameters(query.toString(), new Object[]{team.getName(), team.getSport(), team.getLocation(), team.getSpoLeader()});
         
-        String key[] = {"teamId"};	//pk 컬럼의이름
+        String key[] = {"teamId"};  //pk 컬럼의이름
         try {
-        	jdbcUtil.executeUpdate(key);	//insert문 실행
+            jdbcUtil.executeUpdate(key);    //insert문 실행
             ResultSet rs = jdbcUtil.getGeneratedKeys();
             if(rs.next()) {
-            	int generatedKey = rs.getInt(1);	// 생성된 pk값
-            	team.setTeamId(generatedKey);	//teamId 필드에 저장
+                int generatedKey = rs.getInt(1);    // 생성된 pk값
+                team.setTeamId(generatedKey);   //teamId 필드에 저장
             }
             return team;
             //return result;
         } catch (Exception ex) {
-        	jdbcUtil.rollback();
+            jdbcUtil.rollback();
             ex.printStackTrace();
         } finally {
-        	jdbcUtil.commit();
+            jdbcUtil.commit();
             jdbcUtil.close();
         }
         return null;
@@ -66,10 +65,10 @@ public class TeamDAO {
             int result = jdbcUtil.executeUpdate();
             return result;
         } catch (Exception ex) {
-        	jdbcUtil.rollback();
+            jdbcUtil.rollback();
             ex.printStackTrace();
         } finally {
-        	jdbcUtil.commit();
+            jdbcUtil.commit();
             jdbcUtil.close();
         }
         return 0;
@@ -127,7 +126,7 @@ public class TeamDAO {
     }
 
     
-    // 모든 팀 정보 검색해서 리스트에 저장 후 반환
+ // 모든 팀 정보 검색해서 리스트에 저장 후 반환
     public List<Team> getTeamList() {
         List<Team> teamList = null;
         ResultSet rs = null;
@@ -147,10 +146,10 @@ public class TeamDAO {
                 t.setTeamId(rs.getInt("teamId")); // 수정: teamId를 INTEGER로 변경
                 t.setName(rs.getString("name"));
                 t.setSpoLeader(rs.getString("spoleader")); // 수정: spoleader를 VARCHAR2로 변경
-                t.setLevel(rs.getInt("level"));
+                t.setLevel(rs.getInt("tlevel"));
                 t.setSport(rs.getString("sport"));
                 t.setLocation(rs.getString("location"));
-                t.setMembership(rs.getInt("membership"));
+                t.setMembership(rs.getInt("memberscount"));
                 t.setRival(rs.getString("rival"));
                 teamList.add(t);
             }
@@ -195,6 +194,8 @@ public class TeamDAO {
 
         return team;
     }
+    
+    
 
     
 	// 주어진  ID에 해당하는 팀 정보를 데이터베이스에서 찾아 Team 도메인 클래스에 저장하여 반환.
@@ -370,7 +371,8 @@ public class TeamDAO {
      * 
      * */
     // 가입 신청 목록 반환
-    public List<Request> getRequestList(String teamId) {
+ // 가입 신청 목록 반환
+    public List<Request> getRequestList(int teamId) {
         List<Request> requestList = null;
 
         ResultSet rs = null;
@@ -388,9 +390,9 @@ public class TeamDAO {
             rs = jdbcUtil.executeQuery();
             while (rs.next()) {
                 Request r = new Request();
-                r.setTeamId(rs.getString("teamid"));
+                r.setTeamId(rs.getInt("teamid"));
                 r.setUserId(rs.getString("userid"));
-                r.setDate(rs.getDate("date"));
+                r.setDate(rs.getDate("date").toLocalDate());
                 r.setMassage(rs.getString("massage"));
                 requestList.add(r);
             }
@@ -441,9 +443,36 @@ public class TeamDAO {
         return success;
     }
 
-
-
-
+    
+    public List<Team> getSearchTeamList(String searchText){
+        List<Team> list = new ArrayList<Team>();
+        StringBuilder sql =new StringBuilder();
+        sql.append("select teamid, name, spoleader, tlevel from team ");
+        ResultSet rs = null;
+        try {
+              if(searchText != null && !searchText.equals("") ){
+                  sql.append("WHERE name LIKE ? " );
+              }
+              jdbcUtil.setSqlAndParameters(sql.toString(), new Object[] {"%"+searchText +"%"});
+                rs=jdbcUtil.executeQuery();
+           while(rs.next()) {
+              Team t = new Team();
+              t.setTeamId(rs.getInt("teamid"));
+              t.setName(rs.getString("name"));
+              t.setSpoLeader(rs.getString("spoleader"));
+              t.setLevel(rs.getInt("tlevel"));
+              list.add(t);//
+           }         
+        } catch(Exception e) {
+           e.printStackTrace();
+        }
+        return list;
+        }
+    
+    
 }
+
+
+
 
 
