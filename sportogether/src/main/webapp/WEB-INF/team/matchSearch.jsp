@@ -43,7 +43,6 @@ display : fixed;
 <script>
 	function openRequestForm() {
 		document.getElementById('battle_request_form').style.display = 'block';
-		
 	}
 	function closeForm() {
 		document.getElementById('battle_request_form').style.display = 'none';
@@ -62,6 +61,7 @@ display : fixed;
 				&nbsp;${rival.getTeamName()}&nbsp;<span class='winning'>[승률${rival.getRate()}%]</span>&nbsp;
 			</p>
 		</div>
+		<!-- 팀 검색 기능 구현,  -->
 		<form id = "form" action = "<c:url value='/team/search/result' />">
 		<div class='searchArea'>
 			<input type="text" name="teamName" />&nbsp;&nbsp; <input
@@ -85,6 +85,7 @@ display : fixed;
 		</ul>
 	</div>
 	
+	<!-- 대결 신청하는 form, 신청하기 버튼 누르면 보이게 -->
 	<div id="battle_request_form">
 		<button id="close_form" type="button" onclick="closeForm()">닫기</button>
 		<form method="POST" action="<c:url value='/team/request/create' />">
@@ -101,7 +102,7 @@ display : fixed;
 				</tr>
 				<tr>
 					<td>시간</td>
-					<td><input type="date" name = "date"/></td>
+					<td><input type="text" name = "date"/></td>
 				</tr>
 				<tr>
 					<td><input type="submit" value="신청"/></td>

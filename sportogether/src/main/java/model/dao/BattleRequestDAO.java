@@ -29,9 +29,11 @@ public class BattleRequestDAO {
         	 
         }catch(Exception ex) {
             ex.printStackTrace();
-        }finally {
-            jdbcUtil.close();
-        }
+            jdbcUtil.rollback();
+        }finally {      
+	         jdbcUtil.commit();
+	         jdbcUtil.close();   // resource 반환
+	      }   
         return true;
     }
     
@@ -174,6 +176,7 @@ public class BattleRequestDAO {
     
     
     //팀 아이디와 라이벌 팀을 받아 대결 신청 정보 반환
+    /*
     public BattleRequest getBattleRequest(int teamId, int rivalId) {
         BattleRequest b = null;
         ResultSet rs = null;
@@ -202,7 +205,7 @@ public class BattleRequestDAO {
         }
         return b;
     }
-    
+    */
     //battleId로 대결 신청 정보 반환
     public BattleRequest getBattleRequestById(int battleId) {
     	
