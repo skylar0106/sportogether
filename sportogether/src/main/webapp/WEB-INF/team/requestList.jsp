@@ -2,9 +2,6 @@
 <%@ page contentType="text/html; charset=utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@page import="model.*"%>
-<%
-boolean hasLogined = UserSessionUtils.hasLogined(session); 
-%>
 <!DOCTYPE html>
 <html>
 
@@ -148,18 +145,24 @@ body {
 </Style>
 
 <script>
-	function approve(targetUri) {
+	function approveRequest(targetUri) {
 		confirm("대결 신청을 승인하시겠습니까?");
-		location.href = targetUri;
+		form.action = targetUri;
+		form.method="GET";		
+		form.submit();
 
 	}
-	function reject(targetUri) {
+	function rejectRequest(targetUri) {
 		confirm("대결 신청을 거절하시겠습니까?");
-		location.href = targetUri;
+		form.action = targetUri;
+		form.method="GET";		
+		form.submit();
 	}
 	function cancelRequest(targetUri) {
-		confirm("대결 신청을 취소하시겠습니까?");
-		location.href = targetUri;
+		confirm("대결을 취소하시겠습니까?");
+		form.action = targetUri;
+		form.method="GET";		
+		form.submit();
 		
 	}
 </script>
@@ -169,13 +172,12 @@ body {
 	<div id="container">
 		<div id="header_wrap">
 			<div id="title-upper">
-				<img src="../images/sportogether.png">
+				<img src="../images/sportogether.png"/>
 			</div>
 			<div id="title-bottom">
-				<img src="../images/JOINUS.png">
+				<img src="../images/JOINUS.png"/>
 			</div>
 		</div>
-
 		<div id="nevigation">
 			<ul>
 				<li>팀 관리</li>
@@ -217,9 +219,9 @@ body {
 									varStatus="i">
 									<tr>
 										<td class="partition_name">${sentRequestTeamList[i.index].name}</td>
-										<td><button name= "battleId" type="button" id="cancel" 
+										<td><input type ="button" value = "${bq.battleId }" name= "battleId"  id="cancel" 
 										onClick="cancelRequest(
-	        		'<c:url value='/team/request/cancel'/>')"></button></td>
+	        		'<c:url value='/team/request/cancel'/>')" ></td>
 									</tr>
 								</c:forEach>
 							</c:when>
@@ -232,7 +234,6 @@ body {
 				<script>
 					
 				</script>
-
 				<div class="empty"></div>
 				<div id="form2">
 					<form>
@@ -242,15 +243,11 @@ body {
 									<c:forEach items="${receivedBattleRequestList}"
 										var="bq" varStatus="i">
 										<tr>
-										<!-- 
-										내가보낸리스트 : 
-										내가받은리스트teamId
-										 -->
 											<td class="partition_name">${receivedRequestTeamList[i.index].name}</td>
-											<td><button type="button" id="approve" onclick="approveRequest(
+											<td><input type="button" id="approve" onclick="approveRequest(
 								        		'<c:url value='/team/request/approve'/>')"
-													value="${bq.battleId}"></button>
-												<button type="button" id="reject" onclick="rejectRequest('<c:url value='/team/request/reject'/>')" value="${bq.battleId}"></button></td>
+													value="${bq.battleId}">
+												<input type="button" id="reject" onclick="rejectRequest('<c:url value='/team/request/reject'/>')" value="${bq.battleId}"></td>
 										</tr>
 									</c:forEach>
 								</c:when>
@@ -261,8 +258,6 @@ body {
 				</div>
 			</div>
 		</div>
-		<!-- <div id="footer"><button id="prevbutton" type="reset"></button><button id="nextbutton" type="submit"></button> 
-        </div>-->
 	</div>
 </body>
 

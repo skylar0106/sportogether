@@ -23,38 +23,29 @@ public class UpdateBattleRequestController implements Controller{
     	if (!UserSessionUtils.hasLogined(request.getSession())) {
             return "redirect:/user/login/form?hasLogined=false";     // login form 요청으로 redirect
         }
+    	
         BattleRequestDAO battleRequestDAO = new BattleRequestDAO();
-        TeamDAO teamDAO = new TeamDAO();
         
-        String teamName =  request.getParameter("teamName");
-        
-        Team team = teamDAO.findTeamByName(teamName);
+        BattleRequest bq = null;
         int battleId =Integer.parseInt(request.getParameter("battleId"));
-        BattleRequest bq =  battleRequestDAO.getBattleRequestById(battleId); 
         try {
-        
-        try {
+        	bq= battleRequestDAO.getBattleRequestById(battleId);
 	        if (request.getServletPath().equals("/team/request/approve")) {
 	            battleRequestDAO.approveBattleRequest(bq);
 	        }
-	        else if(request.getServletPath().equals("/team/request/reject")){   
+	        else{   
 	            battleRequestDAO.rejectBattleRequest(bq);
 	        }
-	        else { //
-	        	battleRequestDAO.cancelBattleRequest(bq);
-	        }
+	        return "redirect:/team/request";
         }catch (Exception e) {
         	e.printStackTrace();
         	request.setAttribute("BattleRequestException", true);
         	return "/team/request";
 		}
         
-        }catch (Exception e) {
-        	e.printStackTrace();
-		}
         
         
-        return "redirect:/team/requestList.jsp";
+        
     }
     
 }

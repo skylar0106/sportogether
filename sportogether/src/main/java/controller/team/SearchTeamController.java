@@ -15,7 +15,7 @@ public class SearchTeamController implements Controller {
 	// private static final int countPerPage = 100;	// 한 화면에 출력할 사용자 수
 
     @Override
-    public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
+    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
 //        String teamNam = request.getParameter("teamName");
         // 로그인 여부 확인
     	

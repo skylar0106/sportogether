@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import controller.Controller;
 import controller.user.UserSessionUtils;
@@ -16,27 +15,24 @@ import model.service.dto.BattleRequest;
 import model.service.dto.User;
 
 public class CancelBattleRequestController implements Controller{
-	 public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception  {
+	
+	  public String execute(HttpServletRequest request, HttpServletResponse response)	throws Exception {
 		
 		if (!UserSessionUtils.hasLogined(request.getSession())) {
-            return "redirect:/user/login/form?hasLogined=false";     // login form 요청으로 redirect
+            return "redirect:/user/login/form";     // login form 요청으로 redirect
         }
 		
         BattleRequestDAO battleRequestDAO = new BattleRequestDAO();
-        TeamDAO teamDAO = new TeamDAO();
-        String teamName =  request.getParameter("teamName");
-        
-        String battleid = request.getParameter("battleid");
-        BattleRequest bq= new BattleRequest();
-        battleRequestDAO.cancel()
+        BattleRequest bq = null;
         try{
+        	int battleId = Integer.parseInt(request.getParameter("battleId"));
+        	bq= battleRequestDAO.getBattleRequestById(battleId);
+        	battleRequestDAO.cancelBattleRequest(bq);
         	
+        	return "redirect:/team/request";
         }catch (Exception e) {
-        	return "/team/request.jsp";
+        	return "/team/requestList.jsp";
 		}
-        
-        battleRequestDAO.cancelBattleRequest(bq);
-        return "/team/request.jsp";
 		
 	}
 }

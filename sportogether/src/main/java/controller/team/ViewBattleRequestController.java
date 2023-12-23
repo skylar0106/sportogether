@@ -21,13 +21,14 @@ public class ViewBattleRequestController implements Controller {
     public String execute(HttpServletRequest request, HttpServletResponse response)throws Exception {
        
     	//대결 신청 리스트 조회하는 Controller
+    	
     	//로그인 안되어있으면
     	HttpSession session = request.getSession();
     	 if (!UserSessionUtils.hasLogined(request.getSession())) {
              return "redirect:/user/login/form";     // login form 요청으로 redirect
          }
     	 
-    	 
+    	 if(UserSessionUtils.hasTeam(session) == false) {return "/user/login.jsp";}
     	String userId = UserSessionUtils.getLoginUserId(session);
     	UserDAO userDAO = new UserDAO();
     	User user = userDAO.findUser(userId);
@@ -36,8 +37,8 @@ public class ViewBattleRequestController implements Controller {
         
         if(user.getTeamId() > 0) {
         
-        	int teamId =user.getTeamId();
         try {
+        	int teamId =user.getTeamId();
 	        List<BattleRequest> sentBattleRequestList = battleRequestDao.getSentBattleRequest(teamId);
 	        List<BattleRequest> receivedBattleRequestList = battleRequestDao.getReceivedBattleRequest(teamId);
 	        List<Team> sentRequestTeamList = battleRequestDao.getSentRequestTeam(teamId);

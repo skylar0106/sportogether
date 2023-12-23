@@ -16,7 +16,7 @@ import model.service.UserManager;
 import model.service.dto.Request;
 
 public class JoinRequestController implements Controller{
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
      //가입 요청, 거절, 승인 
         TeamDAO teamDAO = new TeamDAO();
         JoinRequestDAO joinRequestDAO = new JoinRequestDAO();

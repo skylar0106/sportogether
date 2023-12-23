@@ -36,11 +36,12 @@ public class UserSessionUtils {
 		String userId = getLoginUserId(session);
 		try {
 		User user = userDao.findUser(userId);
-		if(user.getTeamId() <= 0) { //없음
+		if(user.getTeamId()>0) { //없음
 			return false;
 		}
 		}catch(Exception e) {
 			e.printStackTrace();
+			return false;
 		}
 		return true;
 	}

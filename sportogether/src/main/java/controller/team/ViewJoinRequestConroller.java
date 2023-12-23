@@ -12,7 +12,7 @@ import model.service.dto.Request;
 public class ViewJoinRequestConroller implements Controller{
     /*가입신청 리스트 조회 컨트롤러*/
    
-    public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
        JoinRequestDAO joinRequestDao = new JoinRequestDAO();
        int teamId = Integer.parseInt(request.getParameter("teamId"));
        

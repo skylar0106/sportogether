@@ -26,7 +26,6 @@ public class JoinRequestDAO {
      * */
     
     //가입신청함 1
-    public 
     public int createJoinRequest(Request r) {
         StringBuilder dml = new StringBuilder();
         dml.append("INSERT INTO REQUEST ");

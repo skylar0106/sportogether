@@ -286,14 +286,23 @@ public class BattleRequestDAO {
     public int cancelBattleRequest(BattleRequest b) {
     	StringBuilder dml = new StringBuilder();
     	dml.append("DELETE FROM BATTLE ");
-    	dml.append("WHERE battleid=? ");
+    	dml.append("WHERE battleid= ? ");
     	jdbcUtil.setSqlAndParameters(dml.toString(), new Object[] {b.getBattleId()});
     	
     	try {
-    		return  jdbcUtil.executeUpdate();
+    		int rs =   jdbcUtil.executeUpdate();
+    		if(rs <=0) {
+    			jdbcUtil.rollback();
+    		}
+    		else {
+    			jdbcUtil.commit();
+    		}
+    		return rs;
     	}catch (Exception e) {
     		e.printStackTrace();
-		}
+		}finally {
+			jdbcUtil.close();
+			}
     	return 0;
     }
     

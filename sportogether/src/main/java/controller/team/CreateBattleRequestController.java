@@ -16,7 +16,7 @@ import model.service.dto.User;
 
 public class CreateBattleRequestController implements Controller {
 
-	public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	  public String execute(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		// 대결신청함(임의의 form에서 신청 정보 입력받는다고 가정)
 
 		HttpSession session = request.getSession();
