@@ -36,7 +36,6 @@
 				&nbsp;&nbsp;검색어 : <span style = "font-size:20px;">${searchTeamName}</span>&nbsp;
 			</p>
 		</div>
-		
 	</div>
 	<hr>
 	<div class='teamList'>
@@ -57,7 +56,7 @@
 			</c:choose>
 		</ul>
 	</div>
-		<p class = "text1" ><a href = "<c:url value='/team/search' />">뒤로 가기</a></p>
+		<p class = "text1" ><a href = "<c:url value='/team/search' />" style = "text-decoration-line: none;">뒤로 가기</a></p>
 		
 				
 </body>

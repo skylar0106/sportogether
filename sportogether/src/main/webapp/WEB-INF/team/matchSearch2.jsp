@@ -28,7 +28,6 @@
 #battle_request_form table {
 	width: 100%;
 	padding: 10%;
-	text-align : center;
 }
 
 #battle_request_form table td {
@@ -36,7 +35,7 @@
 }
 
 #close_form {
-	display : fixed;
+display : fixed;
 	border: none;
 }
 </style>
@@ -47,6 +46,7 @@
 	}
 	function closeForm() {
 		document.getElementById('battle_request_form').style.display = 'none';
+		
 	}
 </script>
 </head>
@@ -62,6 +62,7 @@
 				&nbsp;${rival.getTeamName()}&nbsp;<span class='winning'>[승률${rival.getRate()}%]</span>&nbsp;
 			</p>
 		</div>
+		
 		<!-- 팀 검색 기능 구현,  -->
 		<form id = "form" action = "<c:url value='/team/search/result' />">
 		<div class='searchArea'>
@@ -73,24 +74,28 @@
 	<hr>
 	<div class='teamList'>
 		<ul>
-			<c:forEach var="i" begin="1" end="6">
-				<li>${i}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내가제일잘나가</li>
-
+		<c:choose>
+		<c:when test = "${null ne teamList}">
+			<c:forEach items = "${teamList}" var = "t" varStatus="i">
+				<li>${i.index + 1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${t.name}</li>
 				<div class='appliBtnArea'>
 					<input type="submit" name="fightBtn" value="대결신청"
-						onclick="openRequestForm()" /> <input type="submit" name="joinBtn"
+						onclick="openRequestForm()" /><input type="submit" name="joinBtn"
 						value="가입신청" />
 				</div>
 				<hr>
 			</c:forEach>
+			</c:when>
+			<c:otherwise><li>해당되는 라이벌이 없습니다.</li></c:otherwise>
+			</c:choose>
 		</ul>
 	</div>
 	
 	<!-- 대결 신청하는 form, 신청하기 버튼 누르면 보이게 -->
 	<div id="battle_request_form">
-	
+		<button id="close_form" type="button" onclick="closeForm()">닫기</button>
 		<form method="POST" action="<c:url value='/team/request/create' />">
-			<input type = "hidden" name= "rivalId" value = ""/>
+			<input type = "hidden" id = "rivalId" name= "rivalId" />
 			<input type = "hidden" name= "approval" value = "false"/>
 			<table>
 				<tr>
@@ -106,7 +111,7 @@
 					<td><input type="text" name = "date"/></td>
 				</tr>
 				<tr>
-					<td colspan = "2"><input type="submit" value="신청" style = "border :#8AD6D9; border: none;" />&nbsp;<button id="close_form" type="button" onclick="closeForm()">닫기</button></td>
+					<td><input type="submit" value="신청"/></td>
 				</tr>
 			</table>
 		</form>

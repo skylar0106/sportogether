@@ -11,7 +11,7 @@ import model.service.UserManager;
 import model.service.UserNotFoundException;
 import model.service.dto.*;
 
-public class SearchTeamController implements Controller {
+public class SearchTeamControlle_backup implements Controller {
 	// private static final int countPerPage = 100;	// 한 화면에 출력할 사용자 수
 
     @Override
@@ -33,9 +33,11 @@ public class SearchTeamController implements Controller {
             userId = UserSessionUtils.getLoginUserId(request.getSession());
         }
         
-        TeamManager manager = TeamManager.getInstance();
+        TeamDAO teamDAO = new TeamDAO();
         User user = null;
+        List<Team> list = null;
         try {
+        	list = teamDAO.getTeamList();
             user = uManager.findUser(userId);    // 사용자 정보 검색    
         } catch (UserNotFoundException e) {             
             user = new User(0);
@@ -43,22 +45,13 @@ public class SearchTeamController implements Controller {
         
         request.setAttribute("user", user);     // 사용자 정보 저장   
     	
+		TeamManager manager = TeamManager.getInstance();
 		Rival rival  = manager.findRivalTeam(user.getTeamId());
 		// List<User> userList = manager.findUserList(currentPage, countPerPage);
-		
-		List<Team> teamList = null;
-		TeamDAO teamDAO = new TeamDAO();
-		try
-		{
-			teamList = teamDAO.getTeamList();
-		}catch (Exception e) {
-			e.printStackTrace();
-			request.setAttribute("hasNoTeam", true);
-			return  "/team/matchSearch.jsp"; 
-		}
+
 		// userList 객체와 현재 로그인한 사용자 ID를 request에 저장하여 전달
-		request.setAttribute("rival", rival);
-		request.setAttribute("teamList", teamList);
+		request.setAttribute("rival", rival);				
+		request.setAttribute("teamList", list);				
 //		request.setAttribute("curUserId", 
 //				UserSessionUtils.getLoginUserId(request.getSession()));		
 

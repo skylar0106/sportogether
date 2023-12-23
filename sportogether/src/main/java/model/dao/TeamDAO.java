@@ -148,10 +148,10 @@ public class TeamDAO {
                 t.setTeamId(rs.getInt("teamId")); // 수정: teamId를 INTEGER로 변경
                 t.setName(rs.getString("name"));
                 t.setSpoLeader(rs.getString("spoleader")); // 수정: spoleader를 VARCHAR2로 변경
-                t.setLevel(rs.getInt("level"));
+                t.setLevel(rs.getInt("tlevel"));
                 t.setSport(rs.getString("sport"));
                 t.setLocation(rs.getString("location"));
-                t.setMembership(rs.getInt("membership"));
+                t.setMembership(rs.getInt("memberscount"));
                 t.setRival(rs.getString("rival"));
                 teamList.add(t);
             }
