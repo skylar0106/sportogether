@@ -446,7 +446,7 @@ public class TeamDAO {
     public List<Team> getSearchTeamList(String searchText){
 	    List<Team> list = new ArrayList<Team>();
 	    StringBuilder sql =new StringBuilder();
-	    sql.append("select teamid, name from team ");
+	    sql.append("select teamid, name, spoleader, tlevel from team ");
 	    ResultSet rs = null;
 	    try {
 	          if(searchText != null && !searchText.equals("") ){
@@ -458,6 +458,8 @@ public class TeamDAO {
 	          Team t = new Team();
 	          t.setTeamId(rs.getInt("teamid"));
 	          t.setName(rs.getString("name"));
+	          t.setSpoLeader(rs.getString("spoleader"));
+	          t.setLevel(rs.getInt("tlevel"));
 	          list.add(t);//
 	       }         
 	    } catch(Exception e) {

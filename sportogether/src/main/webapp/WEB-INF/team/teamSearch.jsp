@@ -7,6 +7,17 @@
 <head>
 <meta charset="EUC-KR">
 <title>Insert title here</title>
+<style>
+	#info{
+	width : 150px;
+	height : 32px;
+	border: 2px solid #8AD6D9;
+	margin-left : 10px;
+	border-radius : 12px;
+	background-color : white;
+	}
+
+</style>
 <link rel=stylesheet href="<c:url value='/css/bannerSubTitle.css' />"
 	type="text/css">
 <link rel=stylesheet href="<c:url value='/css/searchTeam.css' />"
@@ -33,7 +44,10 @@
 		<c:choose>
 		<c:when test = "${not empty searchTeamList}">
 			<c:forEach items="${searchTeamList}" var="t"  varStatus = "i">
-				<li>${i.index + 1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${t.name}</li>
+				<li>${i.index + 1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${t.name}
+				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type = "button" id = "info">LEADER [${t.spoLeader}]</button>
+				&nbsp;&nbsp;&nbsp;&nbsp; <button type = "button" id = "info">LEVEL.${t.level}</button>
+				</li>
 				<hr>
 			</c:forEach>
 			</c:when>
@@ -44,8 +58,7 @@
 		</ul>
 	</div>
 		<p class = "text1" ><a href = "<c:url value='/team/search' />">뒤로 가기</a></p>
-
-						
+		
 				
 </body>
 </html>

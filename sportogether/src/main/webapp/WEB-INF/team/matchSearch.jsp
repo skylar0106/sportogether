@@ -42,8 +42,8 @@ display : fixed;
 <title>search_team</title>
 <script>
 	function openRequestForm() {
-		if(session.)
 		document.getElementById('battle_request_form').style.display = 'block';
+		
 	}
 	function closeForm() {
 		document.getElementById('battle_request_form').style.display = 'none';
