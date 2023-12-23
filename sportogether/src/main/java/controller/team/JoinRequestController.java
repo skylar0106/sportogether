@@ -22,18 +22,11 @@ public class JoinRequestController implements Controller{
         JoinRequestDAO joinRequestDAO = new JoinRequestDAO();
         int teamId = Integer.parseInt(request.getParameter("teamId"));
 
-        List<Request> requestList=joinRequestDAO.getRequestList(teamId);
-        String userId = request.getParameter("userId");
-        
         HttpSession session = request.getSession();
-        if (UserSessionUtils.isLoginUser(userId, session) ||
-				UserSessionUtils.isLoginUser("admin", session)) {
-				// 현재 로그인한 사용자가 수정 대상 사용자이거나 관리자인 경우 -> 수정 가능
-								
-				List<Community> commList = manager.findCommunityList();	// 커뮤니티 리스트 검색
-				request.setAttribute("commList", commList);	
-				
-				return "/user/updateForm.jsp";   // 검색한 사용자 정보 및 커뮤니티 리스트를 updateForm으로 전송     
+        List<Request> requestList=joinRequestDAO.getRequestList(teamId);
+        String userId = UserSessionUtils.getLoginUserId(request.getSession());
+        if (!UserSessionUtils.isLoginUser(userId, session)) {
+				return "/user/login/form";
 			}    
         
        try {
@@ -44,7 +37,7 @@ public class JoinRequestController implements Controller{
 	            joinRequestDAO.rejectBattleRequest(bq);
 	        }
 	        else { //신청
-	        	joinRequestDAO.cancelBattleRequest(bq);
+	        	joinRequestDAO.createJoinRequest(bq);
 	        }
        }catch (Exception e) {
        	e.printStackTrace();

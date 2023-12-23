@@ -19,8 +19,8 @@
 	border: 1px solid #7d7c7c;
 	border-radius: 12px;
 	width: 500px;
-	top: 50%;
-	left: 50%;
+	 top: 50%;
+    left: 50%;
 	text-align: center;
 	background-color: white;
 }
@@ -42,8 +42,9 @@
 </style>
 <title>search_team</title>
 <script>
-	function openRequestForm() {
+	function openRequestForm(rivalId) {
 		document.getElementById('battle_request_form').style.display = 'block';
+		document.getElementById('rival').value = rivalId;
 	}
 	function closeForm() {
 		document.getElementById('battle_request_form').style.display = 'none';
@@ -73,24 +74,28 @@
 	<hr>
 	<div class='teamList'>
 		<ul>
-			<c:forEach var="i" begin="1" end="6">
-				<li>${i}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;내가제일잘나가</li>
-
+		<c:choose>
+		<c:when test = "${null ne teamList}">
+			<c:forEach items = "${teamList}"  var="t" varStatus = "i">
+				<li>${i.index + 1}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${t.name}</li>
 				<div class='appliBtnArea'>
 					<input type="submit" name="fightBtn" value="대결신청"
-						onclick="openRequestForm()" /> <input type="submit" name="joinBtn"
+						onclick="openRequestForm(${t.getTeamId()})" /> <input type="submit" name="joinBtn"
 						value="가입신청" />
 				</div>
 				<hr>
 			</c:forEach>
+			</c:when>
+			<c:otherwise><li>생성된 팀이 없습니다.</li></c:otherwise>
+			</c:choose>
 		</ul>
 	</div>
 	
 	<!-- 대결 신청하는 form, 신청하기 버튼 누르면 보이게 -->
 	<div id="battle_request_form">
 	
-		<form method="POST" action="<c:url value='/team/request/create' />">
-			<input type = "hidden" name= "rivalId" value = ""/>
+		<form method="GET" action="<c:url value='/team/request/create' />">
+			<input type = "hidden" name= "rivalId" id = "rival" value = ""/>
 			<input type = "hidden" name= "approval" value = "false"/>
 			<table>
 				<tr>
@@ -103,7 +108,7 @@
 				</tr>
 				<tr>
 					<td>시간</td>
-					<td><input type="text" name = "date"/></td>
+					<td><input type="text" name = "date" pattern="\d{4}-\d{2}-\d{2}" placeholder="yyyy-MM-dd" required/></td>
 				</tr>
 				<tr>
 					<td colspan = "2"><input type="submit" value="신청" style = "border :#8AD6D9; border: none;" />&nbsp;<button id="close_form" type="button" onclick="closeForm()">닫기</button></td>

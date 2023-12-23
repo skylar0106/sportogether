@@ -68,6 +68,9 @@ public class RequestMapping {
         // team controller
         mappings.put("/team/portfolio", new TeamPortfolioController());
         
+        //가입 신청 관련 Controller
+        mappings.put("/team/join/create", new TeamPortfolioController());
+        
      // 나의 포트폴리오 controller
         mappings.put("/user/portfolio", new MyPortfolioController());
         
