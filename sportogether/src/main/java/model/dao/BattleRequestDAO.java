@@ -57,8 +57,8 @@ public class BattleRequestDAO {
         	battleRequestList = new ArrayList<>();
     		while(rs.next()) {
     			BattleRequest bq = new BattleRequest();
-       		 	bq.setTeamId(rs.getInt("teamid"));
-                bq.setRivalId(rs.getInt("rivalid"));
+       		 	bq.setTeamId(rs.getInt("rivalid"));
+                bq.setRivalId(rs.getInt("teamId"));
                 bq.setMessage(rs.getString("message"));
                 bq.setDate(rs.getDate("date").toLocalDate());
                 bq.setSports(rs.getString("sport"));

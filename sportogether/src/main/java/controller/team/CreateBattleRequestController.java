@@ -31,6 +31,10 @@ public class CreateBattleRequestController implements Controller {
 		try {
 			int teamId = user.getTeamId();
 			int rivalId = Integer.parseInt(request.getParameter("rivalId"));
+			
+			//신청하려는 팀과 이름이 같은 팀에는 신청 못하게
+			if(teamId ==rivalId) {throw new Exception();}
+			
 			String sports = request.getParameter("sports");
 			String message = request.getParameter("message");
 
